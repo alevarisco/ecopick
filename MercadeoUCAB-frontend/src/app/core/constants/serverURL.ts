@@ -1,0 +1,1 @@
+export const serverURL = 'http://localhost:8080/servicio-1.0.0/';
