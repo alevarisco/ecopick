@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema empresag
+-- Schema ecopick
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema empresag
+-- Schema ecopick
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `empresag` DEFAULT CHARACTER SET utf8 ;
-USE `empresag` ;
+CREATE SCHEMA IF NOT EXISTS `ecopick` DEFAULT CHARACTER SET utf8 ;
+USE `ecopick` ;
 
 -- -----------------------------------------------------
--- Table `empresag`.`NIVEL_SOCIOECONOMICO`
+-- Table `ecopick`.`NIVEL_SOCIOECONOMICO`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`NIVEL_SOCIOECONOMICO` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`NIVEL_SOCIOECONOMICO` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
@@ -28,9 +28,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`DISPONIBILIDAD`
+-- Table `ecopick`.`DISPONIBILIDAD`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`DISPONIBILIDAD` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`DISPONIBILIDAD` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `hora` TIME NOT NULL,
   PRIMARY KEY (`id`))
@@ -38,9 +38,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`DISPOSITIVO`
+-- Table `ecopick`.`DISPOSITIVO`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`DISPOSITIVO` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`DISPOSITIVO` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
@@ -48,9 +48,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`OCUPACION`
+-- Table `ecopick`.`OCUPACION`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`OCUPACION` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`OCUPACION` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
@@ -58,9 +58,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`EDO_CIVIL`
+-- Table `ecopick`.`EDO_CIVIL`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`EDO_CIVIL` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`EDO_CIVIL` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
@@ -68,9 +68,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`NIVEL_ACADEMICO`
+-- Table `ecopick`.`NIVEL_ACADEMICO`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`NIVEL_ACADEMICO` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`NIVEL_ACADEMICO` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
@@ -78,9 +78,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`GENERO`
+-- Table `ecopick`.`GENERO`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`GENERO` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`GENERO` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
@@ -88,9 +88,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`LUGAR`
+-- Table `ecopick`.`LUGAR`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`LUGAR` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`LUGAR` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(60) NOT NULL,
   `tipo` INT NOT NULL,
@@ -101,21 +101,21 @@ CREATE TABLE IF NOT EXISTS `empresag`.`LUGAR` (
   INDEX `fk_lugar_nivelsocioeconomico_idx` (`fk_nivel_socioeconomico` ASC) VISIBLE,
   CONSTRAINT `fk_lugar_superior`
     FOREIGN KEY (`fk_lugar`)
-    REFERENCES `empresag`.`LUGAR` (`id`)
+    REFERENCES `ecopick`.`LUGAR` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_lugar_nivelsocioeconomico`
     FOREIGN KEY (`fk_nivel_socioeconomico`)
-    REFERENCES `empresag`.`NIVEL_SOCIOECONOMICO` (`id`)
+    REFERENCES `ecopick`.`NIVEL_SOCIOECONOMICO` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`PERSONA`
+-- Table `ecopick`.`PERSONA`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`PERSONA` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`PERSONA` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `documento_identidad` VARCHAR(45) NULL,
   `primer_nombre` VARCHAR(45) NOT NULL,
@@ -139,41 +139,41 @@ CREATE TABLE IF NOT EXISTS `empresag`.`PERSONA` (
   INDEX `fk_persona_dispfin_idx` (`fk_disponibilidad_final` ASC) VISIBLE,
   CONSTRAINT `fk_persona_genero`
     FOREIGN KEY (`fk_genero`)
-    REFERENCES `empresag`.`GENERO` (`id`)
+    REFERENCES `ecopick`.`GENERO` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_persona_edocivil`
     FOREIGN KEY (`fk_edo_civil`)
-    REFERENCES `empresag`.`EDO_CIVIL` (`id`)
+    REFERENCES `ecopick`.`EDO_CIVIL` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_persona_padre`
     FOREIGN KEY (`fk_persona`)
-    REFERENCES `empresag`.`PERSONA` (`id`)
+    REFERENCES `ecopick`.`PERSONA` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_persona_lugar`
     FOREIGN KEY (`fk_lugar`)
-    REFERENCES `empresag`.`LUGAR` (`id`)
+    REFERENCES `ecopick`.`LUGAR` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_persona_disp_ini`
     FOREIGN KEY (`fk_disponibilidad_inicial`)
-    REFERENCES `empresag`.`DISPONIBILIDAD` (`id`)
+    REFERENCES `ecopick`.`DISPONIBILIDAD` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_persona_disp_fin`
     FOREIGN KEY (`fk_disponibilidad_final`)
-    REFERENCES `empresag`.`DISPONIBILIDAD` (`id`)
+    REFERENCES `ecopick`.`DISPONIBILIDAD` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`TELEFONO`
+-- Table `ecopick`.`TELEFONO`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`TELEFONO` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`TELEFONO` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `numero` VARCHAR(45) NOT NULL,
   `fk_persona` INT NOT NULL,
@@ -181,16 +181,16 @@ CREATE TABLE IF NOT EXISTS `empresag`.`TELEFONO` (
   INDEX `fk_telefono_persona_idx` (`fk_persona` ASC) VISIBLE,
   CONSTRAINT `fk_telefono_persona`
     FOREIGN KEY (`fk_persona`)
-    REFERENCES `empresag`.`PERSONA` (`id`)
+    REFERENCES `ecopick`.`PERSONA` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`ROL`
+-- Table `ecopick`.`ROL`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`ROL` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`ROL` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
@@ -198,9 +198,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`USUARIO`
+-- Table `ecopick`.`USUARIO`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`USUARIO` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`USUARIO` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
@@ -212,21 +212,21 @@ CREATE TABLE IF NOT EXISTS `empresag`.`USUARIO` (
   INDEX `fk_usuario_rol_idx` (`fk_rol` ASC) VISIBLE,
   CONSTRAINT `fk_usuario_persona`
     FOREIGN KEY (`fk_persona`)
-    REFERENCES `empresag`.`PERSONA` (`id`)
+    REFERENCES `ecopick`.`PERSONA` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_usuario_rol`
     FOREIGN KEY (`fk_rol`)
-    REFERENCES `empresag`.`ROL` (`id`)
+    REFERENCES `ecopick`.`ROL` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`SOLICITUD`
+-- Table `ecopick`.`SOLICITUD`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`SOLICITUD` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`SOLICITUD` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `estado` INT NOT NULL DEFAULT 0,
   `nombre` VARCHAR(100) NULL,
@@ -235,16 +235,16 @@ CREATE TABLE IF NOT EXISTS `empresag`.`SOLICITUD` (
   INDEX `fk_solicitud_usuario_idx` (`fk_usuario` ASC) VISIBLE,
   CONSTRAINT `fk_solicitud_usuario`
     FOREIGN KEY (`fk_usuario`)
-    REFERENCES `empresag`.`USUARIO` (`id`)
+    REFERENCES `ecopick`.`USUARIO` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`ANALISIS`
+-- Table `ecopick`.`ANALISIS`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`ANALISIS` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`ANALISIS` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `conclusiones` TEXT NOT NULL,
   PRIMARY KEY (`id`))
@@ -252,9 +252,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`ESTUDIO`
+-- Table `ecopick`.`ESTUDIO`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`ESTUDIO` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`ESTUDIO` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `fecha_realizacion` DATE NOT NULL,
   `fecha_culminacion` DATE NULL,
@@ -265,16 +265,16 @@ CREATE TABLE IF NOT EXISTS `empresag`.`ESTUDIO` (
   INDEX `fk_estudio_analisis_idx` (`fk_analisis` ASC) VISIBLE,
   CONSTRAINT `fk_estudio_analisis`
     FOREIGN KEY (`fk_analisis`)
-    REFERENCES `empresag`.`ANALISIS` (`id`)
+    REFERENCES `ecopick`.`ANALISIS` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`SOLICITUD_ESTUDIO`
+-- Table `ecopick`.`SOLICITUD_ESTUDIO`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`SOLICITUD_ESTUDIO` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`SOLICITUD_ESTUDIO` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `fk_solicitud` INT NOT NULL,
   `fk_estudio` INT NOT NULL,
@@ -283,21 +283,21 @@ CREATE TABLE IF NOT EXISTS `empresag`.`SOLICITUD_ESTUDIO` (
   INDEX `fk_solest_solicitud_idx` (`fk_solicitud` ASC) VISIBLE,
   CONSTRAINT `fk_solest_estudio`
     FOREIGN KEY (`fk_estudio`)
-    REFERENCES `empresag`.`ESTUDIO` (`id`)
+    REFERENCES `ecopick`.`ESTUDIO` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_solest_solicitud`
     FOREIGN KEY (`fk_solicitud`)
-    REFERENCES `empresag`.`SOLICITUD` (`id`)
+    REFERENCES `ecopick`.`SOLICITUD` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`PERSONA_DISPOSITIVO`
+-- Table `ecopick`.`PERSONA_DISPOSITIVO`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`PERSONA_DISPOSITIVO` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`PERSONA_DISPOSITIVO` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `fk_persona` INT NOT NULL,
   `fk_dispositivo` INT NOT NULL,
@@ -305,21 +305,21 @@ CREATE TABLE IF NOT EXISTS `empresag`.`PERSONA_DISPOSITIVO` (
   INDEX `fk_perdisposit_dispositivo_idx` (`fk_dispositivo` ASC) VISIBLE,
   CONSTRAINT `fk_perdisposit_persona`
     FOREIGN KEY (`fk_persona`)
-    REFERENCES `empresag`.`PERSONA` (`id`)
+    REFERENCES `ecopick`.`PERSONA` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_perdisposit_dispositivo`
     FOREIGN KEY (`fk_dispositivo`)
-    REFERENCES `empresag`.`DISPOSITIVO` (`id`)
+    REFERENCES `ecopick`.`DISPOSITIVO` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`PERSONA_OCUPACION`
+-- Table `ecopick`.`PERSONA_OCUPACION`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`PERSONA_OCUPACION` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`PERSONA_OCUPACION` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `fk_persona` INT NOT NULL,
   `fk_ocupacion` INT NOT NULL,
@@ -327,21 +327,21 @@ CREATE TABLE IF NOT EXISTS `empresag`.`PERSONA_OCUPACION` (
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_perocu_persona`
     FOREIGN KEY (`fk_persona`)
-    REFERENCES `empresag`.`PERSONA` (`id`)
+    REFERENCES `ecopick`.`PERSONA` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_perocu_ocupacion`
     FOREIGN KEY (`fk_ocupacion`)
-    REFERENCES `empresag`.`OCUPACION` (`id`)
+    REFERENCES `ecopick`.`OCUPACION` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`PERSONA_NVLACADEMICO`
+-- Table `ecopick`.`PERSONA_NVLACADEMICO`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`PERSONA_NVLACADEMICO` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`PERSONA_NVLACADEMICO` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `fk_persona` INT NOT NULL,
   `fk_nivel_academico` INT NOT NULL,
@@ -349,21 +349,21 @@ CREATE TABLE IF NOT EXISTS `empresag`.`PERSONA_NVLACADEMICO` (
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_pernvlaca_persona`
     FOREIGN KEY (`fk_persona`)
-    REFERENCES `empresag`.`PERSONA` (`id`)
+    REFERENCES `ecopick`.`PERSONA` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_pernvlaca_nivelacademico`
     FOREIGN KEY (`fk_nivel_academico`)
-    REFERENCES `empresag`.`NIVEL_ACADEMICO` (`id`)
+    REFERENCES `ecopick`.`NIVEL_ACADEMICO` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`CATEGORIA`
+-- Table `ecopick`.`CATEGORIA`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`CATEGORIA` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`CATEGORIA` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(90) NOT NULL,
   `descripcion` TEXT NULL,
@@ -372,9 +372,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`SUBCATEGORIA`
+-- Table `ecopick`.`SUBCATEGORIA`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`SUBCATEGORIA` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`SUBCATEGORIA` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(90) NOT NULL,
   `descripcion` TEXT NULL,
@@ -383,9 +383,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`FILTRO`
+-- Table `ecopick`.`FILTRO`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`FILTRO` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`FILTRO` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `fk_estudio` INT NULL,
   `tipo_filtro_lugar` INT NULL,
@@ -411,56 +411,56 @@ CREATE TABLE IF NOT EXISTS `empresag`.`FILTRO` (
   INDEX `fk_filtro_solicitud_idx` (`fk_solicitud` ASC) VISIBLE,
   CONSTRAINT `fk_filtro_estudio`
     FOREIGN KEY (`fk_estudio`)
-    REFERENCES `empresag`.`ESTUDIO` (`id`)
+    REFERENCES `ecopick`.`ESTUDIO` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_filtro_nivelsocioeconomico`
     FOREIGN KEY (`fk_nivel_socioeconomico`)
-    REFERENCES `empresag`.`NIVEL_SOCIOECONOMICO` (`id`)
+    REFERENCES `ecopick`.`NIVEL_SOCIOECONOMICO` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_filtro_edocivil`
     FOREIGN KEY (`fk_edo_civil`)
-    REFERENCES `empresag`.`EDO_CIVIL` (`id`)
+    REFERENCES `ecopick`.`EDO_CIVIL` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_filtro_nivelacademico`
     FOREIGN KEY (`fk_nivel_academico`)
-    REFERENCES `empresag`.`NIVEL_ACADEMICO` (`id`)
+    REFERENCES `ecopick`.`NIVEL_ACADEMICO` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_filtro_genero`
     FOREIGN KEY (`fk_genero`)
-    REFERENCES `empresag`.`GENERO` (`id`)
+    REFERENCES `ecopick`.`GENERO` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_filtro_lugar`
     FOREIGN KEY (`fk_lugar`)
-    REFERENCES `empresag`.`LUGAR` (`id`)
+    REFERENCES `ecopick`.`LUGAR` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_filtro_categoria`
     FOREIGN KEY (`fk_categoria`)
-    REFERENCES `empresag`.`CATEGORIA` (`id`)
+    REFERENCES `ecopick`.`CATEGORIA` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_filtro_subcategoria`
     FOREIGN KEY (`fk_subcategoria`)
-    REFERENCES `empresag`.`SUBCATEGORIA` (`id`)
+    REFERENCES `ecopick`.`SUBCATEGORIA` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_filtro_solicitud`
     FOREIGN KEY (`fk_solicitud`)
-    REFERENCES `empresag`.`SOLICITUD` (`id`)
+    REFERENCES `ecopick`.`SOLICITUD` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`TIPO_PREGUNTA`
+-- Table `ecopick`.`TIPO_PREGUNTA`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`TIPO_PREGUNTA` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`TIPO_PREGUNTA` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
   `descripcion` TEXT NULL,
@@ -469,9 +469,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`PREGUNTA`
+-- Table `ecopick`.`PREGUNTA`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`PREGUNTA` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`PREGUNTA` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `pregunta` VARCHAR(90) NOT NULL,
   `status` INT NOT NULL,
@@ -480,16 +480,16 @@ CREATE TABLE IF NOT EXISTS `empresag`.`PREGUNTA` (
   INDEX `fk_pregunta_tipo_idx` (`fk_tipo` ASC) VISIBLE,
   CONSTRAINT `fk_pregunta_tipo`
     FOREIGN KEY (`fk_tipo`)
-    REFERENCES `empresag`.`TIPO_PREGUNTA` (`id`)
+    REFERENCES `ecopick`.`TIPO_PREGUNTA` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`OPCION`
+-- Table `ecopick`.`OPCION`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`OPCION` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`OPCION` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `valor` VARCHAR(90) NULL,
   `rango_inicial` INT NULL,
@@ -499,9 +499,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`POSIBLE_RESPUESTA`
+-- Table `ecopick`.`POSIBLE_RESPUESTA`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`POSIBLE_RESPUESTA` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`POSIBLE_RESPUESTA` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `fk_pregunta` INT NOT NULL,
   `fk_opcion` INT NOT NULL,
@@ -510,21 +510,21 @@ CREATE TABLE IF NOT EXISTS `empresag`.`POSIBLE_RESPUESTA` (
   INDEX `fk_posresp_opcion_idx` (`fk_opcion` ASC) VISIBLE,
   CONSTRAINT `fk_posresp_pregunta`
     FOREIGN KEY (`fk_pregunta`)
-    REFERENCES `empresag`.`PREGUNTA` (`id`)
+    REFERENCES `ecopick`.`PREGUNTA` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_posresp_opcion`
     FOREIGN KEY (`fk_opcion`)
-    REFERENCES `empresag`.`OPCION` (`id`)
+    REFERENCES `ecopick`.`OPCION` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`ENCUESTA`
+-- Table `ecopick`.`ENCUESTA`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`ENCUESTA` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`ENCUESTA` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `fecha` TIMESTAMP NOT NULL,
   `respuesta_texto` TEXT NULL,
@@ -541,22 +541,22 @@ CREATE TABLE IF NOT EXISTS `empresag`.`ENCUESTA` (
   INDEX `fk_encuesta_persona_idx` (`fk_persona` ASC) VISIBLE,
   CONSTRAINT `fk_encuesta_posiblerespuesta`
     FOREIGN KEY (`fk_posible_respuesta`)
-    REFERENCES `empresag`.`POSIBLE_RESPUESTA` (`id`)
+    REFERENCES `ecopick`.`POSIBLE_RESPUESTA` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_encuesta_estudio`
     FOREIGN KEY (`fk_estudio`)
-    REFERENCES `empresag`.`ESTUDIO` (`id`)
+    REFERENCES `ecopick`.`ESTUDIO` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_encuesta_pregunta`
     FOREIGN KEY (`fk_pregunta`)
-    REFERENCES `empresag`.`PREGUNTA` (`id`)
+    REFERENCES `ecopick`.`PREGUNTA` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_encuesta_persona`
     FOREIGN KEY (`fk_persona`)
-    REFERENCES `empresag`.`PERSONA` (`id`)
+    REFERENCES `ecopick`.`PERSONA` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -564,9 +564,9 @@ COMMENT = 'fk_posible_respuesta es para el caso de la pregunta donde se seleccio
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`PREGUNTA_ESTUDIO`
+-- Table `ecopick`.`PREGUNTA_ESTUDIO`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`PREGUNTA_ESTUDIO` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`PREGUNTA_ESTUDIO` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `requerido` TINYINT NOT NULL,
   `fk_estudio` INT NOT NULL,
@@ -576,21 +576,21 @@ CREATE TABLE IF NOT EXISTS `empresag`.`PREGUNTA_ESTUDIO` (
   INDEX `fk_preest_estudio_idx` (`fk_estudio` ASC) VISIBLE,
   CONSTRAINT `fk_preest_pregunta`
     FOREIGN KEY (`fk_pregunta`)
-    REFERENCES `empresag`.`PREGUNTA` (`id`)
+    REFERENCES `ecopick`.`PREGUNTA` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_preest_estudio`
     FOREIGN KEY (`fk_estudio`)
-    REFERENCES `empresag`.`ESTUDIO` (`id`)
+    REFERENCES `ecopick`.`ESTUDIO` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`MARCA`
+-- Table `ecopick`.`MARCA`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`MARCA` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`MARCA` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(90) NOT NULL,
   `descripcion` TEXT NULL,
@@ -599,9 +599,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`TIPO`
+-- Table `ecopick`.`TIPO`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`TIPO` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`TIPO` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(90) NOT NULL,
   `descripcion` TEXT NULL,
@@ -610,9 +610,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`PRESENTACION`
+-- Table `ecopick`.`PRESENTACION`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`PRESENTACION` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`PRESENTACION` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(90) NOT NULL,
   `descripcion` TEXT NULL,
@@ -621,9 +621,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`PREGUNTA_CAT_SUBCAT`
+-- Table `ecopick`.`PREGUNTA_CAT_SUBCAT`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`PREGUNTA_CAT_SUBCAT` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`PREGUNTA_CAT_SUBCAT` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `fk_pregunta` INT NOT NULL,
   `fk_categoria` INT NULL,
@@ -634,26 +634,26 @@ CREATE TABLE IF NOT EXISTS `empresag`.`PREGUNTA_CAT_SUBCAT` (
   INDEX `fk_pregcatsubcat_subcategoria_idx` (`fk_subcategoria` ASC) VISIBLE,
   CONSTRAINT `fk_pregcatsubcat_pregunta`
     FOREIGN KEY (`fk_pregunta`)
-    REFERENCES `empresag`.`PREGUNTA` (`id`)
+    REFERENCES `ecopick`.`PREGUNTA` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_pregcatsubcat_categoria`
     FOREIGN KEY (`fk_categoria`)
-    REFERENCES `empresag`.`CATEGORIA` (`id`)
+    REFERENCES `ecopick`.`CATEGORIA` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_pregcatsubcat_subcategoria`
     FOREIGN KEY (`fk_subcategoria`)
-    REFERENCES `empresag`.`SUBCATEGORIA` (`id`)
+    REFERENCES `ecopick`.`SUBCATEGORIA` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`CATEGORIA_SUBCATEGORIA`
+-- Table `ecopick`.`CATEGORIA_SUBCATEGORIA`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`CATEGORIA_SUBCATEGORIA` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`CATEGORIA_SUBCATEGORIA` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `fk_categoria` INT NOT NULL,
   `fk_subcategoria` INT NOT NULL,
@@ -661,21 +661,21 @@ CREATE TABLE IF NOT EXISTS `empresag`.`CATEGORIA_SUBCATEGORIA` (
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_catsubcat_categoria`
     FOREIGN KEY (`fk_categoria`)
-    REFERENCES `empresag`.`CATEGORIA` (`id`)
+    REFERENCES `ecopick`.`CATEGORIA` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_catsubcat_subcategoria`
     FOREIGN KEY (`fk_subcategoria`)
-    REFERENCES `empresag`.`SUBCATEGORIA` (`id`)
+    REFERENCES `ecopick`.`SUBCATEGORIA` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`SUBCATEGORIA_MARCA`
+-- Table `ecopick`.`SUBCATEGORIA_MARCA`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`SUBCATEGORIA_MARCA` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`SUBCATEGORIA_MARCA` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `fk_subcategoria` INT NOT NULL,
   `fk_marca` INT NOT NULL,
@@ -683,21 +683,21 @@ CREATE TABLE IF NOT EXISTS `empresag`.`SUBCATEGORIA_MARCA` (
   INDEX `fk_subcatmarca_marca_idx` (`fk_marca` ASC) VISIBLE,
   CONSTRAINT `fk_subcatmarca_subcategoria`
     FOREIGN KEY (`fk_subcategoria`)
-    REFERENCES `empresag`.`SUBCATEGORIA` (`id`)
+    REFERENCES `ecopick`.`SUBCATEGORIA` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_subcatmarca_marca`
     FOREIGN KEY (`fk_marca`)
-    REFERENCES `empresag`.`MARCA` (`id`)
+    REFERENCES `ecopick`.`MARCA` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`MARCA_TIPO`
+-- Table `ecopick`.`MARCA_TIPO`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`MARCA_TIPO` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`MARCA_TIPO` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `fk_marca` INT NOT NULL,
   `fk_tipo` INT NOT NULL,
@@ -705,21 +705,21 @@ CREATE TABLE IF NOT EXISTS `empresag`.`MARCA_TIPO` (
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_marcatipo_marca`
     FOREIGN KEY (`fk_marca`)
-    REFERENCES `empresag`.`MARCA` (`id`)
+    REFERENCES `ecopick`.`MARCA` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_marcatipo_tipo`
     FOREIGN KEY (`fk_tipo`)
-    REFERENCES `empresag`.`TIPO` (`id`)
+    REFERENCES `ecopick`.`TIPO` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `empresag`.`TIPO_PRESENTACION`
+-- Table `ecopick`.`TIPO_PRESENTACION`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`TIPO_PRESENTACION` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`TIPO_PRESENTACION` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `fk_tipo` INT NOT NULL,
   `fk_presentacion` INT NOT NULL,
@@ -727,20 +727,20 @@ CREATE TABLE IF NOT EXISTS `empresag`.`TIPO_PRESENTACION` (
   INDEX `fk_tipopres_presentacion_idx` (`fk_presentacion` ASC) VISIBLE,
   CONSTRAINT `fk_tipopres_tipo`
     FOREIGN KEY (`fk_tipo`)
-    REFERENCES `empresag`.`TIPO` (`id`)
+    REFERENCES `ecopick`.`TIPO` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tipopres_presentacion`
     FOREIGN KEY (`fk_presentacion`)
-    REFERENCES `empresag`.`PRESENTACION` (`id`)
+    REFERENCES `ecopick`.`PRESENTACION` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `empresag`.`TOKENS`
+-- Table `ecopick`.`TOKENS`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresag`.`TOKENS` (
+CREATE TABLE IF NOT EXISTS `ecopick`.`TOKENS` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `token_login` VARCHAR(30) NULL,
   `token_reset` VARCHAR(30) NULL,
@@ -749,7 +749,7 @@ CREATE TABLE IF NOT EXISTS `empresag`.`TOKENS` (
   INDEX `fk_usuario_token_idx` (`fk_usuario` ASC) VISIBLE,
   CONSTRAINT `fk_usuario_token`
     FOREIGN KEY (`fk_usuario`)
-    REFERENCES `empresag`.`USUARIO` (`id`)
+    REFERENCES `ecopick`.`USUARIO` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
