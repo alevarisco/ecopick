@@ -1,5 +1,5 @@
-import com.empresag.OcupacionDto;
-import com.empresag.OcupacionService;
+import com.ecopick.OcupacionDto;
+import com.ecopick.OcupacionService;
 import org.junit.Assert;
 import org.junit.Test;
 

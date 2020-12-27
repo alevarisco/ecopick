@@ -6,7 +6,7 @@ dto/target/
 entidades/target/
 exceptions/target/
 servicio/target/
-MercadeoUCAB-backend.iml
+EcoPick-backend.iml
 dto/dto.iml
 dao/dao.iml
 entidades/entidades.iml

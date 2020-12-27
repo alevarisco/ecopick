@@ -3,8 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>MercadeoUCAB</artifactId>
-        <groupId>com.empresag</groupId>
+        <artifactId>EcoPick</artifactId>
+        <groupId>com.ecopick</groupId>
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -25,7 +25,7 @@
             <version>1.6.2</version>
         </dependency>
         <dependency>
-            <groupId>com.empresag</groupId>
+            <groupId>com.ecopick</groupId>
             <artifactId>entidades</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
@@ -36,7 +36,7 @@
             <version>8.0.22</version>
         </dependency>
         <dependency>
-            <groupId>com.empresag</groupId>
+            <groupId>com.ecopick</groupId>
             <artifactId>dto</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>

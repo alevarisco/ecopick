@@ -1,4 +1,4 @@
-import com.empresag.*;
+import com.ecopick.*;
 import org.junit.Test;
 
 import javax.persistence.EntityManager;
@@ -14,8 +14,8 @@ public class AnalisisTest {
     Query q = null;
 
     @Test
-    public void getOpenTextAnswers() throws IndexDatabaseException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("empresag");
+    public void getOpenTextAnswers()  {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecopick");
         EntityManager em = emf.createEntityManager();
         DaoEstudio daoEstudio = new DaoEstudio();
         DaoTipoPregunta daoTipoPregunta = new DaoTipoPregunta();
@@ -62,8 +62,8 @@ public class AnalisisTest {
     }
 
     @Test
-    public void getSelectionAnswers() throws IndexDatabaseException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("empresag");
+    public void getSelectionAnswers()  {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecopick");
         EntityManager em = emf.createEntityManager();
         DaoEstudio daoEstudio = new DaoEstudio();
         DaoTipoPregunta daoTipoPregunta = new DaoTipoPregunta();
@@ -116,8 +116,8 @@ public class AnalisisTest {
     }
 
     @Test
-    public void getTrueFalseAnswers() throws IndexDatabaseException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("empresag");
+    public void getTrueFalseAnswers()  {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecopick");
         EntityManager em = emf.createEntityManager();
         DaoEstudio daoEstudio = new DaoEstudio();
         DaoTipoPregunta daoTipoPregunta = new DaoTipoPregunta();
@@ -168,9 +168,9 @@ public class AnalisisTest {
     }
 
     @Test
-    public void getRangeAnswers() throws IndexDatabaseException {
+    public void getRangeAnswers()  {
         Object [] tuple = null;
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("empresag");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecopick");
         EntityManager em = emf.createEntityManager();
         DaoEstudio daoEstudio = new DaoEstudio();
         DaoTipoPregunta daoTipoPregunta = new DaoTipoPregunta();

@@ -1,4 +1,4 @@
-import com.empresag.*;
+import com.ecopick.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,7 +15,7 @@ public class TipoTest {
 
     @Test
     public void getAllBrands(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("empresag");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecopick");
         EntityManager em = emf.createEntityManager();
 
         JPQL = "SELECT mt FROM MarcaTipoEntity mt";

@@ -1,5 +1,5 @@
-import com.empresag.EdoCivilDto;
-import com.empresag.EdoCivilService;
+import com.ecopick.EdoCivilDto;
+import com.ecopick.EdoCivilService;
 import org.junit.Assert;
 import org.junit.Test;
 

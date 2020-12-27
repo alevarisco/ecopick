@@ -1,5 +1,5 @@
-import com.empresag.DispositivoDto;
-import com.empresag.DispositivoService;
+import com.ecopick.DispositivoDto;
+import com.ecopick.DispositivoService;
 import org.junit.Assert;
 import org.junit.Test;
 

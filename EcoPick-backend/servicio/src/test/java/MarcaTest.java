@@ -1,4 +1,4 @@
-import com.empresag.*;
+import com.ecopick.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,7 +15,7 @@ public class MarcaTest {
 
     @Test
     public void getAllBrands(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("empresag");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecopick");
         EntityManager em = emf.createEntityManager();
 
         JPQL = "SELECT sm FROM SubcategoriaMarcaEntity sm";
@@ -30,7 +30,7 @@ public class MarcaTest {
     @Test
     public void getBrandsBySubcategoryID(){
         long subcategory_id = 1;
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("empresag");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecopick");
         EntityManager em = emf.createEntityManager();
 
         JPQL = "SELECT sm FROM SubcategoriaMarcaEntity sm WHERE sm.fkSubcategoria._id = :id";

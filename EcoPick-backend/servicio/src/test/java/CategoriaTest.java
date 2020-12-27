@@ -1,6 +1,6 @@
-import com.empresag.CategoriaDto;
-import com.empresag.CategoriaEntity;
-import com.empresag.DaoCategoria;
+import com.ecopick.CategoriaDto;
+import com.ecopick.CategoriaEntity;
+import com.ecopick.DaoCategoria;
 import org.junit.Assert;
 import org.junit.Test;
 public class CategoriaTest {

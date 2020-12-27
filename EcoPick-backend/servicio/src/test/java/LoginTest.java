@@ -1,10 +1,10 @@
-import com.empresag.*;
+import com.ecopick.*;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class LoginTest {
     @Test
-    public void getUsuario() throws IndexDatabaseException {
+    public void getUsuario()  {
         LoginService login = new LoginService();
         DaoUsuario usuarioDao = new DaoUsuario();
 

@@ -1,4 +1,4 @@
-import com.empresag.*;
+import com.ecopick.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -18,7 +18,7 @@ public class PreguntaTest {
 
     @Test
     public void allQuestions(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("empresag");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecopick");
         EntityManager em = emf.createEntityManager();
 
         JPQL = "SELECT pcs FROM PreguntaCatSubcatEntity pcs WHERE pcs.fkPregunta.status = 1";
@@ -33,7 +33,7 @@ public class PreguntaTest {
 
     @Test
     public void allActiveQuestionsThatDontExistInStudyByCategory(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("empresag");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecopick");
         EntityManager em = emf.createEntityManager();
 
         JPQL = "SELECT pcs FROM PreguntaCatSubcatEntity pcs WHERE pcs.fkPregunta.status = 1" +
@@ -143,7 +143,7 @@ public class PreguntaTest {
 
     @Test
     public void updateFromSelectionToOpenTextQuestion(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("empresag");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecopick");
         EntityManager em = emf.createEntityManager();
 
         DaoPregunta daoPregunta = new DaoPregunta();

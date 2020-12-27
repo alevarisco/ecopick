@@ -1,4 +1,4 @@
-import com.empresag.*;
+import com.ecopick.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,7 +15,7 @@ public class EstudiosTest {
 
     @Test
     public void allExistingStudies(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("empresag");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecopick");
         EntityManager em = emf.createEntityManager();
 
         JPQL = "SELECT e FROM FiltroEntity e WHERE e.fkEstudio IS NOT NULL";
@@ -28,7 +28,7 @@ public class EstudiosTest {
 
     @Test
     public void allActiveStudies(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("empresag");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecopick");
         EntityManager em = emf.createEntityManager();
 
         JPQL = "SELECT e FROM FiltroEntity e, EstudioEntity ee WHERE e.fkEstudio " +
@@ -42,7 +42,7 @@ public class EstudiosTest {
 
     @Test
     public void getCurrentStudy(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("empresag");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecopick");
         EntityManager em = emf.createEntityManager();
         DaoEstudio daoEstudio = new DaoEstudio();
 
@@ -58,7 +58,7 @@ public class EstudiosTest {
 
     @Test
     public void getQuestionsForStudy(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("empresag");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecopick");
         EntityManager em = emf.createEntityManager();
         DaoEstudio daoEstudio = new DaoEstudio();
 
@@ -81,8 +81,8 @@ public class EstudiosTest {
     }
 
     @Test
-    public void getQuestionForStudyWithOptions() throws IndexDatabaseException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("empresag");
+    public void getQuestionForStudyWithOptions()  {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecopick");
         EntityManager em = emf.createEntityManager();
         DaoEstudio daoEstudio = new DaoEstudio();
         EstudioEntity estudio = daoEstudio.find(1L, EstudioEntity.class);
@@ -136,7 +136,7 @@ public class EstudiosTest {
 
     @Test
     public void assignStudy(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("empresag");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecopick");
         EntityManager em = emf.createEntityManager();
 
         DaoEstudio daoEstudio = new DaoEstudio();

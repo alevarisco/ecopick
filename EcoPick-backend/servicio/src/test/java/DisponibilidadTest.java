@@ -1,5 +1,5 @@
-import com.empresag.DisponibilidadDto;
-import com.empresag.DisponibilidadService;
+import com.ecopick.DisponibilidadDto;
+import com.ecopick.DisponibilidadService;
 import org.junit.Assert;
 import org.junit.Test;
 

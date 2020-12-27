@@ -1,6 +1,6 @@
 
-import com.empresag.GeneroDto;
-import com.empresag.GeneroService;
+import com.ecopick.GeneroDto;
+import com.ecopick.GeneroService;
 import org.junit.Assert;
 import org.junit.Test;
 

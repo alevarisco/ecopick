@@ -1,6 +1,6 @@
 
-import com.empresag.NivelAcademicoDto;
-import com.empresag.NivelAcademicoService;
+import com.ecopick.NivelAcademicoDto;
+import com.ecopick.NivelAcademicoService;
 import org.junit.Assert;
 import org.junit.Test;
 

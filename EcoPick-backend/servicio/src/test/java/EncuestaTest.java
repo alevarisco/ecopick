@@ -1,4 +1,4 @@
-import com.empresag.*;
+import com.ecopick.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,7 +16,7 @@ public class EncuestaTest {
 
     @Test
     public void getAvailablePopulation(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("empresag");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecopick");
         EntityManager em = emf.createEntityManager();
         DaoEstudio daoEstudio = new DaoEstudio();
         EstudioEntity estudio = daoEstudio.find(1L, EstudioEntity.class);
@@ -45,7 +45,7 @@ public class EncuestaTest {
 
     @Test
     public void isUserPartOfAvailablePopulation(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("empresag");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecopick");
         EntityManager em = emf.createEntityManager();
         DaoEncuesta daoEncuesta = new DaoEncuesta();
         DaoPersona daoPersona = new DaoPersona();
@@ -63,7 +63,7 @@ public class EncuestaTest {
 
     @Test
     public void getAvailableStudies(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("empresag");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecopick");
         EntityManager em = emf.createEntityManager();
         DaoPersona daoPersona = new DaoPersona();
         PersonaEntity persona = daoPersona.find(70L, PersonaEntity.class);
@@ -91,7 +91,7 @@ public class EncuestaTest {
     }
 
     @Test
-    public void takeSurvey() throws IndexDatabaseException {
+    public void takeSurvey()  {
         DaoEstudio daoEstudio = new DaoEstudio();
         DaoPersona daoPersona = new DaoPersona();
         DaoPosibleRespuesta daoPosibleRespuesta = new DaoPosibleRespuesta();

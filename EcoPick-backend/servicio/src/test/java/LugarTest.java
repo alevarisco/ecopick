@@ -1,6 +1,6 @@
 
-import com.empresag.LugarDto;
-import com.empresag.LugarService;
+import com.ecopick.LugarDto;
+import com.ecopick.LugarService;
 import org.junit.Assert;
 import org.junit.Test;
 
