@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "MercadeoUCAB-frontend": {
+    "EcoPick-frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,20 +17,14 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": [
-              "hammerjs",
-              "chart.js"
-            ],
-            "outputPath": "dist/MercadeoUCAB-frontend",
+            "allowedCommonJsDependencies": ["hammerjs", "chart.js"],
+            "outputPath": "dist/EcoPick-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "src/styles.scss",
               "node_modules/primeng/resources/themes/saga-blue/theme.css",
@@ -79,11 +73,11 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "MercadeoUCAB-frontend:build"
+            "browserTarget": "EcoPick-frontend:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "MercadeoUCAB-frontend:build:production"
+              "browserTarget": "EcoPick-frontend:build:production"
             }
           }
         },
@@ -94,7 +88,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "MercadeoUCAB-frontend:build"
+            "browserTarget": "EcoPick-frontend:build"
           }
         },
         "test": {
@@ -104,13 +98,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           }
         },
@@ -122,27 +111,25 @@
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "MercadeoUCAB-frontend:serve"
+            "devServerTarget": "EcoPick-frontend:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "MercadeoUCAB-frontend:serve:production"
+              "devServerTarget": "EcoPick-frontend:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "MercadeoUCAB-frontend",
+  "defaultProject": "EcoPick-frontend",
   "cli": {
     "analytics": false
   }

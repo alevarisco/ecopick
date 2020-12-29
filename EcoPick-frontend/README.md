@@ -1,17 +1,20 @@
-# MercadeoUCAB
+# EcoPick
 
 ## Instalación local
+
 1. Clone el repositorio
-2. Abra el directorio `MercadeoUCAB-frontend` en una consola y ejecute el comando `npm i`
+2. Abra el directorio `EcoPick-frontend` en una consola y ejecute el comando `npm i`
 3. Finalmente ejecute el comando `ng serve`, esto inicializará la API del frontend en `localhost:4200`
 
 ## Servidor de pruebas
- Se puede utilizar json-server para hacer pruebas de request http, para ello, debemos instalar json-server: `npm i -g json-server`, luego, debe abrir una nueva consola que apunte al directorio `json-server` del proyecto y ejecutar el siguiente comando:
- ```json-server --watch mock_data.json```
- 
- Esto inicializará el servidor de pruebas en `localhost:3000`
+
+Se puede utilizar json-server para hacer pruebas de request http, para ello, debemos instalar json-server: `npm i -g json-server`, luego, debe abrir una nueva consola que apunte al directorio `json-server` del proyecto y ejecutar el siguiente comando:
+`json-server --watch mock_data.json`
+
+Esto inicializará el servidor de pruebas en `localhost:3000`
 
 ## TODO
+
 1. Cuando se integre el backend, en la parte de mostrar preguntas usara los atributos: tipo, subcategoria, categoria, en la parte de agregar y editar usara los atributos: id_tipo, id_subcategoria, id_categoria
 
 2. El error handler del process http service message debe mostrar los errores que salgan del backend, por ahora solo muestra [Object object]
