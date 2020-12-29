@@ -31,8 +31,8 @@ public class Email {
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
         properties.put("mail.smtp.port", 587);
-        properties.put("mail.smtp.mail.sender","ecopick.info@gmail.com");
-        properties.put("mail.smtp.user", "ecopick.info@gmail.com");
+        properties.put("mail.smtp.mail.sender","info.ecopick@gmail.com");
+        properties.put("mail.smtp.user", "info.ecopick@gmail.com");
         properties.put("mail.smtp.auth", "true");
 
         session = Session.getDefaultInstance(properties);
