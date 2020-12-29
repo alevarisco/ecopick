@@ -1,26 +1,26 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MessageService, SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
-import { Recovery } from '../../core/classes/auth/recovery';
+import { Recovery } from '../../../core/classes/auth/recovery';
 
 /* Form */
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RecoveryService } from '../../core/services/auth/recovery.service';
+import { RecoveryService } from '../../../core/services/auth/recovery.service';
 import { ReorderableColumn } from 'primeng/table';
 
 @Component({
-  selector: 'app-recovery',
-  templateUrl: './recovery.component.html',
-  styleUrls: ['./recovery.component.scss'],
+  selector: 'app-securityquestion',
+  templateUrl: './securityquestion.component.html',
+  styleUrls: ['./securityquestion.component.scss'],
   providers: [MessageService]
 
 })
-export class RecoveryComponent implements OnInit {
+export class SecurityQuestionComponent implements OnInit {
 
 
    /* Form */
-   recoveryForm: FormGroup;
-   @ViewChild('aform') recoveryFormDirective;
+   securityQuestionForm: FormGroup;
+   @ViewChild('bform') securityQuestionFormDirective;
 
    recovery: Recovery;
 
@@ -49,7 +49,7 @@ export class RecoveryComponent implements OnInit {
   }
 
   createForm(){
-    this.recoveryForm = this.fb.group({
+    this.securityQuestionForm = this.fb.group({
       correo_electronico: [
         this.recoveryService.correo,
         [
@@ -59,7 +59,7 @@ export class RecoveryComponent implements OnInit {
       ]
     });
 
-    this.recoveryForm.valueChanges
+    this.securityQuestionForm.valueChanges
     .subscribe(data => {
       this.onValueChange(data);
     });
@@ -67,11 +67,11 @@ export class RecoveryComponent implements OnInit {
 
   onValueChange(data?: any){
     /* If form hasn't been created */
-    if (!this.recoveryForm){
+    if (!this.securityQuestionForm){
       return;
     }
 
-    const form = this.recoveryForm;
+    const form = this.securityQuestionForm;
     for (const field in this.formErrors){
       if (this.formErrors.hasOwnProperty(field)){
         // clear previous error message if any
@@ -95,7 +95,7 @@ export class RecoveryComponent implements OnInit {
 
   onSubmit(){
     this.recovery = new Recovery();
-    this.recovery.correo = this.recoveryForm.value.correo_electronico;
+    this.recovery.correo = this.securityQuestionForm.value.correo_electronico;
     this.recoveryService.validateEmail(this.recovery)
       .subscribe(question => {
         if (question == null){
@@ -113,7 +113,7 @@ export class RecoveryComponent implements OnInit {
   nextPage(): void {
     this.router.navigate(['/security-question']);
   }
+
+ 
 }
-
-
 

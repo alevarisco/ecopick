@@ -8,6 +8,7 @@ import { FamilyComponent } from './register/family/family.component';
 import { StatusComponent } from './register/status/status.component';
 import { RecoveryComponent } from './recovery/recovery.component';
 import { ChangeComponent } from './recovery/change/change.component';
+import { SecurityQuestionComponent } from './recovery/securityquestion/securityquestion.component';
 import {GuestGuard} from '../core/guards/guest.guard';
 
 const routes: Routes = [
@@ -47,6 +48,11 @@ const routes: Routes = [
   {
     path: 'recovery',
     component: RecoveryComponent,
+    canActivate: [GuestGuard]
+  },
+  {
+    path: 'security-question',
+    component: SecurityQuestionComponent,
     canActivate: [GuestGuard]
   },
   {
