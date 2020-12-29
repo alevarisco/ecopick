@@ -11,14 +11,6 @@
 
     <artifactId>dto</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <dependencies>
-        <dependency>
-            <groupId>com.ecopick</groupId>
-            <artifactId>exceptions</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
     <packaging>jar</packaging>
 
     <build>

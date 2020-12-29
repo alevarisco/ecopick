@@ -360,7 +360,7 @@ CREATE TABLE IF NOT EXISTS `ecopick`.`PERSONA_NVLACADEMICO` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
+-- -----------------------------------------------------c
 -- Table `ecopick`.`CATEGORIA`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ecopick`.`CATEGORIA` (
