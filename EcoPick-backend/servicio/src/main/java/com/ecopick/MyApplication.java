@@ -18,18 +18,10 @@ public class MyApplication extends Application {
     public Set<Class<?>> getClasses() {
         Set<Class<?>> h = new HashSet<>();
         h.add( HelloWorld.class );
-        h.add( DispositivoService.class );
         h.add( SesionService.class );
-        h.add( GeneroService.class );
-        h.add( EdoCivilService.class );
         h.add( LugarService.class );
         h.add( UserService.class );
-        h.add( OcupacionService.class );
-        h.add( NivelAcademicoService.class );
-        h.add( DisponibilidadService.class );
-        h.add( RolService.class );
         h.add( LoginService.class );
-        h.add( RecoveryService.class );
         return h;
     }
 }

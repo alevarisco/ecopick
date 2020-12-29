@@ -3,7 +3,6 @@ package com.ecopick;
 public class LugarDto extends BaseDto {
     private String nombre;
     private int tipo;
-    private NivelSocioeconomicoDto fkNivelSocioeconomico;
     private LugarDto fkLugar;
 
     public LugarDto() {
@@ -29,14 +28,6 @@ public class LugarDto extends BaseDto {
         this.tipo = tipo;
     }
 
-    public NivelSocioeconomicoDto getFkNivelSocioeconomico() {
-        return fkNivelSocioeconomico;
-    }
-
-    public void setFkNivelSocioeconomico(NivelSocioeconomicoDto fkNivelSocioeconomico) {
-        this.fkNivelSocioeconomico = fkNivelSocioeconomico;
-    }
-
     public LugarDto getFkLugar() {
         return fkLugar;
     }
@@ -50,7 +41,6 @@ public class LugarDto extends BaseDto {
         return "\n{" +
                 "nombre='" + nombre + '\'' +
                 ", tipo=" + tipo +
-                ", fkNivelSocioeconomico=" + fkNivelSocioeconomico +
                 ", fkLugar=" + fkLugar +
                 '}';
     }

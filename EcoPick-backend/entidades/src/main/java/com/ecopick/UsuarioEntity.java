@@ -1,21 +1,49 @@
 package com.ecopick;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.util.Objects;
 
 @Entity
-@Table(name = "usuario", schema = "ecopick")
+@Table(name = "usuario", schema = "ecopick", catalog = "")
 public class UsuarioEntity extends BaseEntity{
+    private String nombre;
+    private String apellido;
     private String email;
-    private String password;
+    private String contraseña;
+    private String genero;
+    private Date fechaNacimiento;
+    private String telefono;
+    private int tipo;
+    private String numeroIdentificacion;
+    private String respuestaSeguridad;
+    @ManyToOne
+    @JoinColumn(name = "fk_lugar")
+    private LugarEntity fkLugar;
+    @ManyToOne
+    @JoinColumn(name = "fk_pregunta")
+    private PreguntaseguridadEntity fkPregunta;
+
+
     @Basic
-    @Column(name = "estado")
-    private int estado;
-    @ManyToOne
-    @JoinColumn(name = "fk_persona")
-    private PersonaEntity fk_Persona;
-    @ManyToOne
-    @JoinColumn(name = "fk_rol")
-    private RolEntity fk_Rol;
+    @Column(name = "nombre")
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    @Basic
+    @Column(name = "apellido")
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
 
     @Basic
     @Column(name = "email")
@@ -28,53 +56,92 @@ public class UsuarioEntity extends BaseEntity{
     }
 
     @Basic
-    @Column(name = "password")
-    public String getPassword() {
-        return password;
+    @Column(name = "contraseña")
+    public String getContraseña() {
+        return contraseña;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 
     @Basic
-    @Column(name = "estado")
-    public int getEstado() {
-        return estado;
+    @Column(name = "genero")
+    public String getGenero() {
+        return genero;
     }
 
-    public void setEstado(int estado) {
-        this.estado = estado;
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    @Basic
+    @Column(name = "FechaNacimiento")
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    @Basic
+    @Column(name = "telefono")
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    @Basic
+    @Column(name = "tipo")
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+
+    @Basic
+    @Column(name = "NumeroIdentificacion")
+    public String getNumeroIdentificacion() {
+        return numeroIdentificacion;
+    }
+
+    public void setNumeroIdentificacion(String numeroIdentificacion) {
+        this.numeroIdentificacion = numeroIdentificacion;
+    }
+
+    @Basic
+    @Column(name = "RespuestaSeguridad")
+    public String getRespuestaSeguridad() {
+        return respuestaSeguridad;
+    }
+
+    public void setRespuestaSeguridad(String respuestaSeguridad) {
+        this.respuestaSeguridad = respuestaSeguridad;
     }
 
     @ManyToOne
-    @JoinColumn(name = "fk_persona")
-    public PersonaEntity getFk_Persona() {
-        return fk_Persona;
+    @JoinColumn(name = "fk_lugar")
+    public LugarEntity getFkLugar() {
+        return fkLugar;
     }
 
-    public void setFk_Persona(PersonaEntity fkPersona) {
-        this.fk_Persona = fkPersona;
+    public void setFkLugar(LugarEntity fkLugar) {
+        this.fkLugar = fkLugar;
     }
 
     @ManyToOne
-    @JoinColumn(name = "fk_rol")
-    public RolEntity getFk_Rol() {
-        return fk_Rol;
+    @JoinColumn(name = "fk_pregunta")
+    public PreguntaseguridadEntity getFkPregunta() {
+        return fkPregunta;
     }
 
-    public void setFk_Rol(RolEntity fkRol) {
-        this.fk_Rol = fkRol;
-    }
-
-    @Override
-    public String toString() {
-        return "UsuarioEntity{" +
-                "email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", estado=" + estado +
-                ", fk_Persona=" + fk_Persona.toString() +
-                ", fk_Rol=" + fk_Rol.toString() +
-                '}';
+    public void setFkPregunta(PreguntaseguridadEntity fkPregunta) {
+        this.fkPregunta = fkPregunta;
     }
 }

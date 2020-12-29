@@ -25,11 +25,6 @@ public class LugarService {
             lugar.setNombre(lugarDto.getNombre());
             lugar.setTipo(lugarDto.getTipo());
 
-            DaoNivelSocioeconomico daoNivelSocioeconomico = new DaoNivelSocioeconomico();
-            NivelSocioeconomicoEntity nivelSocioeconomicoLugar = daoNivelSocioeconomico.find(lugarDto.getFkNivelSocioeconomico().get_id(), NivelSocioeconomicoEntity.class);
-
-            lugar.setFkNivelSocioeconomico(nivelSocioeconomicoLugar);
-
             DaoLugar daoLugarPadre = new DaoLugar();
             LugarEntity lugarPadre = daoLugarPadre.find(lugarDto.getFkLugar().get_id(), LugarEntity.class);
 
@@ -98,17 +93,6 @@ public class LugarService {
                 resultado.setNombre(lugar.getNombre());
                 resultado.setTipo(lugar.getTipo());
 
-                if( lugar.getFkNivelSocioeconomico() != null) {
-                    DaoNivelSocioeconomico daoNivelSocioeconomico = new DaoNivelSocioeconomico();
-                    NivelSocioeconomicoEntity nivelSocioeconomico = daoNivelSocioeconomico
-                            .find(lugar.getFkNivelSocioeconomico().get_id(), NivelSocioeconomicoEntity.class);
-
-                    NivelSocioeconomicoDto nivelSocioeconomicoLugar = new NivelSocioeconomicoDto();
-                    nivelSocioeconomicoLugar.set_id(nivelSocioeconomico.get_id());
-                    nivelSocioeconomicoLugar.setNombre(nivelSocioeconomico.getNombre());
-
-                    resultado.setFkNivelSocioeconomico(nivelSocioeconomicoLugar);
-                }
 
                 return resultado;
 
@@ -118,17 +102,6 @@ public class LugarService {
                 resultado.setNombre(lugar.getNombre());
                 resultado.setTipo(lugar.getTipo());
 
-                if( lugar.getFkNivelSocioeconomico() != null) {
-                    DaoNivelSocioeconomico daoNivelSocioeconomico = new DaoNivelSocioeconomico();
-                    NivelSocioeconomicoEntity nivelSocioeconomico = daoNivelSocioeconomico
-                            .find(lugar.getFkNivelSocioeconomico().get_id(), NivelSocioeconomicoEntity.class);
-
-                    NivelSocioeconomicoDto nivelSocioeconomicoLugar = new NivelSocioeconomicoDto();
-                    nivelSocioeconomicoLugar.set_id(nivelSocioeconomico.get_id());
-                    nivelSocioeconomicoLugar.setNombre(nivelSocioeconomico.getNombre());
-
-                    resultado.setFkNivelSocioeconomico(nivelSocioeconomicoLugar);
-                }
 
 //                LLAMO A LA RECURSIVIDAD
                 resultado.setFkLugar(getSuperior(lugar.getFkLugar().get_id()));

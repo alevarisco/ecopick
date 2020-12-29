@@ -2,43 +2,9 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
 
     <persistence-unit name="ecopick">
-        <class>com.ecopick.AnalisisEntity</class>
-        <class>com.ecopick.CategoriaEntity</class>
-        <class>com.ecopick.CategoriaSubcategoriaEntity</class>
-        <class>com.ecopick.DisponibilidadEntity</class>
-        <class>com.ecopick.DispositivoEntity</class>
-        <class>com.ecopick.EdoCivilEntity</class>
-        <class>com.ecopick.EncuestaEntity</class>
-        <class>com.ecopick.EstudioEntity</class>
-        <class>com.ecopick.FiltroEntity</class>
-        <class>com.ecopick.GeneroEntity</class>
         <class>com.ecopick.LugarEntity</class>
-        <class>com.ecopick.MarcaEntity</class>
-        <class>com.ecopick.MarcaTipoEntity</class>
-        <class>com.ecopick.NivelAcademicoEntity</class>
-        <class>com.ecopick.NivelSocioeconomicoEntity</class>
-        <class>com.ecopick.OcupacionEntity</class>
-        <class>com.ecopick.OpcionEntity</class>
-        <class>com.ecopick.PersonaDispositivoEntity</class>
-        <class>com.ecopick.PersonaEntity</class>
-        <class>com.ecopick.PersonaNvlacademicoEntity</class>
-        <class>com.ecopick.PersonaOcupacionEntity</class>
-        <class>com.ecopick.PosibleRespuestaEntity</class>
-        <class>com.ecopick.PreguntaCatSubcatEntity</class>
-        <class>com.ecopick.PreguntaEntity</class>
-        <class>com.ecopick.PreguntaEstudioEntity</class>
-        <class>com.ecopick.PresentacionEntity</class>
-        <class>com.ecopick.RolEntity</class>
-        <class>com.ecopick.SolicitudEntity</class>
-        <class>com.ecopick.SolicitudEstudioEntity</class>
-        <class>com.ecopick.SubcategoriaEntity</class>
-        <class>com.ecopick.SubcategoriaMarcaEntity</class>
-        <class>com.ecopick.TelefonoEntity</class>
-        <class>com.ecopick.TipoEntity</class>
-        <class>com.ecopick.TipoPreguntaEntity</class>
-        <class>com.ecopick.TipoPresentacionEntity</class>
+        <class>com.ecopick.PreguntaseguridadEntity</class>
         <class>com.ecopick.UsuarioEntity</class>
-        <class>com.ecopick.TokenEntity</class>
 
         <!--TODO (INFO) - AQUI VAN LAS CREDENCIALES DE LA BASE DE DATOS-->
 
@@ -46,7 +12,7 @@
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ecopick"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value="209fadfc*"/>
+            <property name="javax.persistence.jdbc.password" value="12345678"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
             <property name="eclipselink.logging.level" value="FINE"/>
         </properties>

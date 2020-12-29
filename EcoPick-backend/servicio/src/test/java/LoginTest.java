@@ -11,7 +11,7 @@ public class LoginTest {
         String userString = "";
         UsuarioDto usuarioDto = new UsuarioDto();
         usuarioDto.setEmail("hyperschnell11@outlook.sk");
-        usuarioDto.setPassword("123456789");
+        usuarioDto.setContraseña("123456789");
         UsuarioDto user = login.currentUser(usuarioDto);
         if (user != null)
             userString = user.toString();
@@ -35,9 +35,4 @@ public class LoginTest {
 //        //Assert.assertEquals(1,token.get_id());
 //    }
 
-    @Test
-    public void changeTest(){
-        RecoveryService rec = new RecoveryService();
-        rec.changePassword("angel99castillo@gmail.com","Caracas1.");
-    }
 }

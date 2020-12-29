@@ -2,11 +2,12 @@ package com.ecopick;
 
 import javax.persistence.EntityManager;
 
-public class DaoTipoPregunta extends Dao<TipoPreguntaEntity> {
+public class DaoPreguntaSeguridad extends Dao<PreguntaseguridadEntity>{
+
     private EntityManager _em;
     static DaoHandler _handler = new DaoHandler();
 
-    public DaoTipoPregunta(){
+    public DaoPreguntaSeguridad( ) {
         super(_handler);
     }
 }

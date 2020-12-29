@@ -77,6 +77,23 @@ CREATE TABLE IF NOT EXISTS `ecopick`.`usuario` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `ecopick`.`TOKENS`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ecopick`.`TOKENS` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `token_login` VARCHAR(30) NULL,
+  `token_reset` VARCHAR(30) NULL,
+  `fk_usuario` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_usuario_token_idx` (`fk_usuario` ASC) VISIBLE,
+  CONSTRAINT `fk_usuario_token`
+    FOREIGN KEY (`fk_usuario`)
+    REFERENCES `ecopick`.`USUARIO` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

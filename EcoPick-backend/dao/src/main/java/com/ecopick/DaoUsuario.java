@@ -35,7 +35,7 @@ public class DaoUsuario extends Dao<UsuarioEntity> {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecopick");
         EntityManager em = emf.createEntityManager();
 
-        JPQL = "SELECT u FROM UsuarioEntity u WHERE u.password = :password AND u.email = :email";
+        JPQL = "SELECT u FROM UsuarioEntity u WHERE u.contraseña = :password AND u.email = :email";
         q = em.createQuery(JPQL);
         q.setParameter("password", password);
         q.setParameter("email", email);
