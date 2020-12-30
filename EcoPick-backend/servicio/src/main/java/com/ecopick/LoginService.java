@@ -17,35 +17,48 @@ public class LoginService {
         DaoUsuario daoUsuario = new DaoUsuario();
         DaoToken daoToken = new DaoToken();
 
-        UsuarioEntity usuarioEntity = daoUsuario.findUserByEmail(usuarioDto.getEmail());
-        String token = null;
         UsuarioDto authenticatedUser = new UsuarioDto();
-        TokenEntity tokenEntity = null;
+        UsuarioEntity usuarioEntity = daoUsuario.findUserByEmail(usuarioDto.getEmail());
 
-        /* If user doesn't exist */
+        if (usuarioEntity != null) {
 
-        try {
-            tokenEntity = daoToken.getUserToken(usuarioEntity.get_id());
-        }
-        catch (NullPointerException e){
-            return null;
-        }
+            System.out.println("USUARIO: "+usuarioEntity.toString());
+            System.out.println("DTO: "+usuarioDto.toString());
+            if (usuarioEntity.getContraseña().equals(usuarioDto.getContraseña())) {
+                String token = null;
+                TokenEntity tokenEntity = null;
+
+                /* If user doesn't exist */
+
+                try {
+                    tokenEntity = daoToken.getUserToken(usuarioEntity.get_id());
+                } catch (NullPointerException e) {
+                    return null;
+                }
 
 
-        token = daoToken.getAlphaNumericString(25);
-        if (tokenEntity != null){
-            tokenEntity.setToken_login(token);
-            daoToken.update(tokenEntity);
+                token = daoToken.getAlphaNumericString(25);
+                if (tokenEntity != null) {
+                    tokenEntity.setToken_login(token);
+                    daoToken.update(tokenEntity);
+                } else {
+                    tokenEntity = new TokenEntity();
+                    tokenEntity.setFkUsuario(usuarioEntity);
+                    tokenEntity.setToken_login(token);
+                    daoToken.insert(tokenEntity);
+                }
+
+                authenticatedUser.setTokenLogin(token);
+                authenticatedUser.set_id(usuarioEntity.get_id());
+            }
+            else {
+                authenticatedUser.set_id(-2);
+            }
         }
         else {
-            tokenEntity = new TokenEntity();
-            tokenEntity.setFkUsuario(usuarioEntity);
-            tokenEntity.setToken_login(token);
-            daoToken.insert(tokenEntity);
+            authenticatedUser.set_id(-1);
         }
 
-        authenticatedUser.setTokenLogin(token);
-        authenticatedUser.set_id(usuarioEntity.get_id());
         return authenticatedUser;
         
     }

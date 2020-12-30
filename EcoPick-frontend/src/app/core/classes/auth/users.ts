@@ -6,6 +6,7 @@ export class Users {
     estado?: Number;
     email: String;
     password: String;
+    contraseña?: String;
     persona?: Person;
     fkRol?: Rol;
 }

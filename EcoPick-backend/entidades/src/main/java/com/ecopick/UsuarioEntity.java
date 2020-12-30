@@ -144,4 +144,22 @@ public class UsuarioEntity extends BaseEntity{
     public void setFkPregunta(PreguntaseguridadEntity fkPregunta) {
         this.fkPregunta = fkPregunta;
     }
+
+    @Override
+    public String toString() {
+        return "UsuarioEntity{" +
+                "nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", email='" + email + '\'' +
+                ", contraseña='" + contraseña + '\'' +
+                ", genero='" + genero + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                ", telefono='" + telefono + '\'' +
+                ", tipo=" + tipo +
+                ", numeroIdentificacion='" + numeroIdentificacion + '\'' +
+                ", respuestaSeguridad='" + respuestaSeguridad + '\'' +
+                ", fkLugar=" + fkLugar +
+                ", fkPregunta=" + fkPregunta +
+                '}';
+    }
 }

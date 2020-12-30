@@ -105,17 +105,26 @@ export class LoginComponent implements OnInit {
     this.sent_form = true;
     this.user = new Users();
     this.user.email = this.loginForm.value.correo_electronico;
-    this.user.password = this.loginForm.value.clave;
+    this.user.contraseña = this.loginForm.value.clave;
 
     this.loginService.validateLogin(this.user)
       .subscribe(person => {
       if (person == null){
-        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Usuario o clave incorrectos.'});
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Usuario no registrado.'});
       }
       else{
-        this.sessionService.setCurrentSession(person);
-        this.messageService.add({severity: 'success', summary: 'Exito', detail: 'Usuario validado correctamente.'});
-        this.nextPage();
+        if (person._id == -1 || person._id == 0){
+          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Usuario no registrado.'});
+        }
+        else if (person._id == -2){
+          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Usuario o clave incorrectos.'});
+        }
+        else {
+          console.log(person);
+          this.sessionService.setCurrentSession(person);
+          this.messageService.add({severity: 'success', summary: 'Exito', detail: 'Usuario validado correctamente.'});
+          this.nextPage();
+        }
       }
 
       this.sent_form = false;

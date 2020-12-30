@@ -138,4 +138,24 @@ public class UsuarioDto extends BaseDto {
     public void setTokenRecovery(String tokenRecovery) {
         this.tokenRecovery = tokenRecovery;
     }
+
+    @Override
+    public String toString() {
+        return "UsuarioDto{" +
+                "nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", email='" + email + '\'' +
+                ", contraseña='" + contraseña + '\'' +
+                ", genero='" + genero + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                ", telefono='" + telefono + '\'' +
+                ", tipo=" + tipo +
+                ", numeroIdentificacion='" + numeroIdentificacion + '\'' +
+                ", respuestaSeguridad='" + respuestaSeguridad + '\'' +
+                ", tokenLogin='" + tokenLogin + '\'' +
+                ", tokenRecovery='" + tokenRecovery + '\'' +
+                ", fkLugar=" + fkLugar +
+                ", fkPregunta=" + fkPregunta +
+                '}';
+    }
 }
