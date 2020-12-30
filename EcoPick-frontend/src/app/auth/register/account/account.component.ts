@@ -95,9 +95,9 @@ export class AccountComponent implements OnInit {
 
     this.generos = GENDERS;
 
-    this.edocivilService.getEdosCiviles().subscribe((edosciviles) => {
-      this.estados_civiles = replaceKeyWithValue(edosciviles);
-    });
+    // this.edocivilService.getEdosCiviles().subscribe((edosciviles) => {
+    //   this.estados_civiles = replaceKeyWithValue(edosciviles);
+    // });
 
     this.estado = true;
     this.ciudad = true;
@@ -126,40 +126,40 @@ export class AccountComponent implements OnInit {
   createForm(){
     this.accountForm = this.fb.group({
       correo_electronico: [
-        this.registerService.user.email,
+        this.registerService.usuario.email,
         [
           Validators.required,
           Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
         ]
       ],
-      clave: [this.registerService.user.password,
+      clave: [this.registerService.usuario.contraseña,
         [
           Validators.required,
           Validators.pattern(/^(?=.*\d)(?=.*[a-zA-Z])(?=.*[\W_]).{8,40}$/)
         ]
       ],
       confirmar_clave: [
-        this.registerService.user.confirmar_clave,
+        this.registerService.usuario.confirmar_contraseña,
         [
           Validators.required,
           RxwebValidators.compare({fieldName: 'clave'})
         ]
       ],
-      primer_nombre: [this.registerService.user.fkPersona.primerNombre,
+      primer_nombre: [this.registerService.usuario.nombre,
       [
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(50)
       ]],
       primer_apellido: [
-        this.registerService.user.fkPersona.primerApellido,
+        this.registerService.usuario.apellido,
         [
           Validators.required,
           Validators.minLength(2),
           Validators.maxLength(50)
         ]
       ],
-      documento_de_identificacion: [this.registerService.user.fkPersona.documentoIdentidad,
+      documento_de_identificacion: [this.registerService.usuario.numeroIdentificacion,
         [
           Validators.required,
           Validators.minLength(8),
@@ -167,9 +167,9 @@ export class AccountComponent implements OnInit {
         ]
       ],
 
-      genero: this.registerService.user.fkPersona.fkGenero,
-      estado_civil: this.registerService.user.fkPersona.fkEdoCivil,
-      fecha_de_nacimiento: this.registerService.user.fkPersona.fechaNacimiento,
+      genero: this.registerService.usuario.genero,
+      // estado_civil: this.registerService.user.fkPersona.fkEdoCivil,
+      fecha_de_nacimiento: this.registerService.usuario.fechaNacimiento,
 
       pais: this.registerService.user.fkPersona.id_pais._id,
       estado: this.registerService.user.fkPersona.id_estado._id,
@@ -177,7 +177,7 @@ export class AccountComponent implements OnInit {
       parroquia: this.registerService.user.fkPersona.id_parroquia._id,
       // codigo_pais: this.registerService.user.fkPersona.codigo_pais,
       telefono: [
-        this.registerService.user.fkPersona.telefono.numero,
+        this.registerService.usuario.telefono,
         [
           Validators.pattern('^[0-9]*$')
         ]
@@ -222,37 +222,53 @@ export class AccountComponent implements OnInit {
 
 
   onSubmit(){
-    console.log(this.accountForm.value.correo_electronico);
-    console.log(this.accountForm.value.clave);
-    console.log(this.accountForm.value.confirmar_clave);
-    console.log(this.accountForm.value.primer_nombre);
-    console.log(this.accountForm.value.primer_apellido);
-    console.log(this.accountForm.value.documento_de_identificacion);
-    console.log(this.accountForm.value.genero);
-    console.log(this.accountForm.value.estado_civil);
-    console.log(this.accountForm.value.fecha_de_nacimiento);
 
-    this.registerService.user.email = this.accountForm.value.correo_electronico;
-    this.registerService.user.password = this.accountForm.value.clave;
-    this.registerService.user.confirmar_clave = this.accountForm.value.confirmar_clave;
-    this.registerService.user.fkPersona.primerNombre = this.accountForm.value.primer_nombre;
-    this.registerService.user.fkPersona.primerApellido = this.accountForm.value.primer_apellido;
-    this.registerService.user.fkPersona.documentoIdentidad = this.accountForm.value.documento_de_identificacion;
-    this.registerService.user.fkPersona.fkGenero._id = this.accountForm.value.genero;
-    this.registerService.user.fkPersona.fkEdoCivil._id = this.accountForm.value.estado_civil;
-    this.registerService.user.fkPersona.fechaNacimiento = this.accountForm.value.fecha_de_nacimiento;
+    this.registerService.usuario.email = this.accountForm.value.correo_electronico;
+    this.registerService.usuario.contraseña = this.accountForm.value.clave;
+    this.registerService.usuario.confirmar_contraseña = this.accountForm.value.confirmar_clave;
+    this.registerService.usuario.nombre = this.accountForm.value.primer_nombre;
+    this.registerService.usuario.apellido = this.accountForm.value.primer_apellido;
+    this.registerService.usuario.genero = this.generos[this.accountForm.value.genero-1].label;
+    this.registerService.usuario.fechaNacimiento = this.accountForm.value.fecha_de_nacimiento;
+    this.registerService.usuario.telefono = this.accountForm.value.telefono;
+    this.registerService.usuario.tipo = 0;
+    this.registerService.usuario.numeroIdentificacion = this.accountForm.value.documento_de_identificacion;
+    
+    
+    this.registerService.user.fkPersona.id_pais._id = this.accountForm.value.pais;
+    this.registerService.user.fkPersona.id_estado._id = this.accountForm.value.estado;
+    this.registerService.user.fkPersona.id_ciudad._id = this.accountForm.value.ciudad;
+    this.registerService.user.fkPersona.id_parroquia._id = this.accountForm.value.parroquia;
+
+    if (this.parroquia && this.registerService.user.fkPersona.id_parroquia._id != 0){
+      this.registerService.usuario.fkLugar._id = this.accountForm.value.parroquia;
+    }
+    else if (this.ciudad && this.registerService.user.fkPersona.id_ciudad._id != 0){
+      this.registerService.usuario.fkLugar._id = this.accountForm.value.ciudad;
+    }
+    else if (this.estado && this.registerService.user.fkPersona.id_estado._id != 0){
+      this.registerService.usuario.fkLugar._id = this.accountForm.value.estado;
+    }
+    else {
+      this.registerService.usuario.fkLugar._id = this.accountForm.value.pais;
+    }
 
     if (this.accountForm.valid){
       console.log('epa, achantate...');
 
-      this.registerService.postValidRegister().subscribe((person) =>{
-        this.nextPage();
-      }, errorMessage => {
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'El correo utilizado ya se encuentra registrado.'});
-      });
+      // this.registerService.postValidRegister().subscribe((person) =>{
+      //   this.nextPage();
+      // }, errorMessage => {
+      //   this.messageService.add({severity:'error', summary: 'Error', detail: 'El correo utilizado ya se encuentra registrado.'});
+      // });
 
       // if (this.registerService.postValidRegister()){
-      //   this.nextPage();
+        this.registerService.postValidRegistro(this.registerService.usuario).subscribe((person) =>{
+          this.nextPage();
+        }, errorMessage => {
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'El correo utilizado ya se encuentra registrado.'});
+        });
+        // this.nextPage();
       // }
       // else{
       // }

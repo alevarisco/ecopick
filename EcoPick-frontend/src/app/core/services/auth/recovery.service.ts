@@ -27,6 +27,11 @@ export class RecoveryService {
     return this.http.post<Recovery>(serverURL + 'recovery/' + recovery.correo, recovery, httpOptions)
       .pipe(catchError(this.processHTTPMessageService.handleError));
   }
+
+  getPreguntas(): Observable<Recovery[]>{
+    return this.http.get<Recovery[]>(serverURL + 'recovery/questions')
+      .pipe(catchError(this.processHTTPMessageService.handleError));
+  }
   
   validateAnswer(recovery: Recovery): Observable<Recovery>{
     const httpOptions = {

@@ -1,56 +1,59 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { SelectItem } from 'primeng/api';
+import { MessageService, SelectItem } from 'primeng/api';
 
 /* Form */
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '../../../core/services/auth/register.service';
 import { PlaceService } from '../../../core/services/profile/place.service';
 // import { PhoneService } from '../../../core/services/profile/phone.service';
-import { replaceKeyWithValue } from 'src/app/core/functions/common_functions';
+import { replaceKeyWithValue, replacePreguntasWithValue } from 'src/app/core/functions/common_functions';
+import { RecoveryService } from 'src/app/core/services/auth/recovery.service';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  styleUrls: ['./contact.component.scss'],
+  providers: [MessageService]
 })
 export class ContactComponent implements OnInit {
-  paises: SelectItem[];
-  estados: SelectItem[];
-  ciudades: SelectItem[];
-  parroquias: SelectItem[];
-  codigos: SelectItem[];
+  // paises: SelectItem[];
+  // estados: SelectItem[];
+  // ciudades: SelectItem[];
+  // parroquias: SelectItem[];
+  preguntas: SelectItem[];
 
-  estado: boolean;
-  ciudad: boolean;
-  parroquia: boolean;
+  // estado: boolean;
+  // ciudad: boolean;
+  // parroquia: boolean;
 
   /* Form */
   contactForm: FormGroup;
   @ViewChild('cform') contactFormDirective;
 
   formErrors = {
-    'telefono': ''
+    'respuesta': ''
   };
 
   validationMessages = {
-    'telefono': {
-      'pattern': 'Teléfono debe ser un campo numérico'
+    'respuesta': {
+      'pattern': 'Respuesta no puede estar vacia.'
     }
   }
 
   constructor(private router: Router,
     private registerService: RegisterService,
-    private placeService: PlaceService,
+    private recoveryService: RecoveryService,
+    private messageService: MessageService,
     // private phoneService: PhoneService,
     private fb: FormBuilder) {
 
-    this.estado = true;
-    this.ciudad = true;
-    this.parroquia = true;
+    // this.estado = true;
+    // this.ciudad = true;
+    // this.parroquia = true;
 
-    this.placeService.getCountries().subscribe((countries) => {
-      this.paises = replaceKeyWithValue(countries);
+    this.recoveryService.getPreguntas().subscribe((questions) => {
+      this.preguntas = replacePreguntasWithValue(questions);
     });
 
     // this.phoneService.getCodes().subscribe((codes) => {
@@ -65,65 +68,14 @@ export class ContactComponent implements OnInit {
 
   createForm(){
     this.contactForm = this.fb.group({
-      pais: this.registerService.user.fkPersona.id_pais._id,
-      estado: this.registerService.user.fkPersona.id_estado._id,
-      ciudad: this.registerService.user.fkPersona.id_ciudad._id,
-      parroquia: this.registerService.user.fkPersona.id_parroquia._id,
-      // codigo_pais: this.registerService.user.fkPersona.codigo_pais,
-      telefono: [
-        this.registerService.user.fkPersona.telefono.numero,
-        [
-          Validators.pattern('^[0-9]*$')
-        ]
-      ],
+      pregunta: this.registerService.usuario.fkPregunta._id,
+      respuesta: this.registerService.usuario.respuestaSeguridad,
     });
 
     this.contactForm.valueChanges
     .subscribe(data => {
       this.onValueChange(data);
     });
-  }
-
-  getStates(event){
-    this.ciudades = [];
-    this.parroquias = [];
-    this.placeService.getStates(event.value).subscribe((states) => {
-      if (states.length){
-        this.estado = true;
-        this.estados = replaceKeyWithValue(states);
-      }
-      else{
-        this.estado = false;
-        this.ciudad = false;
-        this.parroquia = false;
-      }
-    })
-  }
-
-  getCities(event){
-    this.parroquias = [];
-    this.placeService.getCities(event.value).subscribe((cities) => {
-      if (cities.length){
-        this.ciudad = true;
-        this.ciudades = replaceKeyWithValue(cities);
-      }
-      else{
-        this.ciudad = false;
-        this.parroquia = false;
-      }
-    })
-  }
-
-  getCounties(event){
-    this.placeService.getCounties(event.value).subscribe((counties) => {
-      if (counties.length){
-        this.parroquia = true;
-        this.parroquias = replaceKeyWithValue(counties);
-      }
-      else{
-        this.parroquia = false;
-      }
-    })
   }
 
   onValueChange(data?: any){
@@ -155,38 +107,29 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit(){
-    this.registerService.user.fkPersona.id_pais._id = this.contactForm.value.pais;
-    this.registerService.user.fkPersona.id_estado._id = this.contactForm.value.estado;
-    this.registerService.user.fkPersona.id_ciudad._id = this.contactForm.value.ciudad;
-    this.registerService.user.fkPersona.id_parroquia._id = this.contactForm.value.parroquia;
-
-    if (this.parroquia && this.registerService.user.fkPersona.id_parroquia._id != 0){
-      this.registerService.user.fkPersona.fkLugar._id = this.contactForm.value.parroquia;
-    }
-    else if (this.ciudad && this.registerService.user.fkPersona.id_ciudad._id != 0){
-      this.registerService.user.fkPersona.fkLugar._id = this.contactForm.value.ciudad;
-    }
-    else if (this.estado && this.registerService.user.fkPersona.id_estado._id != 0){
-      this.registerService.user.fkPersona.fkLugar._id = this.contactForm.value.estado;
-    }
-    else {
-      this.registerService.user.fkPersona.fkLugar._id = this.contactForm.value.pais;
-    }
     
+    this.registerService.usuario.fkPregunta._id = this.contactForm.value.pregunta;
+    this.registerService.usuario.respuestaSeguridad = this.contactForm.value.respuesta;
 
-    // this.registerService.user.fkPersona.codigo_pais = this.contactForm.value.codigo_pais;
-    this.registerService.user.fkPersona.telefono = this.contactForm.value.telefono;
+    console.log(this.registerService.usuario)
 
-    if (this.contactForm.valid)
-      this.nextPage();
+    if (this.contactForm.valid){
+
+      this.registerService.postRegistrarUsuario(this.registerService.usuario)
+        .subscribe(person => {
+          console.log(person);
+          this.router.navigate(['/login']);
+          this.messageService.add({severity:'success', summary: 'Éxito', detail: 'Registro completado satisfactoriamente.'});
+        },
+        errorMessage => {
+          this.messageService.add({severity:'error', summary: 'Error', detail: errorMessage});
+        })
+    }
+    else{
+      this.messageService.add({severity:'error', summary: 'Error', detail: 'Hubo datos inválidos o incompletos en el formulario'});
+    }
+
   }
 
-  previousPage(): void {
-    this.router.navigate(['register'])
-  }
-
-  nextPage(): void {
-    this.router.navigate(['register/family']);
-  }
 
 }

@@ -235,27 +235,48 @@ export class FamilyComponent implements OnInit {
 
 
   onSubmit(){
-    this.registerService.user.email = this.familyForm.value.correo_electronico;
-    this.registerService.user.password = this.familyForm.value.clave;
-    this.registerService.user.confirmar_clave = this.familyForm.value.confirmar_clave;
-    this.registerService.user.fkPersona.primerNombre = this.familyForm.value.primer_nombre;
-    this.registerService.user.fkPersona.primerApellido = this.familyForm.value.primer_apellido;
-    this.registerService.user.fkPersona.documentoIdentidad = this.familyForm.value.documento_de_identificacion;
-    this.registerService.user.fkPersona.fkGenero._id = this.familyForm.value.genero;
-    this.registerService.user.fkPersona.fkEdoCivil._id = this.familyForm.value.estado_civil;
-    this.registerService.user.fkPersona.fechaNacimiento = this.familyForm.value.fecha_de_nacimiento;
+    this.registerService.usuario.email = this.familyForm.value.correo_electronico;
+    this.registerService.usuario.contraseña = this.familyForm.value.clave;
+    this.registerService.usuario.confirmar_contraseña = this.familyForm.value.confirmar_clave;
+    this.registerService.usuario.nombre = this.familyForm.value.primer_nombre;
+    this.registerService.usuario.telefono = this.familyForm.value.telefono;
+    this.registerService.usuario.tipo = 1;
+    this.registerService.usuario.numeroIdentificacion = this.familyForm.value.documento_de_identificacion;
+    
+    this.registerService.user.fkPersona.id_pais._id = this.familyForm.value.pais;
+    this.registerService.user.fkPersona.id_estado._id = this.familyForm.value.estado;
+    this.registerService.user.fkPersona.id_ciudad._id = this.familyForm.value.ciudad;
+    this.registerService.user.fkPersona.id_parroquia._id = this.familyForm.value.parroquia;
+
+    if (this.parroquia && this.registerService.user.fkPersona.id_parroquia._id != 0){
+      this.registerService.usuario.fkLugar._id = this.familyForm.value.parroquia;
+    }
+    else if (this.ciudad && this.registerService.user.fkPersona.id_ciudad._id != 0){
+      this.registerService.usuario.fkLugar._id = this.familyForm.value.ciudad;
+    }
+    else if (this.estado && this.registerService.user.fkPersona.id_estado._id != 0){
+      this.registerService.usuario.fkLugar._id = this.familyForm.value.estado;
+    }
+    else {
+      this.registerService.usuario.fkLugar._id = this.familyForm.value.pais;
+    }
 
     if (this.familyForm.valid){
       console.log('epa, achantate...');
 
-      this.registerService.postValidRegister().subscribe((person) =>{
-        this.nextPage();
-      }, errorMessage => {
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'El correo utilizado ya se encuentra registrado.'});
-      });
+      // this.registerService.postValidRegister().subscribe((person) =>{
+      //   this.nextPage();
+      // }, errorMessage => {
+      //   this.messageService.add({severity:'error', summary: 'Error', detail: 'El correo utilizado ya se encuentra registrado.'});
+      // });
 
       // if (this.registerService.postValidRegister()){
-      //   this.nextPage();
+        this.registerService.postValidRegistro(this.registerService.usuario).subscribe((person) =>{
+          this.nextPage();
+        }, errorMessage => {
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'El correo utilizado ya se encuentra registrado.'});
+        });
+        // this.nextPage();
       // }
       // else{
       // }
@@ -272,7 +293,7 @@ export class FamilyComponent implements OnInit {
   // }
 
   nextPage(): void {
-    this.router.navigate(['register/status']);
+    this.router.navigate(['register/contact']);
   }
 
   getStates(event){

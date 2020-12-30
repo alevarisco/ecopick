@@ -2,6 +2,7 @@ package com.ecopick;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("/recovery")
@@ -55,6 +56,28 @@ public class RecoveryService {
         }
 
         return usuario;
+
+    }
+
+    @GET
+    @Path("/questions")
+    public List<PreguntaSeguridadDto> getPreguntas(){
+        DaoPreguntaSeguridad daoPreguntaSeguridad = new DaoPreguntaSeguridad();
+
+        List<PreguntaSeguridadDto> resultado = new ArrayList<>();
+
+        List<PreguntaseguridadEntity> preguntas = daoPreguntaSeguridad.getPreguntas();
+        for (int i = 0; i < preguntas.size(); i++) {
+            PreguntaseguridadEntity pregunta = preguntas.get(i);
+
+            PreguntaSeguridadDto resPregunta = new PreguntaSeguridadDto();
+            resPregunta.set_id(pregunta.get_id());
+            resPregunta.setPregunta(pregunta.getPregunta());
+
+            resultado.add(resPregunta);
+        }
+
+        return resultado;
 
     }
 

@@ -5,3 +5,7 @@ export function replaceKeyWithValue(obj){
 export function replaceDateWithValue(obj){
     return obj.map(({ _id: value, hora: label, ...rest }) => ({ value, label, ...rest }));
 }
+
+export function replacePreguntasWithValue(obj){
+    return obj.map(({ _id: value, pregunta: label, ...rest }) => ({ value, label, ...rest }));
+}

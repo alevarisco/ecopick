@@ -48,6 +48,7 @@ public class SesionService {
             UsuarioEntity resul = daoUsuario.insert(usuario);
 
             resultado.set_id(resul.get_id());
+
         }
         catch (Exception e) {
             e.printStackTrace();

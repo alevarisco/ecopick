@@ -45,20 +45,20 @@ export class StatusComponent implements OnInit {
     private fb: FormBuilder,
     private messageService: MessageService) {
 
-    this.ocupacionService.getOcupaciones().subscribe((ocupations) => {
-      this.ocupaciones = replaceKeyWithValue(ocupations);
-    });
-    this.nivelAcademicoService.getNivelesAcademicos().subscribe((niveles) => {
-      this.niveles_academicos = replaceKeyWithValue(niveles);
-    });
-    this.deviceService.getDevices().subscribe((devices) => {
-      this.dispositivos = replaceKeyWithValue(devices);
-    });
-    this.disponibilidadService.getDisponibilidades().subscribe((disponibilidades) => {
-      console.log(replaceDateWithValue(disponibilidades));
-      this.horario_inicial = replaceDateWithValue(disponibilidades);
-      this.horario_final = replaceDateWithValue(disponibilidades);
-    });
+    // this.ocupacionService.getOcupaciones().subscribe((ocupations) => {
+    //   this.ocupaciones = replaceKeyWithValue(ocupations);
+    // });
+    // this.nivelAcademicoService.getNivelesAcademicos().subscribe((niveles) => {
+    //   this.niveles_academicos = replaceKeyWithValue(niveles);
+    // });
+    // this.deviceService.getDevices().subscribe((devices) => {
+    //   this.dispositivos = replaceKeyWithValue(devices);
+    // });
+    // this.disponibilidadService.getDisponibilidades().subscribe((disponibilidades) => {
+    //   console.log(replaceDateWithValue(disponibilidades));
+    //   this.horario_inicial = replaceDateWithValue(disponibilidades);
+    //   this.horario_final = replaceDateWithValue(disponibilidades);
+    // });
     // this.ocupaciones = GENDERS;
     // this.niveles_academicos = ACADEMICS;
     // this.niveles_socioeconomicos = SOCIAL_STATUSES;

@@ -12,6 +12,8 @@ import { Genero } from '../../classes/profile/genero';
 import { Place } from '../../classes/profile/place';
 import { telefono } from '../../classes/profile/telefono';
 import { Disponibilidad } from '../../classes/profile/disponibilidad';
+import { User } from '../../classes/profile/user';
+import { Recovery } from '../../classes/auth/recovery';
 
 @Injectable({
   providedIn: 'root'
@@ -84,6 +86,26 @@ export class RegisterService {
     fkPersona: this.personaData
   };
 
+  pregunta: Recovery = {
+    _id: 0
+  };
+
+  usuario: User = {
+    email: '',
+    contraseña: '',
+    confirmar_contraseña: '',
+    nombre: '',
+    apellido: '',
+    genero: '',
+    fechaNacimiento: '',
+    telefono: '',
+    tipo: 0,
+    numeroIdentificacion: '',
+    respuestaSeguridad: '',
+    fkLugar: this.lugar,
+    fkPregunta: this.pregunta
+  };
+
   constructor(private http: HttpClient,
     private processHTTPMessageService: ProcessHttpMessageService) {
   }
@@ -98,6 +120,28 @@ export class RegisterService {
     // return this.http.post<Person>(baseURL + 'register', this.user, httpOptions)
     return this.http.post<Person>(serverURL + 'sesion/register', this.user, httpOptions)
       .pipe(catchError(this.processHTTPMessageService.handleError))
+  }
+  
+  postRegistrarUsuario(usuario: User): Observable<User>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.post<User>(serverURL + 'sesion/register', usuario, httpOptions)
+      .pipe(catchError(this.processHTTPMessageService.handleError))
+  }
+
+  postValidRegistro(usuario: User): Observable<User>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.post<User>(serverURL + 'sesion/validRegister', usuario, httpOptions)
+      .pipe(catchError(this.processHTTPMessageService.handleError));
   }
 
   postValidRegister(): Observable<Person>{

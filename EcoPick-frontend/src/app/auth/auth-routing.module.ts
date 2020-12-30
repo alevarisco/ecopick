@@ -38,11 +38,11 @@ const routes: Routes = [
       {
         path: 'empresa',
         component: FamilyComponent
+      },
+      {
+        path: 'contact',
+        component: ContactComponent
       }
-      // {
-      //   path: 'status',
-      //   component: StatusComponent
-      // }
     ]
   },
   {
