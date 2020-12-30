@@ -19,9 +19,14 @@ import { ResetService } from 'src/app/core/services/auth/reset.service';
 })
 export class ChangeComponent implements OnInit {
 
-  token: String;
-  reset: Reset;
-  currentURL: String[];
+  // token: String;
+  reset: Reset = {
+    token: "",
+    clave: "",
+    correo: ""
+  };
+  correo: String;
+  // currentURL: String[];
 
   /* Form */
   changeForm: FormGroup;
@@ -50,15 +55,20 @@ export class ChangeComponent implements OnInit {
       private fb: FormBuilder,
       private resetService: ResetService,
       private messageService: MessageService) {
-      this.createForm();
-      this.currentURL = this.router.url.split('/');
-      this.token = this.currentURL[this.currentURL.length - 1];
-      this.reset = new Reset();
-      this.reset.token = this.token;
+      if ((this.Activatedroute.snapshot.queryParamMap.get('correo') || 0) === 0) {
+        this.router.navigate(['404']);
+      }
+      else{
+        this.correo = this.Activatedroute.snapshot.queryParamMap.get('correo');
+        this.createForm();
+      }
+      // this.currentURL = this.router.url.split('/');
+      // this.token = this.currentURL[this.currentURL.length - 1];
+      // this.reset = new Reset();
+      // this.reset.token = this.token;
     }
 
   ngOnInit(): void {
-    this.postVerificar();
   }
 
   createForm(){
@@ -118,6 +128,7 @@ export class ChangeComponent implements OnInit {
     if (this.changeForm.valid){
 
       this.reset.clave = this.changeForm.value.clave;
+      this.reset.correo = this.correo;
 
       this.postReset();
       this.nextPage();
@@ -137,14 +148,14 @@ export class ChangeComponent implements OnInit {
     });
   }
 
-  postVerificar(): void {
-    this.resetService.postVerificar(this.reset).subscribe((res)=>{
-      if (res == null)
-      this.router.navigate(['404']);
-    }, errorMessage => {
-      this.messageService.add({severity:'error', summary: 'Error', detail: errorMessage});
-    });
-  }
+  // postVerificar(): void {
+  //   this.resetService.postVerificar(this.reset).subscribe((res)=>{
+  //     if (res == null)
+  //     this.router.navigate(['404']);
+  //   }, errorMessage => {
+  //     this.messageService.add({severity:'error', summary: 'Error', detail: errorMessage});
+  //   });
+  // }
 
   nextPage(): void {
     this.router.navigate(['login']);

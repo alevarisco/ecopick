@@ -31,6 +31,15 @@
               (ngSubmit)="onSubmit()"
             >
               <br />
+              
+              <div class="p-grid p-jc-center p-mt-4">
+                <div class="p-col-6 p-mb-1">
+                  <div class="p-inputgroup">
+                    <h3>{{pregunta}}</h3>
+                  </div>
+                </div>
+              </div>
+
               <div class="p-grid p-jc-center p-mt-4">
                 <div class="p-col-6 p-mb-1">
                   <div class="p-inputgroup">
@@ -38,15 +47,15 @@
                       ><i class="pi pi-envelope"></i
                     ></span>
                     <input
-                      id="correo_electronico"
-                      formControlName="correo_electronico"
+                      id="respuesta"
+                      formControlName="respuesta"
                       type="text"
                       pInputText
-                      placeholder="Correo Electrónico *"
+                      placeholder="Respuesta *"
                     />
                   </div>
-                  <span class="error-msg" *ngIf="formErrors.correo_electronico"
-                    ><small>{{ formErrors.correo_electronico }}</small></span
+                  <span class="error-msg" *ngIf="formErrors.respuesta"
+                    ><small>{{ formErrors.respuesta }}</small></span
                   >
                 </div>
               </div>

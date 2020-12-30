@@ -22,17 +22,17 @@ export class ResetService {
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post<Reset>(serverURL + 'recovery/' + reset.token + '/pass/' + reset.clave, reset, httpOptions)
+    return this.http.post<Reset>(serverURL + 'recovery/' + reset.correo + '/pass/' + reset.clave, reset, httpOptions)
       .pipe(catchError(this.processHTTPMessageService.handleError));
   }
 
-  postVerificar(reset): Observable<Reset>{
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-    return this.http.post<Reset>(serverURL + 'recovery/' + reset.token, reset, httpOptions)
-      .pipe(catchError(this.processHTTPMessageService.handleError));
-  }
+  // postVerificar(reset): Observable<Reset>{
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/json'
+  //     })
+  //   };
+  //   return this.http.post<Reset>(serverURL + 'recovery/' + reset.token, reset, httpOptions)
+  //     .pipe(catchError(this.processHTTPMessageService.handleError));
+  // }
 }

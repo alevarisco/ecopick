@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MessageService, SelectItem } from 'primeng/api';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Recovery } from '../../../core/classes/auth/recovery';
 
 /* Form */
@@ -22,13 +22,15 @@ export class SecurityquestionComponent implements OnInit {
    @ViewChild('aform') recoveryFormDirective;
 
    recovery: Recovery;
+   pregunta: String;
+   correo: String;
 
    formErrors = {
-     'correo_electronico': ''
+     'respuesta': ''
    };
 
    validationMessages = {
-     'correo_electronico': {
+     'respuesta': {
        'required': 'Correo electrónico es requerido',
        'pattern': 'Correo electronico debe tener un formato válido'
      }
@@ -36,11 +38,19 @@ export class SecurityquestionComponent implements OnInit {
 
     es: any;
 
-    constructor(private router: Router,
+    constructor(private Activatedroute: ActivatedRoute,
+      private router: Router,
       private fb: FormBuilder,
       private recoveryService: RecoveryService,
       private messageService: MessageService) {
-      this.createForm();
+      if ((this.Activatedroute.snapshot.queryParamMap.get('pregunta') || 0) === 0) {
+        this.router.navigate(['404']);
+      }
+      else{
+        this.pregunta = this.Activatedroute.snapshot.queryParamMap.get('pregunta');
+        this.correo = this.Activatedroute.snapshot.queryParamMap.get('correo');
+        this.createForm();
+      }
     }
 
 
@@ -49,13 +59,7 @@ export class SecurityquestionComponent implements OnInit {
 
   createForm(){
     this.recoveryForm = this.fb.group({
-      correo_electronico: [
-        this.recoveryService.correo,
-        [
-          Validators.required,
-          Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
-        ]
-      ]
+      respuesta: this.recoveryService.respuesta
     });
 
     this.recoveryForm.valueChanges
@@ -94,23 +98,25 @@ export class SecurityquestionComponent implements OnInit {
 
   onSubmit(){
     this.recovery = new Recovery();
-    this.recovery.correo = this.recoveryForm.value.correo_electronico;
-    this.recoveryService.validateEmail(this.recovery)
+    this.recovery.correo = this.correo;
+    this.recovery.respuesta = this.recoveryForm.value.respuesta;
+    this.recoveryService.validateAnswer(this.recovery)
       .subscribe(question => {
         if (question == null){
           this.messageService.add({severity: 'error', summary: 'Error', detail: 'Usuario no registrado.'});
       }
       else{
         this.messageService.add({severity: 'success', summary: 'Exito', detail: 'Usuario validado correctamente.'});
-        this.nextPage();
+        console.log(question)
+        this.nextPage(this.correo);
       }
 
       })
 
   }
 
-  nextPage(): void {
-    this.router.navigate(['/security-question']);
+  nextPage(correo): void {
+    this.router.navigate(['/change'], { queryParams: { correo: correo} })
   }
 
 }

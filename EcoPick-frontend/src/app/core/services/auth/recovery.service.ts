@@ -12,6 +12,7 @@ import { catchError } from 'rxjs/operators';
 export class RecoveryService {
 
   correo: String;
+  respuesta: String;
 
   constructor(private http: HttpClient,
               private processHTTPMessageService: ProcessHttpMessageService) { }
@@ -24,6 +25,17 @@ export class RecoveryService {
     };
 
     return this.http.post<Recovery>(serverURL + 'recovery/' + recovery.correo, recovery, httpOptions)
+      .pipe(catchError(this.processHTTPMessageService.handleError));
+  }
+  
+  validateAnswer(recovery: Recovery): Observable<Recovery>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.post<Recovery>(serverURL + 'recovery/' + recovery.correo + '/'+ recovery.respuesta, recovery, httpOptions)
       .pipe(catchError(this.processHTTPMessageService.handleError));
   }
 }

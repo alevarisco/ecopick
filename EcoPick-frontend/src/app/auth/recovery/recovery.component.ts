@@ -7,6 +7,7 @@ import { Recovery } from '../../core/classes/auth/recovery';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RecoveryService } from '../../core/services/auth/recovery.service';
 import { ReorderableColumn } from 'primeng/table';
+import { Question } from 'src/app/core/classes/study/question';
 
 @Component({
   selector: 'app-recovery',
@@ -103,15 +104,16 @@ export class RecoveryComponent implements OnInit {
       }
       else{
         this.messageService.add({severity: 'success', summary: 'Exito', detail: 'Usuario validado correctamente.'});
-        this.nextPage();
+        console.log(question)
+        this.nextPage(question.pregunta, this.recovery.correo);
       }
 
       })
 
   }
 
-  nextPage(): void {
-    this.router.navigate(['/security-question']);
+  nextPage(pregunta, correo): void {
+    this.router.navigate(['/security-question'], { queryParams: { pregunta: pregunta, correo: correo} })
   }
 }
 
