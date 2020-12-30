@@ -11,6 +11,7 @@ import { FamilyComponent } from './register/family/family.component';
 import { RecoveryComponent } from './recovery/recovery.component';
 import { ChangeComponent } from './recovery/change/change.component';
 import { ToastModule } from 'primeng/toast';
+import { SecurityquestionComponent } from './recovery/securityquestion/securityquestion.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ToastModule } from 'primeng/toast';
     StatusComponent,
     FamilyComponent,
     RecoveryComponent,
-    ChangeComponent
+    ChangeComponent,
+    SecurityquestionComponent
   ],
   imports: [
     CommonModule,

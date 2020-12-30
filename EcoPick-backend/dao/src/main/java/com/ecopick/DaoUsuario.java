@@ -53,4 +53,27 @@ public class DaoUsuario extends Dao<UsuarioEntity> {
 
         return q.getResultList();
     }
+
+    public List<PreguntaseguridadEntity> getPregunta(String correo){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecopick");
+        EntityManager em = emf.createEntityManager();
+
+        JPQL = "SELECT p FROM UsuarioEntity u, PreguntaseguridadEntity p WHERE u.email = :correo AND p = u.fkPregunta";
+        q = em.createQuery(JPQL);
+        q.setParameter("correo", correo);
+
+        return q.getResultList();
+    }
+
+    public List<UsuarioEntity> getRespuesta(String correo, String respuesta){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecopick");
+        EntityManager em = emf.createEntityManager();
+
+        JPQL = "SELECT u FROM UsuarioEntity u WHERE u.email = :correo AND u.respuestaSeguridad = :respuesta";
+        q = em.createQuery(JPQL);
+        q.setParameter("correo", correo);
+        q.setParameter("respuesta", respuesta);
+
+        return q.getResultList();
+    }
 }

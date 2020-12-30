@@ -8,19 +8,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RecoveryService } from '../../../core/services/auth/recovery.service';
 import { ReorderableColumn } from 'primeng/table';
 
+
 @Component({
   selector: 'app-securityquestion',
   templateUrl: './securityquestion.component.html',
   styleUrls: ['./securityquestion.component.scss'],
   providers: [MessageService]
-
 })
-export class SecurityQuestionComponent implements OnInit {
-
+export class SecurityquestionComponent implements OnInit {
 
    /* Form */
-   securityQuestionForm: FormGroup;
-   @ViewChild('bform') securityQuestionFormDirective;
+   recoveryForm: FormGroup;
+   @ViewChild('aform') recoveryFormDirective;
 
    recovery: Recovery;
 
@@ -49,7 +48,7 @@ export class SecurityQuestionComponent implements OnInit {
   }
 
   createForm(){
-    this.securityQuestionForm = this.fb.group({
+    this.recoveryForm = this.fb.group({
       correo_electronico: [
         this.recoveryService.correo,
         [
@@ -59,7 +58,7 @@ export class SecurityQuestionComponent implements OnInit {
       ]
     });
 
-    this.securityQuestionForm.valueChanges
+    this.recoveryForm.valueChanges
     .subscribe(data => {
       this.onValueChange(data);
     });
@@ -67,11 +66,11 @@ export class SecurityQuestionComponent implements OnInit {
 
   onValueChange(data?: any){
     /* If form hasn't been created */
-    if (!this.securityQuestionForm){
+    if (!this.recoveryForm){
       return;
     }
 
-    const form = this.securityQuestionForm;
+    const form = this.recoveryForm;
     for (const field in this.formErrors){
       if (this.formErrors.hasOwnProperty(field)){
         // clear previous error message if any
@@ -95,7 +94,7 @@ export class SecurityQuestionComponent implements OnInit {
 
   onSubmit(){
     this.recovery = new Recovery();
-    this.recovery.correo = this.securityQuestionForm.value.correo_electronico;
+    this.recovery.correo = this.recoveryForm.value.correo_electronico;
     this.recoveryService.validateEmail(this.recovery)
       .subscribe(question => {
         if (question == null){
@@ -114,6 +113,4 @@ export class SecurityQuestionComponent implements OnInit {
     this.router.navigate(['/security-question']);
   }
 
- 
 }
-

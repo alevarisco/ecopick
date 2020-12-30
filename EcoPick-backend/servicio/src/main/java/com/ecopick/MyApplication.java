@@ -22,6 +22,7 @@ public class MyApplication extends Application {
         h.add( LugarService.class );
         h.add( UserService.class );
         h.add( LoginService.class );
+        h.add( RecoveryService.class );
         return h;
     }
 }

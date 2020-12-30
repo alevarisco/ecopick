@@ -328,7 +328,7 @@ public class UserService {
 //        return resultado;
 //
 //    }
-//
+
     @GET
     @Path("/")
     public List<UsuarioDto> getUser (){
