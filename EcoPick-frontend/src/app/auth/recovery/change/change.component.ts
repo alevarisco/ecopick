@@ -123,13 +123,10 @@ export class ChangeComponent implements OnInit {
   }
 
   onSubmit(){
-
+    this.reset.clave = this.changeForm.value.clave;
+    this.reset.correo = this.correo;
 
     if (this.changeForm.valid){
-
-      this.reset.clave = this.changeForm.value.clave;
-      this.reset.correo = this.correo;
-
       this.postReset();
       this.nextPage();
     }

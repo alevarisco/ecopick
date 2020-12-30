@@ -2,12 +2,12 @@
     <p-card>
         <div class="p-grid">
             <!-- Imagen decorativa -->
-            <div class="p-col-12 p-lg-5 p-d-none p-d-lg-inline-flex" style="padding-left: 120px; padding-top: 60px !important">
-                <img src="../../../assets/img/logo_ecopick.png" class="panel-img" width="260px" height="260px" alt="">
+            <div class="p-col-12 p-lg-4 " style="padding-left: 100px; padding-top: 60px !important">
+                <img src="../../../assets/img/logo_ecopick.png" width="70%" height="70%" alt="" >
             </div>
 
             <!-- Formulario de login -->
-            <div class="p-col-12 p-lg-7">
+            <div class="p-col-12 p-lg-8">
                 <div class="p-grid p-jc-center">
                     <h1 style="color: #3283fcff; margin-bottom: 0 !important;">Inicio de sesión</h1>
                 </div>
@@ -15,7 +15,7 @@
                 <div class="demo-container p-p-0 p-p-sm-4 p-p-md-6 p-p-lg-4">
                     <form novalidate [formGroup]="loginForm" #lform="ngForm" (ngSubmit)="onSubmit()">
                         <div class="p-grid p-jc-center p-mt-4">
-                            <div class="p-col-6 p-mb-1">
+                            <div class="p-col-12 p-lg-6 p-mb-1">
                                 <div class="p-inputgroup">
                                     <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
                                     <input id="correo_electronico" class="p-inputtext-lg" formControlName="correo_electronico" pInputText type="text" placeholder="Correo electrónico">
@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="p-grid p-jc-center p-mt-1">
-                            <div class="p-col-6 p-mb-1">
+                            <div class="p-col-12 p-lg-6 p-mb-1">
                                 <div class="p-inputgroup">
                                     <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
                                     <input id="clave" class="p-inputtext-lg" formControlName="clave" type="password" placeholder="Contraseña" pInputText>
@@ -41,7 +41,7 @@
                             </div>
                         </div>
                     </form>
-                  <div class="p-text-center p-mt-4"><a routerLink="/recovery">Olvidé mi contraseña</a></div>
+                  <div class="p-text-center p-mt-4"><a routerLink="/recovery">¿Olvidó su contraseña?</a></div>
                 </div>
 
                 <div class="p-text-center p-mt-1">No tengo cuenta <a routerLink="/register">¡Registrarme!</a></div>

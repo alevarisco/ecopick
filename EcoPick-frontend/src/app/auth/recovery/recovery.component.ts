@@ -97,18 +97,25 @@ export class RecoveryComponent implements OnInit {
   onSubmit(){
     this.recovery = new Recovery();
     this.recovery.correo = this.recoveryForm.value.correo_electronico;
-    this.recoveryService.validateEmail(this.recovery)
+  
+    if (this.recovery.correo == null){
+      this.messageService.add({severity: 'error', summary: 'Error', detail: 'Debe ingresar un correo.'});
+    }
+    else{
+      this.recoveryService.validateEmail(this.recovery)
       .subscribe(question => {
-        if (question == null){
+        if (question.pregunta == null){
           this.messageService.add({severity: 'error', summary: 'Error', detail: 'Usuario no registrado.'});
       }
       else{
         this.messageService.add({severity: 'success', summary: 'Exito', detail: 'Usuario validado correctamente.'});
-        console.log(question)
         this.nextPage(question.pregunta, this.recovery.correo);
       }
 
       })
+    }
+
+   
 
   }
 

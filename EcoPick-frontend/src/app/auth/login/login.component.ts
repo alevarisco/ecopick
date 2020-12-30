@@ -106,23 +106,27 @@ export class LoginComponent implements OnInit {
     this.user = new Users();
     this.user.email = this.loginForm.value.correo_electronico;
     this.user.contraseña = this.loginForm.value.clave;
-
-    this.loginService.validateLogin(this.user)
+    
+    if (this.user.email  == "" || this.user.contraseña == ""){
+      this.messageService.add({severity: 'error', summary: 'Error', detail: 'Debe ingresar su correo y clave.'});
+    }
+    else {
+      this.loginService.validateLogin(this.user)
       .subscribe(person => {
       if (person == null){
-        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Usuario no registrado.'});
+        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Correo no registrado.'});
       }
       else{
         if (person._id == -1 || person._id == 0){
-          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Usuario no registrado.'});
+          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Correo no registrado.'});
         }
         else if (person._id == -2){
-          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Usuario o clave incorrectos.'});
+          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Correo o clave incorrectos.'});
         }
         else {
           console.log(person);
           this.sessionService.setCurrentSession(person);
-          this.messageService.add({severity: 'success', summary: 'Exito', detail: 'Usuario validado correctamente.'});
+          this.messageService.add({severity: 'success', summary: 'Exito', detail: 'Correo validado correctamente.'});
           this.nextPage();
         }
       }
@@ -133,6 +137,9 @@ export class LoginComponent implements OnInit {
         this.sent_form = false;
         this.messageService.add({severity: 'error', summary: 'Error', detail: errorMessage});
       });
+    }
+    this.sent_form = false;
+    
   }
 
   nextPage(): void {

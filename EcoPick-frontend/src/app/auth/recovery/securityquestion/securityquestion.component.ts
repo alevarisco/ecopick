@@ -102,12 +102,11 @@ export class SecurityquestionComponent implements OnInit {
     this.recovery.respuesta = this.recoveryForm.value.respuesta;
     this.recoveryService.validateAnswer(this.recovery)
       .subscribe(question => {
-        if (question == null){
-          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Usuario no registrado.'});
+        if (question._id == 0){
+          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Respuesta incorrecta.'});
       }
       else{
-        this.messageService.add({severity: 'success', summary: 'Exito', detail: 'Usuario validado correctamente.'});
-        console.log(question)
+        this.messageService.add({severity: 'success', summary: 'Exito', detail: 'Respuesta correcta.'});
         this.nextPage(this.correo);
       }
 
