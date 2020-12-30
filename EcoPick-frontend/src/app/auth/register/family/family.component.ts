@@ -262,7 +262,7 @@ export class FamilyComponent implements OnInit {
 
     }
     else{
-      this.messageService.add({severity:'error', summary: 'Error', detail: 'Hubo datos inválidos o incompletos en el formulario'});
+      this.messageService.add({severity:'error', summary: 'Error', detail: 'Hay datos inválidos o incompletos en el formulario'});
     }
   }
 

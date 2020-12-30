@@ -1,15 +1,29 @@
-<div class="demo-container p-p-0 p-p-sm-4 p-p-md-6 p-p-lg-4">
+<div class="demo-container p-mx-4 p-p-0 p-p-sm-1 p-p-md-2 p-p-lg-6">
     <p-card>
-
+        <!-- Imagen decorativa -->
+       
         <div class="p-grid">
-            <div class="p-col-12 p-md-8 p-lg-12">
-                <button pButton pRipple type="submit" (click)="sendPersona()" label="Personal"></button>
+            <div class="p-col-12 p-lg-4 " style="padding-left: 100px; padding-top: 60px !important">
+                <img src="../../../assets/img/logo_ecopick.png" width="70%" height="70%" alt="" >
             </div>
+    
+            <div class=" p-lg-8 p-grid p-jc-center">
+                <div class="p-col-12">
+                    <h1 style="color: #3283fcff; margin-bottom: 15 px; text-align: center !important ">¿Qué tipo de usuario desea ser? </h1>
+                </div>
 
-            <div class="p-col-12 p-md-8 p-lg-12">
-                <button pButton pRipple type="submit" (click)="sendEmpresa()" label="Empresarial" ></button>
+                <div class="p-col-12 p-lg-6">
+                    <button pButton pRipple type="submit" (click)="sendPersona()" label="PERSONAL: Publica y ofrece material reciclable" class="p-button-lg" icon="pi pi-users" style="background-color: #3283fcff !important"></button>
+                </div>
+
+                <div class="p-col-12 p-lg-6">
+                    <button pButton pRipple type="submit" (click)="sendEmpresa()" label="EMPRESARIAL: Adquiere el material que necesitas" class="p-button-lg" icon="pi pi-home" style="background-color: #3283fcff !important"></button>
+                 </div>
+                
             </div>
+           
 
+            <div class="p-text-center p-mt-4" style="text-align: center"><a routerLink="/login">Ir Atras</a></div>
         </div>
     </p-card>
 </div>
