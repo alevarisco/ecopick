@@ -24,25 +24,25 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'personal',
+        redirectTo: 'status',
         pathMatch: 'full'
+      },
+      {
+        path: 'status',
+        component: StatusComponent
       },
       {
         path: 'personal',
         component: AccountComponent
       },
       {
-        path: 'contact',
-        component: ContactComponent
-      },
-      {
-        path: 'family',
+        path: 'empresa',
         component: FamilyComponent
-      },
-      {
-        path: 'status',
-        component: StatusComponent
       }
+      // {
+      //   path: 'status',
+      //   component: StatusComponent
+      // }
     ]
   },
   {

@@ -15,6 +15,8 @@ import { NivelAcademicoService } from 'src/app/core/services/profile/nivel-acade
 import { DeviceService } from 'src/app/core/services/profile/device.service';
 import { GENDERS } from 'src/app/core/constants/gender';
 import { DisponibilidadService } from 'src/app/core/services/profile/disponibilidad.service';
+import {ButtonModule} from 'primeng/button';
+
 
 @Component({
   selector: 'app-status',
@@ -122,6 +124,14 @@ export class StatusComponent implements OnInit {
 
   previousPage(): void {
     this.router.navigate(['register/family'])
+  }
+
+  sendPersona(): void{
+    this.router.navigate(['register/personal']);
+  }
+
+  sendEmpresa(): void{
+    this.router.navigate(['register/empresa']);
   }
 
 }

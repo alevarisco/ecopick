@@ -13,6 +13,7 @@ import { GeneroService } from '../../../core/services/profile/genero.service';
 import { EdocivilService } from '../../../core/services/profile/edocivil.service';
 import { from } from 'rxjs';
 import { errorMonitor } from 'events';
+import { PlaceService } from 'src/app/core/services/profile/place.service';
 
 @Component({
   selector: 'app-account',
@@ -21,8 +22,19 @@ import { errorMonitor } from 'events';
   providers: [MessageService]
 })
 export class AccountComponent implements OnInit {
+
   generos: SelectItem[];
   estados_civiles: SelectItem[];
+
+  paises: SelectItem[];
+  estados: SelectItem[];
+  ciudades: SelectItem[];
+  parroquias: SelectItem[];
+  codigos: SelectItem[];
+
+  estado: boolean;
+  ciudad: boolean;
+  parroquia: boolean;
 
   /* Form */
   accountForm: FormGroup;
@@ -35,6 +47,7 @@ export class AccountComponent implements OnInit {
     'primer_nombre': '',
     'primer_apellido': '',
     'documento_de_identificacion': '',
+    'telefono': '',
   };
 
   validationMessages = {
@@ -64,6 +77,9 @@ export class AccountComponent implements OnInit {
       'required': 'Documento de identificación es requerido',
       'minlength': 'Documento de identificación debe tener al menos 8 caracteres',
       'maxlength': 'Documento de identificación no debe pasar de los 50 caracteres'
+    },
+    'telefono': {
+      'pattern': 'Teléfono debe ser un campo numérico'
     }
   };
 
@@ -74,15 +90,23 @@ export class AccountComponent implements OnInit {
     private registerService: RegisterService,
     private messageService: MessageService,
     private generoService: GeneroService,
+    private placeService: PlaceService,
     private edocivilService: EdocivilService) {
-    // this.generos = GENDERS;
-    this.generoService.getGeneros().subscribe((genres) => {
-      this.generos = replaceKeyWithValue(genres);
-    });
-    // this.estados_civiles = CIVIL_STATUSES;
+
+    this.generos = GENDERS;
+
     this.edocivilService.getEdosCiviles().subscribe((edosciviles) => {
       this.estados_civiles = replaceKeyWithValue(edosciviles);
     });
+
+    this.estado = true;
+    this.ciudad = true;
+    this.parroquia = true;
+
+    this.placeService.getCountries().subscribe((countries) => {
+      this.paises = replaceKeyWithValue(countries);
+    });
+
     this.createForm();
   }
 
@@ -142,9 +166,22 @@ export class AccountComponent implements OnInit {
           Validators.maxLength(50)
         ]
       ],
+
       genero: this.registerService.user.fkPersona.fkGenero,
       estado_civil: this.registerService.user.fkPersona.fkEdoCivil,
-      fecha_de_nacimiento: this.registerService.user.fkPersona.fechaNacimiento
+      fecha_de_nacimiento: this.registerService.user.fkPersona.fechaNacimiento,
+
+      pais: this.registerService.user.fkPersona.id_pais._id,
+      estado: this.registerService.user.fkPersona.id_estado._id,
+      ciudad: this.registerService.user.fkPersona.id_ciudad._id,
+      parroquia: this.registerService.user.fkPersona.id_parroquia._id,
+      // codigo_pais: this.registerService.user.fkPersona.codigo_pais,
+      telefono: [
+        this.registerService.user.fkPersona.telefono.numero,
+        [
+          Validators.pattern('^[0-9]*$')
+        ]
+      ],
     });
 
 
@@ -228,6 +265,49 @@ export class AccountComponent implements OnInit {
 
   nextPage(): void {
     this.router.navigate(['register/contact']);
+  }
+
+
+  getStates(event){
+    this.ciudades = [];
+    this.parroquias = [];
+    this.placeService.getStates(event.value).subscribe((states) => {
+      if (states.length){
+        this.estado = true;
+        this.estados = replaceKeyWithValue(states);
+      }
+      else{
+        this.estado = false;
+        this.ciudad = false;
+        this.parroquia = false;
+      }
+    })
+  }
+
+  getCities(event){
+    this.parroquias = [];
+    this.placeService.getCities(event.value).subscribe((cities) => {
+      if (cities.length){
+        this.ciudad = true;
+        this.ciudades = replaceKeyWithValue(cities);
+      }
+      else{
+        this.ciudad = false;
+        this.parroquia = false;
+      }
+    })
+  }
+
+  getCounties(event){
+    this.placeService.getCounties(event.value).subscribe((counties) => {
+      if (counties.length){
+        this.parroquia = true;
+        this.parroquias = replaceKeyWithValue(counties);
+      }
+      else{
+        this.parroquia = false;
+      }
+    })
   }
 
 }

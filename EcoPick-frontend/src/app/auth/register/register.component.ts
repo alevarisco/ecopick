@@ -13,24 +13,24 @@ export class RegisterComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.items = [
-      {
-        label: 'Cuenta',
-        routerLink: 'personal'
-      },
-      {
-        label: 'Contacto',
-        routerLink: 'contact'
-      },
-      {
-        label: 'Familia',
-        routerLink: 'family'
-      },
-      {
-        label: 'Estatus',
-        routerLink: 'status'
-      }
-    ];
+    // this.items = [
+    //   {
+    //     label: 'Tipo de usuario',
+    //     routerLink: 'status'
+    //   },
+    //   {
+    //     label: 'Personal',
+    //     routerLink: 'personal'
+    //   },
+    //   // {
+    //   //   label: 'Contacto',
+    //   //   routerLink: 'contact'
+    //   // }
+    //   // {
+    //   //   label: 'Familia',
+    //   //   routerLink: 'family'
+    //   // }
+    // ];
   }
 
 }

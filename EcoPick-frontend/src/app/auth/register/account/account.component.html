@@ -1,13 +1,90 @@
 <div class="demo-container p-p-0 p-p-sm-4 p-p-md-6 p-p-lg-4">
     <form novalidate [formGroup]="accountForm" #aform="ngForm" (ngSubmit)="onSubmit()">
-        <div class="p-grid p-mt-4">
+
+        <div class="p-grid p-mb-4 p-jc-center">
+            <h1 style="color: #3283fcff; margin-bottom: 0 !important;">Registro de usuario natural</h1> 
+        </div>
+
+        <div class="p-grid p-mt-8">
+            <div class="p-col-12 p-md-6 p-mb-5">
+                <span class="p-float-label">
+                    <input id="primer_nombre" class="p-inputtext-lg fill-width" formControlName="primer_nombre"  type="text" pInputText>
+                    <label for="float-input">Nombre *</label>
+                </span>
+                <span class="error-msg" *ngIf="formErrors.primer_nombre"><small>{{formErrors.primer_nombre}}</small></span>
+
+            </div>
+
+            <div class="p-col-12 p-md-6 p-mb-5">
+                <span class="p-float-label">
+                    <input id="primer_apellido" class="p-inputtext-lg fill-width" formControlName="primer_apellido"  type="text" pInputText>
+                    <label for="float-input">Apellido *</label>
+                </span>
+                <span class="error-msg" *ngIf="formErrors.primer_apellido"><small>{{formErrors.primer_apellido}}</small></span>
+
+            </div>
+            
             <div class="p-col-12 p-md-6 p-mb-5">
                 <span class="p-float-label">
                     <input id="correo_electronico" class="p-inputtext-lg fill-width" formControlName="correo_electronico" type="text" pInputText>
-                    <label for="float-input">Correo Electrónico *</label>
+                    <label for="float-input">Correo electrónico *</label>
                 </span>
                 <span class="error-msg" *ngIf="formErrors.correo_electronico"><small>{{formErrors.correo_electronico}}</small></span>
             </div>
+
+            <div class="p-col-12 p-md-6 p-mb-5">
+                <span class="p-float-label">
+                    <input id="documento" class="p-inputtext-lg fill-width" formControlName="documento_de_identificacion"  type="text" pInputText>
+                    <label for="float-input">Cédula de identidad *</label>
+                </span>
+                <span class="error-msg" *ngIf="formErrors.documento_de_identificacion"><small>{{formErrors.documento_de_identificacion}}</small></span>
+
+            </div>
+
+            <div class="p-col-12 p-md-6 p-mb-5">
+                <p-dropdown [options]="generos" placeholder="Género" formControlName="genero" ></p-dropdown>
+            </div>
+
+            <div class="p-col-12 p-md-6 p-mb-5">
+                <span class="p-float-label">
+                    <input id="telefono" class="p-inputtext-lg full-width" type="text" pInputText formControlName="telefono">
+                    <label for="float-input">Número telefónico *</label>
+                </span>
+                <span class="error-msg" *ngIf="formErrors.telefono"><small>{{formErrors.telefono}}</small></span>
+
+            </div>
+
+            <div class="p-col-12 p-md-6 p-mb-5">
+                <p-calendar placeholder="Fecha de nacimiento *" [locale]="es" [yearNavigator]="true" yearRange="1900:2030" dataType="string" dateFormat="dd/mm/yy" formControlName="fecha_de_nacimiento" class="p-inputtext-lg"></p-calendar>
+            </div>
+
+            <div class="p-col-12 p-md-6 p-mb-5">
+                <p-dropdown [options]="paises" placeholder="País" (onChange)="getStates($event)" formControlName="pais"></p-dropdown>
+            </div>
+
+            <div class="p-col-12 p-md-6 p-mb-5" *ngIf="estado; else elseEstado">
+                <p-dropdown [options]="estados" placeholder="Estado" (onChange)="getCities($event)" formControlName="estado"></p-dropdown>
+            </div>
+            <ng-template #elseEstado>
+                <div class="p-col-12 p-md-6 p-mb-5" >
+                </div>
+            </ng-template>
+
+            <div class="p-col-12 p-md-6 p-mb-5" *ngIf="ciudad; else elseCiudad">
+                <p-dropdown [options]="ciudades" placeholder="Ciudad" (onChange)="getCounties($event)" formControlName="ciudad"></p-dropdown>
+            </div>
+            <ng-template #elseCiudad>
+                <div class="p-col-12 p-md-6 p-mb-5" >
+                </div>
+            </ng-template>
+
+            <div class="p-col-12 p-md-6 p-mb-5" *ngIf="parroquia; else elseParroquia">
+                <p-dropdown [options]="parroquias" placeholder="Parroquia" formControlName="parroquia"></p-dropdown>
+            </div>
+            <ng-template #elseParroquia>
+                <div class="p-col-12 p-md-6 p-mb-5" >
+                </div>
+            </ng-template>
 
             <div class="p-col-12 p-md-6 p-mb-5">
                 <span class="p-float-label">
@@ -26,45 +103,6 @@
                 </span>
                 <span class="error-msg" *ngIf="formErrors.confirmar_clave"><small>{{formErrors.confirmar_clave}}</small></span>
 
-            </div>
-
-            <div class="p-col-12 p-md-6 p-mb-5">
-                <span class="p-float-label">
-                    <input id="primer_nombre" class="p-inputtext-lg fill-width" formControlName="primer_nombre"  type="text" pInputText>
-                    <label for="float-input">Primer Nombre *</label>
-                </span>
-                <span class="error-msg" *ngIf="formErrors.primer_nombre"><small>{{formErrors.primer_nombre}}</small></span>
-
-            </div>
-
-            <div class="p-col-12 p-md-6 p-mb-5">
-                <span class="p-float-label">
-                    <input id="primer_apellido" class="p-inputtext-lg fill-width" formControlName="primer_apellido"  type="text" pInputText>
-                    <label for="float-input">Primer Apellido *</label>
-                </span>
-                <span class="error-msg" *ngIf="formErrors.primer_apellido"><small>{{formErrors.primer_apellido}}</small></span>
-
-            </div>
-
-            <div class="p-col-12 p-md-6 p-mb-5">
-                <span class="p-float-label">
-                    <input id="documento" class="p-inputtext-lg fill-width" formControlName="documento_de_identificacion"  type="text" pInputText>
-                    <label for="float-input">Código de pasaporte *</label>
-                </span>
-                <span class="error-msg" *ngIf="formErrors.documento_de_identificacion"><small>{{formErrors.documento_de_identificacion}}</small></span>
-
-            </div>
-
-            <div class="p-col-12 p-md-6 p-mb-5">
-                <p-dropdown [options]="generos" placeholder="Género" formControlName="genero" ></p-dropdown>
-            </div>
-
-            <div class="p-col-12 p-md-6 p-mb-5">
-                <p-dropdown [options]="estados_civiles" placeholder="Estado Civil" formControlName="estado_civil" ></p-dropdown>
-            </div>
-
-            <div class="p-col-12 p-md-6 p-mb-5">
-                <p-calendar placeholder="Fecha de Nacimiento *" [locale]="es" [yearNavigator]="true" yearRange="1900:2030" dataType="string" dateFormat="dd/mm/yy" formControlName="fecha_de_nacimiento" class="p-inputtext-lg"></p-calendar>
             </div>
         </div>
 
