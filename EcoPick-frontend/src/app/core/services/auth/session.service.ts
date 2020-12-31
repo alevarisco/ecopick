@@ -39,19 +39,19 @@ export class SessionService {
   }
 
   isAdmin(): boolean {
-    return this.getCurrentSession().fkRol._id === 1;
+    return false;
   }
 
   isAnalyst(): boolean {
-    return this.getCurrentSession().fkRol._id === 2;
+    return false;
   }
 
   isClient(): boolean {
-    return this.getCurrentSession().fkRol._id === 3;
+    return false;
   }
 
   isPolled(): boolean {
-    return this.getCurrentSession().fkRol._id === 4;
+    return true;
   }
 
   getCurrentToken(): string {

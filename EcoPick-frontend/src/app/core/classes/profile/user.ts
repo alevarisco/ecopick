@@ -2,7 +2,7 @@ import { Recovery } from '../auth/recovery';
 import { Place } from './place';
 
 export class User {
-    _id?: number;
+    _id?: number; 
     email: string;
     contraseña: string;
     confirmar_contraseña?: string;
@@ -16,4 +16,8 @@ export class User {
     respuestaSeguridad: string;
     fkLugar: Place;
     fkPregunta: Recovery;
+    id_pais?: Place;
+    id_estado?: Place;
+    id_ciudad?: Place;
+    id_parroquia?: Place;
 }

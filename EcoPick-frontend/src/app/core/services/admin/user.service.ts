@@ -16,6 +16,8 @@ import { telefono } from '../../classes/profile/telefono';
 import { Rol } from '../../classes/profile/rol';
 import { Disponibilidad } from '../../classes/profile/disponibilidad';
 import { serverURL } from '../../constants/serverURL';
+import { User } from '../../classes/profile/user';
+import { Recovery } from '../../classes/auth/recovery';
 
 @Injectable({
   providedIn: 'root'
@@ -122,12 +124,37 @@ export class UserService {
     persona: this.persona
   };
 
+  pregunta: Recovery = {
+    _id: 0
+  };
+
+  usuario: User = {
+    email: '',
+    contraseña: '',
+    confirmar_contraseña: '',
+    nombre: '',
+    apellido: '',
+    genero: '',
+    fechaNacimiento: '01/01/1990',
+    telefono: '',
+    tipo: 0,
+    numeroIdentificacion: '',
+    respuestaSeguridad: '',
+    fkLugar: this.lugar,
+    fkPregunta: this.pregunta
+  };
 
   constructor(private http: HttpClient,
               private processHTTPMessageService: ProcessHttpMessageService) { }
 
   getPerson(pid): Observable<Person>{
     return this.http.get<Person>(serverURL + 'user/' + pid)
+      // .pipe(map(persona => persona[0]))
+      .pipe(catchError(this.processHTTPMessageService.handleError));
+  }
+  
+  getPersona(pid): Observable<User>{
+    return this.http.get<User>(serverURL + 'user/' + pid)
       // .pipe(map(persona => persona[0]))
       .pipe(catchError(this.processHTTPMessageService.handleError));
   }
@@ -179,6 +206,16 @@ export class UserService {
       })
     };
     return this.http.put<Person>(serverURL + 'user/edit/' + persona._id, persona, httpOptions)
+      .pipe(catchError(this.processHTTPMessageService.handleError));
+  }
+
+  putUsuario(persona: User): Observable<User>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.put<User>(serverURL + 'user/edit/' + persona._id, persona, httpOptions)
       .pipe(catchError(this.processHTTPMessageService.handleError));
   }
 

@@ -121,18 +121,18 @@ export class NavigationComponent implements OnInit {
       }
     ];
 
-    if (this.sessionService.isAdmin()){
-      this.items = this.items_admin;
-    }
-    else if (this.sessionService.isAnalyst()){
-      this.items = this.items_analyst;
-    }
-    else if (this.sessionService.isClient()){
-      this.items = this.items_client;
-    }
-    else if (this.sessionService.isPolled()){
-      this.items = this.items_user;
-    }
+    // if (this.sessionService.isAdmin()){
+    //   this.items = this.items_admin;
+    // }
+    // else if (this.sessionService.isAnalyst()){
+    //   this.items = this.items_analyst;
+    // }
+    // else if (this.sessionService.isClient()){
+    //   this.items = this.items_client;
+    // }
+    // else if (this.sessionService.isPolled()){
+    //   this.items = this.items_user;
+    // }
   }
 
   logout(): void {

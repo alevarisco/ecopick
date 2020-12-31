@@ -191,6 +191,7 @@ public class UserService {
             resultado.setGenero(usuario.getGenero());
             resultado.setFechaNacimiento(usuario.getFechaNacimiento());
             resultado.setNumeroIdentificacion(usuario.getNumeroIdentificacion());
+            resultado.setTelefono(usuario.getTelefono());
 
             LugarService lugarService = new LugarService();
             LugarDto usuarioLugar = lugarService.getSuperior(usuario.getFkLugar().get_id());
@@ -255,6 +256,7 @@ public class UserService {
             usuarioOld.setGenero(usuarioDto.getGenero());
             usuarioOld.setFechaNacimiento(usuarioDto.getFechaNacimiento());
             usuarioOld.setNumeroIdentificacion(usuarioDto.getNumeroIdentificacion());
+            usuarioOld.setTelefono(usuarioDto.getTelefono());
 
             usuarioDao.update(usuarioOld);
 
