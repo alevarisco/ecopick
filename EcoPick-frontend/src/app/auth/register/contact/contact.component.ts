@@ -37,7 +37,7 @@ export class ContactComponent implements OnInit {
 
   validationMessages = {
     'respuesta': {
-      'pattern': 'Respuesta no puede estar vacia.'
+      'required': 'Respuesta no puede estar vacia.'
     }
   }
 
@@ -69,7 +69,13 @@ export class ContactComponent implements OnInit {
   createForm(){
     this.contactForm = this.fb.group({
       pregunta: this.registerService.usuario.fkPregunta._id,
-      respuesta: this.registerService.usuario.respuestaSeguridad,
+      respuesta: [
+        this.registerService.usuario.respuestaSeguridad,
+        [
+          Validators.required,
+          Validators.pattern(/[A-Za-z][A-Za-z0-9]*$/)
+        ],
+      ],
     });
 
     this.contactForm.valueChanges
