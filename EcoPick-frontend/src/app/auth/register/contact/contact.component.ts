@@ -9,6 +9,8 @@ import { PlaceService } from '../../../core/services/profile/place.service';
 // import { PhoneService } from '../../../core/services/profile/phone.service';
 import { replaceKeyWithValue, replacePreguntasWithValue } from 'src/app/core/functions/common_functions';
 import { RecoveryService } from 'src/app/core/services/auth/recovery.service';
+import { User } from 'src/app/core/classes/profile/user';
+import { Person } from 'src/app/core/classes/profile/person';
 
 @Component({
   selector: 'app-contact',
@@ -37,7 +39,8 @@ export class ContactComponent implements OnInit {
 
   validationMessages = {
     'respuesta': {
-      'required': 'Respuesta no puede estar vacia.'
+      'required': 'Respuesta no puede estar vacia.',
+      'pattern': 'Respuesta solo permite caracteres alfabéticos'
     }
   }
 
@@ -125,6 +128,12 @@ export class ContactComponent implements OnInit {
         .subscribe(person => {
           console.log(person);
           this.router.navigate(['/login']);
+          this.registerService.cleanUsuario();
+          // this.registerService.usuario = new User;
+          // this.registerService.user.fkPersona.id_pais._id = 0;
+          // this.registerService.user.fkPersona.id_estado._id = 0;
+          // this.registerService.user.fkPersona.id_ciudad._id = 0;
+          // this.registerService.user.fkPersona.id_parroquia._id = 0;
           this.messageService.add({severity:'success', summary: 'Éxito', detail: 'Registro completado satisfactoriamente.'});
         },
         errorMessage => {

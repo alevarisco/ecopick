@@ -97,7 +97,7 @@ export class RegisterService {
     nombre: '',
     apellido: '',
     genero: '',
-    fechaNacimiento: '',
+    fechaNacimiento: '01/01/1990',
     telefono: '',
     tipo: 0,
     numeroIdentificacion: '',
@@ -108,6 +108,94 @@ export class RegisterService {
 
   constructor(private http: HttpClient,
     private processHTTPMessageService: ProcessHttpMessageService) {
+  }
+
+  cleanUsuario(): void{
+    this.edocivil = {
+      _id: 0,
+      nombre: '',
+    };
+    this.genero = {
+      _id: 0,
+      nombre: '',
+    };
+  
+    this.pais = {
+      _id: 0,
+      nombre: '',
+    };
+    this.estado = {
+      _id: 0,
+      nombre: '',
+    };
+    this.ciudad = {
+      _id: 0,
+      nombre: '',
+    };
+    this.parroquia = {
+      _id: 0,
+      nombre: '',
+    };
+    this.lugar = {
+      _id: 0,
+      nombre: '',
+    };
+  
+    this.telefono = {
+      numero: 0,
+    };
+  
+  
+  
+    this.horario_ini = {
+      _id: 0,
+      hora: null,
+    };
+    this.horario_fin = {
+      _id: 0,
+      hora: null,
+    };
+  
+    this.personaData = {
+      hijos: this.hijos,
+      fkEdoCivil: this.edocivil,
+      fkGenero: this.genero,
+      id_pais: this.pais,
+      id_estado: this.estado,
+      id_ciudad: this.ciudad,
+      id_parroquia: this.parroquia,
+      fkLugar: this.lugar,
+      codigo_pais: 0,
+      telefono: this.telefono,
+      id_horario_inicial: this.horario_ini,
+      id_horario_final: this.horario_fin
+    };
+  
+    this.user = {
+      email: '',
+      password: '',
+      fkPersona: this.personaData
+    };
+  
+    this.pregunta = {
+      _id: 0
+    };
+
+    this.usuario = {
+      email: '',
+      contraseña: '',
+      confirmar_contraseña: '',
+      nombre: '',
+      apellido: '',
+      genero: '',
+      fechaNacimiento: '01/01/1990',
+      telefono: '',
+      tipo: 0,
+      numeroIdentificacion: '',
+      respuestaSeguridad: '',
+      fkLugar: this.lugar,
+      fkPregunta: this.pregunta
+    };
   }
 
   postRegister(user: Person): Observable<Person>{

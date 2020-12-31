@@ -69,19 +69,25 @@ export class FamilyComponent implements OnInit {
       'compare': 'Clave y confirmar clave deben coincidir'
     },
     'primer_nombre':{
-      'required': 'Nombre de empresa es requerido',
-      'minlength': 'Nombre de empresa debe tener al menos 2 caracteres',
-      'maxlength': 'Nombre de empresa no puede tener más de 50 caracteres'
+      'required': 'Nombre es requerido',
+      'minlength': 'Nombre debe tener al menos 2 caracteres',
+      'maxlength': 'Nombre no puede tener más de 50 caracteres',
+      'pattern': 'Nombre solo permite caracteres alfabéticos'
     },
     'documento_de_identificacion':{
       'required': 'Documento de identificación es requerido',
       'minlength': 'Documento de identificación debe tener al menos 8 caracteres',
-      'maxlength': 'Documento de identificación no debe pasar de los 50 caracteres'
+      'maxlength': 'Documento de identificación no debe pasar de los 50 caracteres',
+      'pattern': 'Documento de identificación debe ser un campo numérico'
     },
     'telefono': {
+      'required': 'Teléfono es requerido',
       'pattern': 'Teléfono debe ser un campo numérico'
     },
     'descripcion': {
+      'required': 'Descripción es requerida',
+      'minlength': 'Descripción debe tener al menos 2 caracteres',
+      'maxlength': 'Descripción no debe pasar de los 50 caracteres',
       'pattern': 'Debe ingresar una descripción de la empresa'
     }
   }
@@ -92,23 +98,17 @@ export class FamilyComponent implements OnInit {
   es: any;
 
 
-  constructor(private router: Router, 
-    private registerService: RegisterService,
-    private generoService: GeneroService, 
+  constructor(private router: Router,
     private fb: FormBuilder,
+    private registerService: RegisterService,
     private messageService: MessageService,
-    private placeService: PlaceService,
-    private edocivilService: EdocivilService) {
-    // this.generos = GENDERS;
+    private placeService: PlaceService) {
 
-    // this.generoService.getGeneros().subscribe((genres) => {
-    //   this.generos = replaceKeyWithValue(genres);
-    // });
     this.generos = GENDERS;
-    // this.estados_civiles = CIVIL_STATUSES;
-    this.edocivilService.getEdosCiviles().subscribe((edosciviles) => {
-      this.estados_civiles = replaceKeyWithValue(edosciviles);
-    });
+
+    // this.edocivilService.getEdosCiviles().subscribe((edosciviles) => {
+    //   this.estados_civiles = replaceKeyWithValue(edosciviles);
+    // });
 
     this.estado = true;
     this.ciudad = true;
@@ -122,77 +122,74 @@ export class FamilyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.registerService.user.fkPersona.hijos)
-      // this.hijos = this.registerService.user.fkPersona.hijos;
-
     this.es = {
-        firstDayOfWeek: 1,
-        dayNames: [ "Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado" ],
-        dayNamesShort: [ "dom","lun","mar","mié","jue","vie","sáb" ],
-        dayNamesMin: [ "D","L","M","X","J","V","S" ],
-        monthNames: [ "Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre" ],
-        monthNamesShort: [ "ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic" ],
-        today: 'Hoy',
-        clear: 'Borrar'
-    }
+      firstDayOfWeek: 1,
+      dayNames: [ "Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado" ],
+      dayNamesShort: [ "dom","lun","mar","mié","jue","vie","sáb" ],
+      dayNamesMin: [ "D","L","M","X","J","V","S" ],
+      monthNames: [ "Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre" ],
+      monthNamesShort: [ "ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic" ],
+      today: 'Hoy',
+      clear: 'Borrar'
+  }
   }
 
   createForm(){
     this.familyForm = this.fb.group({
       correo_electronico: [
-        this.registerService.user.email,
+        this.registerService.usuario.email,
         [
           Validators.required,
           Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
         ]
       ],
-      clave: [this.registerService.user.password,
+      clave: [this.registerService.usuario.contraseña,
         [
           Validators.required,
           Validators.pattern(/^(?=.*\d)(?=.*[a-zA-Z])(?=.*[\W_]).{8,40}$/)
         ]
       ],
       confirmar_clave: [
-        this.registerService.user.confirmar_clave,
+        this.registerService.usuario.confirmar_contraseña,
         [
           Validators.required,
           RxwebValidators.compare({fieldName: 'clave'})
         ]
       ],
-      primer_nombre: [this.registerService.user.fkPersona.primerNombre,
+      primer_nombre: [this.registerService.usuario.nombre,
       [
         Validators.required,
         Validators.minLength(2),
-        Validators.maxLength(50)
+        Validators.maxLength(50),
+        Validators.pattern('^[a-zA-Z]*$')
       ]],
-      primer_apellido: [
-        this.registerService.user.fkPersona.primerApellido,
+      descripcion: [
+        this.registerService.usuario.apellido,
         [
           Validators.required,
           Validators.minLength(2),
           Validators.maxLength(50)
         ]
       ],
-      documento_de_identificacion: [this.registerService.user.fkPersona.documentoIdentidad,
+      documento_de_identificacion: [this.registerService.usuario.numeroIdentificacion,
         [
           Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(50)
+          Validators.minLength(6),
+          Validators.maxLength(10),
+          Validators.pattern('^[0-9]*$')
         ]
       ],
-
-      genero: this.registerService.user.fkPersona.fkGenero,
-      estado_civil: this.registerService.user.fkPersona.fkEdoCivil,
-      fecha_de_nacimiento: this.registerService.user.fkPersona.fechaNacimiento,
-
+      // estado_civil: this.registerService.user.fkPersona.fkEdoCivil,
+      
       pais: this.registerService.user.fkPersona.id_pais._id,
       estado: this.registerService.user.fkPersona.id_estado._id,
       ciudad: this.registerService.user.fkPersona.id_ciudad._id,
       parroquia: this.registerService.user.fkPersona.id_parroquia._id,
       // codigo_pais: this.registerService.user.fkPersona.codigo_pais,
       telefono: [
-        this.registerService.user.fkPersona.telefono.numero,
+        this.registerService.usuario.telefono,
         [
+          Validators.required,
           Validators.pattern('^[0-9]*$')
         ]
       ],
@@ -239,6 +236,7 @@ export class FamilyComponent implements OnInit {
     this.registerService.usuario.contraseña = this.familyForm.value.clave;
     this.registerService.usuario.confirmar_contraseña = this.familyForm.value.confirmar_clave;
     this.registerService.usuario.nombre = this.familyForm.value.primer_nombre;
+    this.registerService.usuario.apellido = this.familyForm.value.descripcion;
     this.registerService.usuario.telefono = this.familyForm.value.telefono;
     this.registerService.usuario.tipo = 1;
     this.registerService.usuario.numeroIdentificacion = this.familyForm.value.documento_de_identificacion;

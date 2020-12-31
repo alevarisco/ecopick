@@ -64,21 +64,25 @@ export class AccountComponent implements OnInit {
       'compare': 'Clave y confirmar clave deben coincidir'
     },
     'primer_nombre':{
-      'required': 'Primer nombre es requerido',
-      'minlength': 'Primer nombre debe tener al menos 2 caracteres',
-      'maxlength': 'Primer nombre no puede tener más de 50 caracteres'
+      'required': 'Nombre es requerido',
+      'minlength': 'Nombre debe tener al menos 2 caracteres',
+      'maxlength': 'Nombre no puede tener más de 50 caracteres',
+      'pattern': 'Nombre solo permite caracteres alfabéticos'
     },
     'primer_apellido':{
-      'required': 'Primer apellido es requerido',
-      'minlength': 'Primer apellido debe tener al menos 2 caracteres',
-      'maxlength': 'Primer apellido no puede tener más de 50 caracteres'
+      'required': 'Apellido es requerido',
+      'minlength': 'Apellido debe tener al menos 2 caracteres',
+      'maxlength': 'Apellido no puede tener más de 50 caracteres',
+      'pattern': 'Apellido solo permite caracteres alfabéticos'
     },
     'documento_de_identificacion':{
       'required': 'Documento de identificación es requerido',
       'minlength': 'Documento de identificación debe tener al menos 8 caracteres',
-      'maxlength': 'Documento de identificación no debe pasar de los 50 caracteres'
+      'maxlength': 'Documento de identificación no debe pasar de los 50 caracteres',
+      'pattern': 'Documento de identificación debe ser un campo numérico'
     },
     'telefono': {
+      'required': 'Teléfono es requerido',
       'pattern': 'Teléfono debe ser un campo numérico'
     }
   };
@@ -89,9 +93,7 @@ export class AccountComponent implements OnInit {
     private fb: FormBuilder,
     private registerService: RegisterService,
     private messageService: MessageService,
-    private generoService: GeneroService,
-    private placeService: PlaceService,
-    private edocivilService: EdocivilService) {
+    private placeService: PlaceService) {
 
     this.generos = GENDERS;
 
@@ -149,28 +151,40 @@ export class AccountComponent implements OnInit {
       [
         Validators.required,
         Validators.minLength(2),
-        Validators.maxLength(50)
+        Validators.maxLength(50),
+        Validators.pattern('^[a-zA-Z]*$')
       ]],
       primer_apellido: [
         this.registerService.usuario.apellido,
         [
           Validators.required,
           Validators.minLength(2),
-          Validators.maxLength(50)
+          Validators.maxLength(50),
+          Validators.pattern('^[a-zA-Z]*$')
         ]
       ],
       documento_de_identificacion: [this.registerService.usuario.numeroIdentificacion,
         [
           Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(50)
+          Validators.minLength(6),
+          Validators.maxLength(10),
+          Validators.pattern('^[0-9]*$')
         ]
       ],
 
-      genero: this.registerService.usuario.genero,
+      genero: [
+        this.registerService.usuario.genero,
+        [
+          Validators.required,
+        ]
+      ],
       // estado_civil: this.registerService.user.fkPersona.fkEdoCivil,
-      fecha_de_nacimiento: this.registerService.usuario.fechaNacimiento,
-
+      fecha_de_nacimiento: [
+        this.registerService.usuario.fechaNacimiento,
+        [
+          Validators.required,
+        ]
+      ],
       pais: this.registerService.user.fkPersona.id_pais._id,
       estado: this.registerService.user.fkPersona.id_estado._id,
       ciudad: this.registerService.user.fkPersona.id_ciudad._id,
@@ -179,6 +193,7 @@ export class AccountComponent implements OnInit {
       telefono: [
         this.registerService.usuario.telefono,
         [
+          Validators.required,
           Validators.pattern('^[0-9]*$')
         ]
       ],
@@ -223,37 +238,38 @@ export class AccountComponent implements OnInit {
 
   onSubmit(){
 
-    this.registerService.usuario.email = this.accountForm.value.correo_electronico;
-    this.registerService.usuario.contraseña = this.accountForm.value.clave;
-    this.registerService.usuario.confirmar_contraseña = this.accountForm.value.confirmar_clave;
-    this.registerService.usuario.nombre = this.accountForm.value.primer_nombre;
-    this.registerService.usuario.apellido = this.accountForm.value.primer_apellido;
-    this.registerService.usuario.genero = this.generos[this.accountForm.value.genero-1].label;
-    this.registerService.usuario.fechaNacimiento = this.accountForm.value.fecha_de_nacimiento;
-    this.registerService.usuario.telefono = this.accountForm.value.telefono;
-    this.registerService.usuario.tipo = 0;
-    this.registerService.usuario.numeroIdentificacion = this.accountForm.value.documento_de_identificacion;
-    
-    
-    this.registerService.user.fkPersona.id_pais._id = this.accountForm.value.pais;
-    this.registerService.user.fkPersona.id_estado._id = this.accountForm.value.estado;
-    this.registerService.user.fkPersona.id_ciudad._id = this.accountForm.value.ciudad;
-    this.registerService.user.fkPersona.id_parroquia._id = this.accountForm.value.parroquia;
 
-    if (this.parroquia && this.registerService.user.fkPersona.id_parroquia._id != 0){
-      this.registerService.usuario.fkLugar._id = this.accountForm.value.parroquia;
-    }
-    else if (this.ciudad && this.registerService.user.fkPersona.id_ciudad._id != 0){
-      this.registerService.usuario.fkLugar._id = this.accountForm.value.ciudad;
-    }
-    else if (this.estado && this.registerService.user.fkPersona.id_estado._id != 0){
-      this.registerService.usuario.fkLugar._id = this.accountForm.value.estado;
-    }
-    else {
-      this.registerService.usuario.fkLugar._id = this.accountForm.value.pais;
-    }
+    if (this.accountForm.valid || this.accountForm.value.genero-1 != -1){
+      this.registerService.usuario.email = this.accountForm.value.correo_electronico;
+      this.registerService.usuario.contraseña = this.accountForm.value.clave;
+      this.registerService.usuario.confirmar_contraseña = this.accountForm.value.confirmar_clave;
+      this.registerService.usuario.nombre = this.accountForm.value.primer_nombre;
+      this.registerService.usuario.apellido = this.accountForm.value.primer_apellido;
+      this.registerService.usuario.genero = this.generos[this.accountForm.value.genero-1].label;
+      this.registerService.usuario.fechaNacimiento = this.accountForm.value.fecha_de_nacimiento;
+      this.registerService.usuario.telefono = this.accountForm.value.telefono;
+      this.registerService.usuario.tipo = 0;
+      this.registerService.usuario.numeroIdentificacion = this.accountForm.value.documento_de_identificacion;
+      
+      
+      this.registerService.user.fkPersona.id_pais._id = this.accountForm.value.pais;
+      this.registerService.user.fkPersona.id_estado._id = this.accountForm.value.estado;
+      this.registerService.user.fkPersona.id_ciudad._id = this.accountForm.value.ciudad;
+      this.registerService.user.fkPersona.id_parroquia._id = this.accountForm.value.parroquia;
 
-    if (this.accountForm.valid){
+      if (this.parroquia && this.registerService.user.fkPersona.id_parroquia._id != 0){
+        this.registerService.usuario.fkLugar._id = this.accountForm.value.parroquia;
+      }
+      else if (this.ciudad && this.registerService.user.fkPersona.id_ciudad._id != 0){
+        this.registerService.usuario.fkLugar._id = this.accountForm.value.ciudad;
+      }
+      else if (this.estado && this.registerService.user.fkPersona.id_estado._id != 0){
+        this.registerService.usuario.fkLugar._id = this.accountForm.value.estado;
+      }
+      else {
+        this.registerService.usuario.fkLugar._id = this.accountForm.value.pais;
+      }
+
       console.log('epa, achantate...');
 
       // this.registerService.postValidRegister().subscribe((person) =>{
