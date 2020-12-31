@@ -1,27 +1,28 @@
-<div class="demo-container p-p-0 p-p-sm-4 p-p-md-12 p-p-lg-12">
-    <form novalidate [formGroup]="contactForm" #cform="ngForm" (ngSubmit)="onSubmit()">
-        <div class="p-grid">
-            <div class="p-col-12">
-                <p-dropdown [options]="preguntas" placeholder="Pregunta de seguridad" formControlName="pregunta"></p-dropdown>
-            </div>
-            <div class="p-col-12">
-                <span class="p-float-label">
-                    <input id="respuesta" class="p-inputtext-lg full-width" type="text" pInputText formControlName="respuesta">
-                    <label for="float-input">Respuesta</label>
+<div class="demo-container p-mx-4 p-p-0 p-p-sm-1 p-p-md-2 p-p-lg-6">
+    <p-card>
+        <form novalidate [formGroup]="contactForm" #cform="ngForm" (ngSubmit)="onSubmit()">
+            <div class="p-grid" >
+                <div class="p-lg-12 p-col-12">
+                    <h1 style="color: #3283fcff; text-align: center; margin-bottom: 0 !important;">Registro de usuario natural</h1> 
+                </div>
+                <div class="p-col-12 p-lg-6">
+                    <span class="p-float-label">
+                    <p-dropdown [options]="preguntas" placeholder="Pregunta de seguridad" formControlName="pregunta"></p-dropdown>
                 </span>
-                <span class="error-msg" *ngIf="formErrors.respuesta"><small>{{formErrors.respuesta}}</small></span>
-
-            </div>
-        </div>
-        <div class="p-grid p-jc-end p-mt-1 p-mr-4">
-            <div class="p-grid p-formgrid p-fluid">
-                <div class="p-mb-2 p-col-6 p-mb-lg-0">
-                    <!-- <button pButton pRipple type="button" label="Anterior" class="p-button-secondary" (click)="previousPage()"></button> -->
                 </div>
-                <div class="p-mb-2 p-col-6 p-mb-lg-0">
-                    <button pButton pRipple type="submit" label="Registrarse"></button>
+                <div class="p-col-12 p-lg-6">
+                    <span class="p-float-label">
+                        <input id="respuesta" class="p-inputtext-lg full-width" type="text" pInputText formControlName="respuesta">
+                        <label for="float-input">Respuesta</label>
+                    </span>
+                    <span class="error-msg" *ngIf="formErrors.respuesta"><small>{{formErrors.respuesta}}</small></span>
+                    <div class="p-mb-2 p-col-12 " style="text-align: end">
+                        <button pButton pRipple type="submit" style="background-color: #3283fcff !important" label="Registrarse"></button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </form>
+            
+        </form>
+        <div class="p-text-center p-mt-4" style="text-align: center"><a routerLink="/register/status">Ir Atras</a></div>
+    </p-card>
 </div>

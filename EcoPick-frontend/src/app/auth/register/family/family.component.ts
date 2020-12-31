@@ -106,10 +106,6 @@ export class FamilyComponent implements OnInit {
 
     this.generos = GENDERS;
 
-    // this.edocivilService.getEdosCiviles().subscribe((edosciviles) => {
-    //   this.estados_civiles = replaceKeyWithValue(edosciviles);
-    // });
-
     this.estado = true;
     this.ciudad = true;
     this.parroquia = true;
@@ -260,35 +256,19 @@ export class FamilyComponent implements OnInit {
     }
 
     if (this.familyForm.valid){
-      console.log('epa, achantate...');
 
-      // this.registerService.postValidRegister().subscribe((person) =>{
-      //   this.nextPage();
-      // }, errorMessage => {
-      //   this.messageService.add({severity:'error', summary: 'Error', detail: 'El correo utilizado ya se encuentra registrado.'});
-      // });
-
-      // if (this.registerService.postValidRegister()){
         this.registerService.postValidRegistro(this.registerService.usuario).subscribe((person) =>{
           this.nextPage();
         }, errorMessage => {
           this.messageService.add({severity:'error', summary: 'Error', detail: 'El correo utilizado ya se encuentra registrado.'});
         });
-        // this.nextPage();
-      // }
-      // else{
-      // }
-
+  
     }
     else{
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Hay datos inválidos o incompletos en el formulario'});
     }
   }
 
-
-  // previousPage(): void {
-  //   this.router.navigate(['register/contact'])
-  // }
 
   nextPage(): void {
     this.router.navigate(['register/contact']);

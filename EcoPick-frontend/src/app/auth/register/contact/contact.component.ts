@@ -40,7 +40,7 @@ export class ContactComponent implements OnInit {
   validationMessages = {
     'respuesta': {
       'required': 'Respuesta no puede estar vacia.',
-      'pattern': 'Respuesta solo permite caracteres alfabéticos'
+      'pattern': 'Respuesta no admite caracteres en blanco'
     }
   }
 
@@ -120,25 +120,24 @@ export class ContactComponent implements OnInit {
     this.registerService.usuario.fkPregunta._id = this.contactForm.value.pregunta;
     this.registerService.usuario.respuestaSeguridad = this.contactForm.value.respuesta;
 
-    console.log(this.registerService.usuario)
+
 
     if (this.contactForm.valid){
-
+      if (this.registerService.usuario.respuestaSeguridad == ""){
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'Ingrese su respuesta.'});
+      }
+      else {
       this.registerService.postRegistrarUsuario(this.registerService.usuario)
         .subscribe(person => {
-          console.log(person);
+  
           this.router.navigate(['/login']);
           this.registerService.cleanUsuario();
-          // this.registerService.usuario = new User;
-          // this.registerService.user.fkPersona.id_pais._id = 0;
-          // this.registerService.user.fkPersona.id_estado._id = 0;
-          // this.registerService.user.fkPersona.id_ciudad._id = 0;
-          // this.registerService.user.fkPersona.id_parroquia._id = 0;
           this.messageService.add({severity:'success', summary: 'Éxito', detail: 'Registro completado satisfactoriamente.'});
         },
         errorMessage => {
           this.messageService.add({severity:'error', summary: 'Error', detail: errorMessage});
         })
+      }
     }
     else{
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Hubo datos inválidos o incompletos en el formulario'});
