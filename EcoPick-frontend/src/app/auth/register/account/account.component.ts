@@ -277,15 +277,6 @@ export class AccountComponent implements OnInit {
           this.registerService.usuario.fkLugar._id = this.accountForm.value.pais;
         }
   
-        console.log('epa, achantate...');
-  
-        // this.registerService.postValidRegister().subscribe((person) =>{
-        //   this.nextPage();
-        // }, errorMessage => {
-        //   this.messageService.add({severity:'error', summary: 'Error', detail: 'El correo utilizado ya se encuentra registrado.'});
-        // });
-  
-        // if (this.registerService.postValidRegister()){
           this.registerService.postValidRegistro(this.registerService.usuario).subscribe((person) =>{
             this.nextPage();
           }, errorMessage => {

@@ -2,7 +2,7 @@
     <form novalidate [formGroup]="familyForm" #aform="ngForm" (ngSubmit)="onSubmit()">
 
         <div class="p-grid p-mb-4 p-jc-center">
-            <h1 style="color: #3283fcff; margin-bottom: 0 !important;">Registro de usuario empresarial</h1> 
+            <h1 style="color: #3283fcff; text-align:center; margin-bottom: 0 !important;">Registro de usuario empresarial</h1> 
         </div>
 
         <div class="p-grid p-mt-8">
@@ -41,7 +41,7 @@
 
             </div>
 
-            <div class="p-col-12 p-md-13 p-mb-5">
+            <div class="p-col-12 p-md-6 p-mb-5">
                 <span class="p-float-label">
                     <input id="descripcion" class="p-inputtext-lg full-width" type="text" pInputText formControlName="descripcion">
                     <label for="float-input">Descripción *</label>
@@ -70,13 +70,13 @@
                 </div>
             </ng-template>
 
-            <div class="p-col-12 p-md-6 p-mb-5" *ngIf="parroquia; else elseParroquia">
+            <!-- <div class="p-col-12 p-md-6 p-mb-5" *ngIf="parroquia; else elseParroquia">
                 <p-dropdown [options]="parroquias" placeholder="Parroquia" formControlName="parroquia"></p-dropdown>
             </div>
             <ng-template #elseParroquia>
                 <div class="p-col-12 p-md-6 p-mb-5" >
                 </div>
-            </ng-template>
+            </ng-template> -->
 
             <div class="p-col-12 p-md-6 p-mb-5">
                 <span class="p-float-label">
@@ -94,14 +94,13 @@
                     <label for="float-input">Confirmar Contraseña *</label>
                 </span>
                 <span class="error-msg" *ngIf="formErrors.confirmar_clave"><small>{{formErrors.confirmar_clave}}</small></span>
-
             </div>
         </div>
 
         <div class="p-grid p-jc-end p-mt-1 p-mr-4">
             <div class="p-grid p-formgrid p-fluid">
                 <div class="p-mb-2 p-col-12 p-mb-lg-0">
-                    <button pButton pRipple type="submit" label="Siguiente"></button>
+                    <button pButton pRipple type="submit" style="background-color: #3283fcff !important" label="Siguiente"></button>
                 </div>
             </div>
         </div>

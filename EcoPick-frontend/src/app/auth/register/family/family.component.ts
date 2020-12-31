@@ -258,7 +258,7 @@ export class FamilyComponent implements OnInit {
     if (this.familyForm.valid){
 
         this.registerService.postValidRegistro(this.registerService.usuario).subscribe((person) =>{
-          this.nextPage();
+        this.nextPage();
         }, errorMessage => {
           this.messageService.add({severity:'error', summary: 'Error', detail: 'El correo utilizado ya se encuentra registrado.'});
         });
