@@ -57,7 +57,7 @@ export class AccountComponent implements OnInit {
     },
     'clave': {
       'required': 'Clave es requerida',
-      'pattern': 'Clave debe contener al menos 8 caracteres, 1 letra, 1 numero y 1 caracter especial'
+      'pattern': 'Clave debe contener al menos 6 caracteres, 1 letra mayuscula'
     },
     'confirmar_clave': {
       'required': 'Confirmar clave es requerida',
@@ -137,7 +137,8 @@ export class AccountComponent implements OnInit {
       clave: [this.registerService.usuario.contraseña,
         [
           Validators.required,
-          Validators.pattern(/^(?=.*\d)(?=.*[a-zA-Z])(?=.*[\W_]).{8,40}$/)
+          // Validators.pattern(/^(?=.*\d)(?=.*[a-zA-Z])(?=.*[\W_]).{6,40}$/)
+          Validators.pattern(/^(?=.*\d)(?=.*[a-zA-Z]).{6,40}$/)
         ]
       ],
       confirmar_clave: [
@@ -152,7 +153,8 @@ export class AccountComponent implements OnInit {
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(50),
-        Validators.pattern('^[a-zA-Z]*$')
+        // Validators.pattern('^[a-zA-Z ]*$')
+        Validators.pattern('[ A-Za-zÑñäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙ\s]+')
       ]],
       primer_apellido: [
         this.registerService.usuario.apellido,
@@ -160,7 +162,8 @@ export class AccountComponent implements OnInit {
           Validators.required,
           Validators.minLength(2),
           Validators.maxLength(50),
-          Validators.pattern('^[a-zA-Z]*$')
+          // Validators.pattern('^[a-zA-Z ]*$')
+          Validators.pattern('[ A-Za-zÑñäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙ\s]+')
         ]
       ],
       documento_de_identificacion: [this.registerService.usuario.numeroIdentificacion,
@@ -234,6 +237,34 @@ export class AccountComponent implements OnInit {
     }
   }
 
+  checkAll(){
+    /* If form hasn't been created */
+    if (!this.accountForm){
+      return;
+    }
+
+    const form = this.accountForm;
+    for (const field in this.formErrors){
+      if (this.formErrors.hasOwnProperty(field)){
+        // clear previous error message if any
+        this.formErrors[field] = '';
+        const control = form.get(field);
+
+        // if field is modified by user
+        if (control && control.dirty && !control.valid){
+          const messages = this.validationMessages[field];
+
+          // check if i'm adding the error message to the field
+          for (const key in control.errors){
+            if (control.errors.hasOwnProperty(key)){
+              this.formErrors[field] += messages[key] + ' ';
+            }
+          }
+        }
+      }
+    }
+  }
+
 
 
   onSubmit(){
@@ -243,60 +274,72 @@ export class AccountComponent implements OnInit {
 
     var edad = 2020 - parseInt(fecha[2]);
 
+    var name = this.accountForm.value.primer_nombre;
+    var lname = this.accountForm.value.primer_apellido;
 
-    if (edad >= 18){
+    if (name.replace(/\s/g, '').length && lname.replace(/\s/g, '').length) {
+      if (edad >= 18){
 
-      if (this.accountForm.valid || this.accountForm.value.genero-1 != -1){
-        this.registerService.usuario.email = this.accountForm.value.correo_electronico;
-        this.registerService.usuario.contraseña = this.accountForm.value.clave;
-        this.registerService.usuario.confirmar_contraseña = this.accountForm.value.confirmar_clave;
-        this.registerService.usuario.nombre = this.accountForm.value.primer_nombre;
-        this.registerService.usuario.apellido = this.accountForm.value.primer_apellido;
-        this.registerService.usuario.genero = this.generos[this.accountForm.value.genero-1].label;
-        this.registerService.usuario.fechaNacimiento = this.accountForm.value.fecha_de_nacimiento;
-        this.registerService.usuario.telefono = this.accountForm.value.telefono;
-        this.registerService.usuario.tipo = 0;
-        this.registerService.usuario.numeroIdentificacion = this.accountForm.value.documento_de_identificacion;
-        
-        
-        this.registerService.user.fkPersona.id_pais._id = this.accountForm.value.pais;
-        this.registerService.user.fkPersona.id_estado._id = this.accountForm.value.estado;
-        this.registerService.user.fkPersona.id_ciudad._id = this.accountForm.value.ciudad;
-        this.registerService.user.fkPersona.id_parroquia._id = this.accountForm.value.parroquia;
-  
-        if (this.parroquia && this.registerService.user.fkPersona.id_parroquia._id != 0){
-          this.registerService.usuario.fkLugar._id = this.accountForm.value.parroquia;
+        if (this.accountForm.valid || this.accountForm.value.genero-1 != -1){
+          this.registerService.usuario.email = this.accountForm.value.correo_electronico;
+          this.registerService.usuario.contraseña = this.accountForm.value.clave;
+          this.registerService.usuario.confirmar_contraseña = this.accountForm.value.confirmar_clave;
+          this.registerService.usuario.nombre = this.accountForm.value.primer_nombre;
+          this.registerService.usuario.apellido = this.accountForm.value.primer_apellido;
+          this.registerService.usuario.genero = this.generos[this.accountForm.value.genero-1].label;
+          this.registerService.usuario.fechaNacimiento = this.accountForm.value.fecha_de_nacimiento;
+          this.registerService.usuario.telefono = this.accountForm.value.telefono;
+          this.registerService.usuario.tipo = 0;
+          this.registerService.usuario.numeroIdentificacion = this.accountForm.value.documento_de_identificacion;
+          
+          
+          this.registerService.user.fkPersona.id_pais._id = this.accountForm.value.pais;
+          this.registerService.user.fkPersona.id_estado._id = this.accountForm.value.estado;
+          this.registerService.user.fkPersona.id_ciudad._id = this.accountForm.value.ciudad;
+          this.registerService.user.fkPersona.id_parroquia._id = this.accountForm.value.parroquia;
+    
+          if (this.parroquia && this.registerService.user.fkPersona.id_parroquia._id != 0){
+            this.registerService.usuario.fkLugar._id = this.accountForm.value.parroquia;
+          }
+          else if (this.ciudad && this.registerService.user.fkPersona.id_ciudad._id != 0){
+            this.registerService.usuario.fkLugar._id = this.accountForm.value.ciudad;
+          }
+          else if (this.estado && this.registerService.user.fkPersona.id_estado._id != 0){
+            this.registerService.usuario.fkLugar._id = this.accountForm.value.estado;
+          }
+          else {
+            this.registerService.usuario.fkLugar._id = this.accountForm.value.pais;
+          }
+    
+            this.registerService.postValidRegistro(this.registerService.usuario).subscribe((person) =>{
+              this.nextPage();
+            }, errorMessage => {
+              this.messageService.add({severity:'error', summary: 'Error', detail: 'El correo utilizado ya se encuentra registrado.'});
+              this.checkAll();
+            });
+            // this.nextPage();
+          // }
+          // else{
+          // }
+    
         }
-        else if (this.ciudad && this.registerService.user.fkPersona.id_ciudad._id != 0){
-          this.registerService.usuario.fkLugar._id = this.accountForm.value.ciudad;
+        else{
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Hubo datos inválidos o incompletos en el formulario'});
+          this.checkAll();
         }
-        else if (this.estado && this.registerService.user.fkPersona.id_estado._id != 0){
-          this.registerService.usuario.fkLugar._id = this.accountForm.value.estado;
-        }
-        else {
-          this.registerService.usuario.fkLugar._id = this.accountForm.value.pais;
-        }
-  
-          this.registerService.postValidRegistro(this.registerService.usuario).subscribe((person) =>{
-            this.nextPage();
-          }, errorMessage => {
-            this.messageService.add({severity:'error', summary: 'Error', detail: 'El correo utilizado ya se encuentra registrado.'});
-          });
-          // this.nextPage();
-        // }
-        // else{
-        // }
-  
+      }
+      else if (edad < 0){
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'Viajar en el tiempo no esta permitido.'});
+        this.checkAll();
       }
       else{
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'Hubo datos inválidos o incompletos en el formulario'});
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'Debes ser mayor de edad.'});
+        this.checkAll();
       }
     }
-    else if (edad < 0){
-      this.messageService.add({severity:'error', summary: 'Error', detail: 'Viajar en el tiempo no esta permitido.'});
-    }
     else{
-      this.messageService.add({severity:'error', summary: 'Error', detail: 'Debes ser mayor de edad.'});
+      this.messageService.add({severity:'error', summary: 'Error', detail: 'Hubo datos inválidos o incompletos en el formulario'});
+      this.checkAll();
     }
   }
 

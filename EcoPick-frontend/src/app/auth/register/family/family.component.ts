@@ -62,7 +62,7 @@ export class FamilyComponent implements OnInit {
     },
     'clave': {
       'required': 'Clave es requerida',
-      'pattern': 'Clave debe contener al menos 8 caracteres, 1 letra, 1 numero y 1 caracter especial'
+      'pattern': 'Clave debe contener al menos 6 caracteres, 1 letra mayuscula'
     },
     'confirmar_clave': {
       'required': 'Confirmar clave es requerida',
@@ -72,7 +72,7 @@ export class FamilyComponent implements OnInit {
       'required': 'Nombre es requerido',
       'minlength': 'Nombre debe tener al menos 2 caracteres',
       'maxlength': 'Nombre no puede tener más de 50 caracteres',
-      'pattern': 'Nombre solo permite caracteres alfabéticos'
+      'pattern': 'Nombre no permite caracteres especiales'
     },
     'documento_de_identificacion':{
       'required': 'Documento de identificación es requerido',
@@ -85,7 +85,7 @@ export class FamilyComponent implements OnInit {
       'pattern': 'Teléfono debe ser un campo numérico'
     },
     'descripcion': {
-      'required': 'Descripción es requerida',
+      // 'required': 'Descripción es requerida',
       'minlength': 'Descripción debe tener al menos 2 caracteres',
       'maxlength': 'Descripción no debe pasar de los 50 caracteres',
       'pattern': 'Debe ingresar una descripción de la empresa'
@@ -142,7 +142,8 @@ export class FamilyComponent implements OnInit {
       clave: [this.registerService.usuario.contraseña,
         [
           Validators.required,
-          Validators.pattern(/^(?=.*\d)(?=.*[a-zA-Z])(?=.*[\W_]).{8,40}$/)
+          // Validators.pattern(/^(?=.*\d)(?=.*[a-zA-Z])(?=.*[\W_]).{8,40}$/)
+          Validators.pattern(/^(?=.*\d)(?=.*[a-zA-Z]).{6,40}$/)
         ]
       ],
       confirmar_clave: [
@@ -157,12 +158,13 @@ export class FamilyComponent implements OnInit {
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(50),
-        Validators.pattern('^[a-zA-Z]*$')
+        // Validators.pattern('^[a-zA-Z]*$')
+        Validators.pattern('[ 0-9A-Za-zÑñäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙ\s]+')
       ]],
       descripcion: [
         this.registerService.usuario.apellido,
         [
-          Validators.required,
+          // Validators.required,
           Validators.minLength(2),
           Validators.maxLength(50)
         ]
@@ -226,46 +228,87 @@ export class FamilyComponent implements OnInit {
     }
   }
 
+  checkAll(){
+    /* If form hasn't been created */
+    if (!this.familyForm){
+      return;
+    }
+
+    const form = this.familyForm;
+    for (const field in this.formErrors){
+      if (this.formErrors.hasOwnProperty(field)){
+        // clear previous error message if any
+        this.formErrors[field] = '';
+        const control = form.get(field);
+
+        // if field is modified by user
+        if (control && control.dirty && !control.valid){
+          const messages = this.validationMessages[field];
+
+          // check if i'm adding the error message to the field
+          for (const key in control.errors){
+            if (control.errors.hasOwnProperty(key)){
+              this.formErrors[field] += messages[key] + ' ';
+            }
+          }
+        }
+      }
+    }
+  }
+  
+
 
   onSubmit(){
-    this.registerService.usuario.email = this.familyForm.value.correo_electronico;
-    this.registerService.usuario.contraseña = this.familyForm.value.clave;
-    this.registerService.usuario.confirmar_contraseña = this.familyForm.value.confirmar_clave;
-    this.registerService.usuario.nombre = this.familyForm.value.primer_nombre;
-    this.registerService.usuario.apellido = this.familyForm.value.descripcion;
-    this.registerService.usuario.telefono = this.familyForm.value.telefono;
-    this.registerService.usuario.tipo = 1;
-    this.registerService.usuario.numeroIdentificacion = this.familyForm.value.documento_de_identificacion;
     
-    this.registerService.user.fkPersona.id_pais._id = this.familyForm.value.pais;
-    this.registerService.user.fkPersona.id_estado._id = this.familyForm.value.estado;
-    this.registerService.user.fkPersona.id_ciudad._id = this.familyForm.value.ciudad;
-    this.registerService.user.fkPersona.id_parroquia._id = this.familyForm.value.parroquia;
 
-    if (this.parroquia && this.registerService.user.fkPersona.id_parroquia._id != 0){
-      this.registerService.usuario.fkLugar._id = this.familyForm.value.parroquia;
-    }
-    else if (this.ciudad && this.registerService.user.fkPersona.id_ciudad._id != 0){
-      this.registerService.usuario.fkLugar._id = this.familyForm.value.ciudad;
-    }
-    else if (this.estado && this.registerService.user.fkPersona.id_estado._id != 0){
-      this.registerService.usuario.fkLugar._id = this.familyForm.value.estado;
-    }
-    else {
-      this.registerService.usuario.fkLugar._id = this.familyForm.value.pais;
-    }
+    var name = this.familyForm.value.primer_nombre;
 
-    if (this.familyForm.valid){
+    if (name.replace(/\s/g, '').length ) {
+      this.registerService.usuario.email = this.familyForm.value.correo_electronico;
+      this.registerService.usuario.contraseña = this.familyForm.value.clave;
+      this.registerService.usuario.confirmar_contraseña = this.familyForm.value.confirmar_clave;
+      this.registerService.usuario.nombre = this.familyForm.value.primer_nombre;
+      this.registerService.usuario.apellido = this.familyForm.value.descripcion;
+      this.registerService.usuario.telefono = this.familyForm.value.telefono;
+      this.registerService.usuario.tipo = 1;
+      this.registerService.usuario.numeroIdentificacion = this.familyForm.value.documento_de_identificacion;
+      
+      this.registerService.user.fkPersona.id_pais._id = this.familyForm.value.pais;
+      this.registerService.user.fkPersona.id_estado._id = this.familyForm.value.estado;
+      this.registerService.user.fkPersona.id_ciudad._id = this.familyForm.value.ciudad;
+      this.registerService.user.fkPersona.id_parroquia._id = this.familyForm.value.parroquia;
 
-        this.registerService.postValidRegistro(this.registerService.usuario).subscribe((person) =>{
-        this.nextPage();
-        }, errorMessage => {
-          this.messageService.add({severity:'error', summary: 'Error', detail: 'El correo utilizado ya se encuentra registrado.'});
-        });
-  
+      if (this.parroquia && this.registerService.user.fkPersona.id_parroquia._id != 0){
+        this.registerService.usuario.fkLugar._id = this.familyForm.value.parroquia;
+      }
+      else if (this.ciudad && this.registerService.user.fkPersona.id_ciudad._id != 0){
+        this.registerService.usuario.fkLugar._id = this.familyForm.value.ciudad;
+      }
+      else if (this.estado && this.registerService.user.fkPersona.id_estado._id != 0){
+        this.registerService.usuario.fkLugar._id = this.familyForm.value.estado;
+      }
+      else {
+        this.registerService.usuario.fkLugar._id = this.familyForm.value.pais;
+      }
+
+      if (this.familyForm.valid){
+
+          this.registerService.postValidRegistro(this.registerService.usuario).subscribe((person) =>{
+          this.nextPage();
+          }, errorMessage => {
+            this.messageService.add({severity:'error', summary: 'Error', detail: 'El correo utilizado ya se encuentra registrado.'});
+            this.checkAll();
+          });
+    
+      }
+      else{
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'Hay datos inválidos o incompletos en el formulario'});
+        this.checkAll();
+      }
     }
     else{
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Hay datos inválidos o incompletos en el formulario'});
+      this.checkAll();
     }
   }
 
