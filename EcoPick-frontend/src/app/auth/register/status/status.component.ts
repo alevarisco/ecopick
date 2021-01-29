@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService, SelectItem } from 'primeng/api';
 import { ACADEMICS } from '../../../core/constants/academics';
-import { SOCIAL_STATUSES } from '../../../core/constants/social_status';
 import { DEVICES } from '../../../core/constants/device';
 import { SCHEDULES } from '../../../core/constants/schedule';
 import { Router } from '@angular/router';

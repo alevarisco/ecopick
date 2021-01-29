@@ -7,8 +7,6 @@ import { GENDERS } from '../core/constants/gender';
 import { CIVIL_STATUSES } from '../core/constants/civil_status';
 import { Device, DEVICES } from '../core/constants/device';
 import { Rol } from '../core/classes/profile/rol';
-import { STUDY_STATES } from '../core/constants/study_states'; // Se usara NO borrar
-import { SOCIAL_STATUSES } from '../core/constants/social_status';
 import { SCHEDULES } from '../core/constants/schedule';
 import { ACADEMICS } from '../core/constants/academics';
 import { ACCOUNT_XTATUS } from 'src/app/core/constants/account_status';

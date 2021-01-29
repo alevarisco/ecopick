@@ -7,7 +7,6 @@ import { Recovery } from '../../core/classes/auth/recovery';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RecoveryService } from '../../core/services/auth/recovery.service';
 import { ReorderableColumn } from 'primeng/table';
-import { Question } from 'src/app/core/classes/study/question';
 
 @Component({
   selector: 'app-recovery',

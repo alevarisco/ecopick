@@ -9,9 +9,6 @@ import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
 import { AdminModule } from './admin/admin.module';
 import { ProfileModule } from './profile/profile.module';
-import { AnalyticsModule } from './analytics/analytics.module';
-import { ClientModule } from './client/client.module';
-import { SurveysModule } from './surveys/surveys.module';
 import { ChangeComponent } from './auth/recovery/change/change.component';
 import { RouterModule } from '@angular/router';
 
@@ -27,9 +24,6 @@ import { RouterModule } from '@angular/router';
     AuthModule,
     AdminModule,
     ProfileModule,
-    AnalyticsModule,
-    ClientModule,
-    SurveysModule,
     RouterModule.forRoot([
       { path: 'change/:hash', component: ChangeComponent }
     ])
