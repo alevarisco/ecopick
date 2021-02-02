@@ -14,7 +14,9 @@ export class ProductsService {
   producto: Product = {
     descripcion: '',
     cantidad: 0,
-    tipo: ''
+    producto: '',
+    fkPublica: 1,
+    fkLugar: 1
   }
   constructor(private http: HttpClient,
     private processHTTPMessageService: ProcessHttpMessageService) { }
@@ -25,8 +27,7 @@ export class ProductsService {
           'Content-Type': 'application/json'
         })
       };
-  
-      return this.http.post<Product>(serverURL + '/pedido/add', producto, httpOptions)
+      return this.http.post<Product>(serverURL + 'pedido/add', producto, httpOptions)
         .pipe(catchError(this.processHTTPMessageService.handleError))
   }
 }

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService, SelectItem } from 'primeng/api';
 import { PRODUCTS} from '../../../APP/core/constants/PRODUCTS';
 import {ProductsService} from '../../core/services/products/products.service'
+import {SessionService} from '../../core/services/auth/session.service'
 
 @Component({
   selector: 'app-publish',
@@ -14,7 +15,8 @@ export class PublishComponent implements OnInit {
   productos: SelectItem[];
 
   constructor(private fb: FormBuilder,
-    private productService: ProductsService){
+    private productService: ProductsService,
+    private sessionService: SessionService){
     //private messageService: MessageService) {
   this.productos = PRODUCTS;
   this.createForm();
@@ -111,8 +113,10 @@ export class PublishComponent implements OnInit {
       if (this.publishForm.valid){
         this.productService.producto.cantidad = this.publishForm.value.cantidad;
         this.productService.producto.descripcion = this.publishForm.value.descripcion;
-        this.productService.producto.tipo = this.publishForm.value.productos;
-        
+        this.productService.producto.producto = this.publishForm.value.productos;
+        this.productService.producto.fkPublica = this.sessionService.getCurrentUser();
+        console.log('entra');
+        console.log(this.productService.producto);
          this.productService.postRegistrarProducto(this.productService.producto).subscribe((order) =>{
          })
       }
