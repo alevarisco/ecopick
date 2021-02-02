@@ -23,6 +23,7 @@ public class MyApplication extends Application {
         h.add( UserService.class );
         h.add( LoginService.class );
         h.add( RecoveryService.class );
+        h.add( PedidoService.class );
         return h;
     }
 }
