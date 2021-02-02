@@ -15,4 +15,8 @@ export class ProductCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  confirmation(){
+    alert("Esta seguro?")
+  }
+
 }
