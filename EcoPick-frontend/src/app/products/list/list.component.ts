@@ -13,29 +13,29 @@ export class ListComponent implements OnInit {
   constructor(public productSevice: ProductService) {
 
     // Eliminar estos datos de prueba y descomentar el método ngOnInit() de abajo
-    this.products = [
-      {
-        name: "Madera",
-        desc: "Roble resistente",
-        quantity: 20
-      },
-      {
-        name: "Metal",
-        desc: "Inoxidable",
-        quantity: 10
-      },
-      {
-        name: "Plástico",
-        desc: "Necesita reutilizarse",
-        quantity: 15
-      }
-    ]
+    // this.products = [
+    //   {
+    //     name: "Madera",
+    //     desc: "Roble resistente",
+    //     quantity: 20
+    //   },
+    //   {
+    //     name: "Metal",
+    //     desc: "Inoxidable",
+    //     quantity: 10
+    //   },
+    //   {
+    //     name: "Plástico",
+    //     desc: "Necesita reutilizarse",
+    //     quantity: 15
+    //   }
+    // ]
   }
 
   ngOnInit(): void {
-    // this.productSevice.getProducts().subscribe(data => {
-    //   this.products = data;
-    // })
+    this.productSevice.getProducts().subscribe(data => {
+      this.products = data.objeto;
+    })
   }
 
 

@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
   // }
 
   sendPublicaciones(): void{
-    // this.router.navigate(['']);
+     this.router.navigate(['/publish']);
   }
 
   sendMisPublicacioness(): void{

@@ -4,7 +4,7 @@ import { MessageService, SelectItem } from 'primeng/api';
 import { PRODUCTS} from '../../../APP/core/constants/PRODUCTS';
 import {ProductsService} from '../../core/services/products/products.service'
 import {SessionService} from '../../core/services/auth/session.service'
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-publish',
   templateUrl: './publish.component.html',
@@ -16,8 +16,9 @@ export class PublishComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private productService: ProductsService,
-    private sessionService: SessionService){
-    //private messageService: MessageService) {
+    private sessionService: SessionService,
+   // private messageService: MessageService,
+    private router: Router) {
   this.productos = PRODUCTS;
   this.createForm();
   }
@@ -118,6 +119,7 @@ export class PublishComponent implements OnInit {
         console.log('entra');
         console.log(this.productService.producto);
          this.productService.postRegistrarProducto(this.productService.producto).subscribe((order) =>{
+           this.nextPage();
          })
       }
       else{
@@ -125,6 +127,11 @@ export class PublishComponent implements OnInit {
           console.log('else')
       }
       
+    }
+
+  
+  nextPage(): void {
+      this.router.navigate(['/my-posts']);
     }
 
 }

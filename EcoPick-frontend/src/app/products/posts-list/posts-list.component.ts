@@ -12,36 +12,44 @@ export class PostsListComponent implements OnInit {
   products: object[];
   userId: number;
   userType: number;
+  empty: boolean;
 
-  constructor(public productSevice: ProductService, public sessionService: SessionService) {
+  constructor(public productService: ProductService, public sessionService: SessionService) {
 
     this.userId = sessionService.getCurrentUser();
     this.userType = sessionService.getCurrentSession().tipo;
 
     // Eliminar estos datos de prueba y descomentar el método ngOnInit() de abajo
-    this.products = [
-      {
-        name: "Madera",
-        desc: "Roble resistente",
-        quantity: 20
-      },
-      {
-        name: "Metal",
-        desc: "Inoxidable",
-        quantity: 10
-      },
-      {
-        name: "Plástico",
-        desc: "Necesita reutilizarse",
-        quantity: 15
-      }
-    ]
+    // // this.products = [
+    //   {
+    //     name: "Madera",
+    //     desc: "Roble resistente",
+    //     quantity: 20
+    //   },
+    //   {
+    //     name: "Metal",
+    //     desc: "Inoxidable",
+    //     quantity: 10
+    //   },
+    //   {
+    //     name: "Plástico",
+    //     desc: "Necesita reutilizarse",
+    //     quantity: 15
+    //   }
+    // ]
   }
 
   ngOnInit(): void {
-    // this.productSevice.getProductsById(userId, userType).subscribe(data => {
-    //   this.products = data;
-    // })
+    this.productService.getProductsById(this.userId, this.userType).subscribe(data => {
+      this.products = data.objeto;
+      if (this.products.length == 0) {
+        this.empty = true;
+      }
+      else {
+        this.empty = false;
+      }
+     
+   })
   }
 
 }

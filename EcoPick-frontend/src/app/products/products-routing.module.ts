@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [GuestGuard]
+   //canActivate: [GuestGuard]
   },
   {
     path: 'publish',
@@ -21,12 +21,12 @@ const routes: Routes = [
   {
     path: 'explore-products',
     component: ListComponent,
-    canActivate: [GuestGuard]
+    //canActivate: [GuestGuard]
   },
   {
     path: 'my-posts',
     component: PostsListComponent,
-    canActivate: [GuestGuard]
+    //canActivate: [GuestGuard]
   }
 ];
 

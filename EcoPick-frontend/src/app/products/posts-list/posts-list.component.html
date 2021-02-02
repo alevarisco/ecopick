@@ -4,8 +4,15 @@
     </div>
     <input type="text" placeholder="Buscar" class="search">
     <div class="product-list">
-        <div *ngFor="let p of products" >
-            <app-product-card [productName]="p.name" [productQuantity]="p.quantity" [productDesc]="p.desc" [listType]=1></app-product-card>
+        <div *ngIf="empty; else cards">
+            <h3>No existen publicaciones registradas</h3>
         </div>
+        <ng-template #cards>
+            <li *ngFor="let p of products" >
+                <app-product-card [productName]="p.producto" [productQuantity]="p.cantidad" [productDesc]="p.descripcion" [listType]=1></app-product-card>
+            </li>
+        </ng-template>
     </div>
+
+    <div class="p-text-center p-mt-4" ><a routerLink="/dashboard">Ir Atras</a></div>
 </div>
