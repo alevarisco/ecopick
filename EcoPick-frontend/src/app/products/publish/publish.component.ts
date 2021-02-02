@@ -14,8 +14,8 @@ export class PublishComponent implements OnInit {
   productos: SelectItem[];
 
   constructor(private fb: FormBuilder,
-    private productService: ProductsService,
-    private messageService: MessageService,) {
+    private productService: ProductsService){
+    //private messageService: MessageService) {
   this.productos = PRODUCTS;
   this.createForm();
   }
@@ -112,9 +112,9 @@ export class PublishComponent implements OnInit {
         this.productService.producto.cantidad = this.publishForm.value.cantidad;
         this.productService.producto.descripcion = this.publishForm.value.descripcion;
         this.productService.producto.tipo = this.publishForm.value.productos;
-        console.log(this.productService.producto)
-        this.productService.postRegistrarProducto(this.productService.producto).subscribe((order) =>{
-        })
+        
+         this.productService.postRegistrarProducto(this.productService.producto).subscribe((order) =>{
+         })
       }
       else{
           // this.messageService.add({severity:'error', summary: 'Error', detail: 'Complete todos los campos.'});
