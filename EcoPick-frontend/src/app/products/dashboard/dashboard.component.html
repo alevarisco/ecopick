@@ -1,1 +1,44 @@
-<p>dashboard works!</p>
+<app-navigation></app-navigation>
+
+<div class="demo-container p-mx-4 p-p-0 p-p-sm-1 p-p-md-2 p-p-lg-6">
+    <p-card>       
+        <div class="p-grid">
+                
+            
+            <div *ngIf="isNatural; else elseEmpresarial" class="p-lg-12 p-grid p-jc-center">
+
+                    <div class="p-col-12">
+                        <h1 style="color: #3283fc; margin-bottom: 15 px; text-align: center !important ">Productos</h1>
+                    </div>
+    
+                    <div class="p-col-12 p-lg-6 p-offset-3">
+                        <button pButton pRipple type="submit" (click)="sendPublicaciones()" label="Publicar" class="p-button-lg" style="background-color: #3283fcff !important"></button>
+                    </div>
+    
+                    <div class="p-col-12 p-lg-6 p-offset-3">
+                        <button pButton pRipple type="submit" (click)="sendMisPublicacioness()" label="Mis Publicaciones" class="p-button-lg" style="background-color: #3283fcff !important"></button>
+                     </div>
+            </div>
+
+            <div class="p-lg-12 p-grid p-jc-center">
+                <ng-template #elseEmpresarial>
+                    <div class="p-lg-12 p-grid p-jc-center">
+
+                        <div class="p-col-12">
+                            <h1 style="color: #3283fc; margin-bottom: 15 px; text-align: center !important ">Productos</h1>
+                        </div>
+        
+                        <div class="p-col-12 p-lg-6 p-offset-3">
+                            <button pButton pRipple type="submit" (click)="sendExplorarProd()" label="Explorar Productos" class="p-button-lg" style="background-color: #3283fcff !important"></button>
+                        </div>
+        
+                        <div class="p-col-12 p-lg-6 p-offset-3">
+                            <button pButton pRipple type="submit" (click)="sendMisPedidos()" label="Mis Pedidos" class="p-button-lg" style="background-color: #3283fcff !important"></button>
+                        </div>
+                    </div> 
+                </ng-template>
+            </div>
+
+        </div>
+    </p-card>
+</div>

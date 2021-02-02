@@ -6,6 +6,7 @@
         <class>com.ecopick.PreguntaseguridadEntity</class>
         <class>com.ecopick.UsuarioEntity</class>
         <class>com.ecopick.TokenEntity</class>
+        <class>com.ecopick.PedidoEntity</class>
 
         <!--TODO (INFO) - AQUI VAN LAS CREDENCIALES DE LA BASE DE DATOS-->
 
@@ -13,7 +14,11 @@
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ecopick"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
+<<<<<<< HEAD
             <property name="javax.persistence.jdbc.password" value="209fadfc*"/>
+=======
+            <property name="javax.persistence.jdbc.password" value="123456"/>
+>>>>>>> a3e2dbf42b2067c279d762343e87b493d54b7101
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
             <property name="eclipselink.logging.level" value="FINE"/>
         </properties>

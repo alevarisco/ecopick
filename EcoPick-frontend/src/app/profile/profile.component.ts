@@ -67,6 +67,8 @@ export class ProfileComponent implements OnInit {
 
   dir_bella: String;
 
+  isNatural: boolean;
+
   /* Form */
   profileForm: FormGroup;
   @ViewChild('pform') profileFormDirective;
@@ -176,6 +178,12 @@ export class ProfileComponent implements OnInit {
         // this.userService.getPerson(this.current_user).subscribe((persona) => {
             this.persona = persona;
 
+            if (this.persona.tipo == 0)
+              this.isNatural = true;
+            else
+              this.isNatural = false;
+
+              
             console.log(this.persona);
             if (this.persona){
               this.loading = false;

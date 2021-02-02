@@ -50,6 +50,7 @@ public class LoginService {
 
                 authenticatedUser.setTokenLogin(token);
                 authenticatedUser.set_id(usuarioEntity.get_id());
+                authenticatedUser.setTipo(usuarioEntity.getTipo());
             }
             else {
                 authenticatedUser.set_id(-2);
