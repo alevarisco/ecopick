@@ -30,7 +30,7 @@ export class NavigationComponent implements OnInit {
       {
         label: 'Usuarios',
         icon: 'pi pi-fw pi-users',
-        command: u => this.router.navigate(['admin/users'])
+        // command: u => this.router.navigate(['admin/users'])
       },
       {
         label: 'Productos',
@@ -94,9 +94,14 @@ export class NavigationComponent implements OnInit {
 
     this.items_user = [
       {
-        label: 'Encuestas',
-        icon: 'pi pi-fw pi-chart-bar',
-        command: s => this.router.navigate(['surveys/available'])
+        label: 'Productos',
+        icon: 'pi pi-fw pi-shopping-cart',
+        command: s => this.router.navigate(['dashboard'])
+      },
+      {
+        label: 'Mi perfil',
+        icon: 'pi pi-fw pi-user',
+        command: s => this.router.navigate(['profile'])
       }
     ];
 
@@ -131,7 +136,7 @@ export class NavigationComponent implements OnInit {
     //   this.items = this.items_client;
     // }
     // else if (this.sessionService.isPolled()){
-    //   this.items = this.items_user;
+      this.items = this.items_user;
     // }
   }
 

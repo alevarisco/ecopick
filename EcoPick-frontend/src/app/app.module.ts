@@ -11,6 +11,7 @@ import { AdminModule } from './admin/admin.module';
 import { ProfileModule } from './profile/profile.module';
 import { ChangeComponent } from './auth/recovery/change/change.component';
 import { RouterModule } from '@angular/router';
+import { ProductsModule } from './products/products.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { RouterModule } from '@angular/router';
     AuthModule,
     AdminModule,
     ProfileModule,
+    ProductsModule,
     RouterModule.forRoot([
       { path: 'change/:hash', component: ChangeComponent }
     ])
