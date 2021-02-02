@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
 import { ProductRoutingModule } from './products-routing.module';
+import { PublishComponent } from './publish/publish.component';
 
 
   @NgModule({
     declarations: [
-      DashboardComponent
+      DashboardComponent,
+      PublishComponent
     ],
     imports: [
       CommonModule,
