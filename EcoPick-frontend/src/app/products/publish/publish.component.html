@@ -1,0 +1,54 @@
+<div class="demo-container p-mx-4 p-p-0 p-p-sm-1 p-p-md-2 p-p-lg-6">
+    <p-card>
+        <div class="p-grid">
+            <div class="p-col-12">
+                <div class="demo-container p-p-0 p-p-sm-4 p-p-md-6 p-p-lg-8">
+                    <form novalidate [formGroup]="publishForm" #pform="ngForm" (ngSubmit)="onSubmit()">
+                       
+                        <div class="p-grid p-mb-4 p-jc-center">
+                            <h1 style="color: #3283fcff; margin-bottom: 0 !important;">Registrar producto</h1> 
+                        </div>
+
+                        <div class="p-grid p-jc-center p-mt-4">
+                            <div class="p-col-12 p-md-6 p-mb-1">
+                                    <p-dropdown [options]="productos" placeholder="Tipo de productos" formControlName="productos"></p-dropdown>
+                            </div>
+                        </div>
+
+                        <div class="p-grid p-jc-center p-mt-4">
+                            <div class="p-col-12 p-md-6 p-mb-5">
+                                <span class="p-float-label">
+                                    <input id="descripcion" class="p-inputtext-lg fill-width" formControlName="descripcion"  type="text" pInputText>
+                                    <label for="float-input">Descripción del producto</label>
+                                </span>
+                                <span class="error-msg" *ngIf="formErrors.descripcion"><small>{{formErrors.descripcion}}</small></span>
+                            </div>
+                        </div>
+
+                        <div class="p-grid p-jc-center p-mt-4">
+                            <div class="p-col-12 p-md-6 p-mb-5">
+                                <span class="p-float-label">
+                                    <input id="cantidad" class="p-inputtext-lg fill-width" formControlName="cantidad"  type="text" pInputText>
+                                    <label for="float-input">Cantidad a ofrecer (kg)</label>
+                                </span>
+                                <span class="error-msg" *ngIf="formErrors.cantidad"><small>{{formErrors.cantidad}}</small></span>
+                            </div>
+                        </div>
+
+                    
+                        <div class="p-grid p-jc-center p-mt-1 p-col-12">
+                            <div class="p-grid p-formgrid p-fluid ">
+                                <div class=" p-mb-2 p-mb-lg-0">
+                                    <button pButton pRipple type="submit" class="p-button-lg" [disabled]="sent_form" label="Publicar" style="background-color: #3283fcff !important"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+                    	
+    </p-card>
+</div>
+
