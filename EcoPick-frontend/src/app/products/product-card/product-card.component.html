@@ -1,0 +1,22 @@
+<div class="product-card">
+    <div class="product-tumb">
+        <img src="https://www.proclinic.es/tienda/build/static/default-product.61ad5874.png" alt="">
+    </div>
+    <div class="product-details">
+        <h4><a href="">{{ productName }}</a></h4>
+        <p>{{productDesc}}</p>
+        <div class="product-bottom-details">
+            <div class="product-price"><small>Disponible: </small>{{productQuantity}}</div>
+            <div *ngIf="listType == 0">
+                <div class="product-links">
+                    <button class="reclamar-btn">¡Reclamar!</button>
+                </div>
+            </div>
+            <div *ngIf="listType == 1">
+                <div class="product-links">
+                    <button class="reclamar-btn">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

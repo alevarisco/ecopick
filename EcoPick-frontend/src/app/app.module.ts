@@ -12,10 +12,12 @@ import { ProfileModule } from './profile/profile.module';
 import { ChangeComponent } from './auth/recovery/change/change.component';
 import { RouterModule } from '@angular/router';
 import { ProductsModule } from './products/products.module';
+import { OrdersComponent } from './orders/orders.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    OrdersComponent,
   ],
   imports: [
     BrowserModule,
