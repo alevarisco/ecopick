@@ -126,10 +126,13 @@ export class StatusComponent implements OnInit {
   }
 
   sendPersona(): void{
+    this.registerService.usuario.tipo = 0;
     this.router.navigate(['register/personal']);
+
   }
 
   sendEmpresa(): void{
+    this.registerService.usuario.tipo = 1;
     this.router.navigate(['register/empresa']);
   }
 

@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  
   createForm() {
     this.loginForm = this.fb.group({
       correo_electronico: [
@@ -127,7 +128,7 @@ export class LoginComponent implements OnInit {
           console.log(person);
           this.sessionService.setCurrentSession(person);
           this.messageService.add({severity: 'success', summary: 'Exito', detail: 'Correo validado correctamente.'});
-          this.nextPage();
+          this.nextPage(person.tipo);
         }
       }
 
@@ -142,7 +143,8 @@ export class LoginComponent implements OnInit {
     
   }
 
-  nextPage(): void {
+  nextPage(tipo): void {
     this.router.navigate(['/dashboard']);
+    // this.router.navigate(['/dashboard'], { queryParams: { type: tipo } });
   }
 }

@@ -35,6 +35,7 @@ public class SesionService {
             usuario.setNumeroIdentificacion(usuarioDto.getNumeroIdentificacion());
             usuario.setTelefono(usuarioDto.getTelefono());
             usuario.setRespuestaSeguridad(usuarioDto.getRespuestaSeguridad());
+            usuario.setTipo(usuarioDto.getTipo());
 
             DaoLugar daoLugar = new DaoLugar();
             LugarEntity lugarEntity = daoLugar.find(usuarioDto.getFkLugar().get_id(), LugarEntity.class);
