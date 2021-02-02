@@ -192,6 +192,7 @@ public class UserService {
             resultado.setFechaNacimiento(usuario.getFechaNacimiento());
             resultado.setNumeroIdentificacion(usuario.getNumeroIdentificacion());
             resultado.setTelefono(usuario.getTelefono());
+            resultado.setTipo(usuario.getTipo());
 
             LugarService lugarService = new LugarService();
             LugarDto usuarioLugar = lugarService.getSuperior(usuario.getFkLugar().get_id());
