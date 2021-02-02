@@ -143,6 +143,6 @@ export class LoginComponent implements OnInit {
   }
 
   nextPage(): void {
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/dashboard']);
   }
 }
