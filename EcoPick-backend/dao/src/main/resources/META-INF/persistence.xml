@@ -6,6 +6,7 @@
         <class>com.ecopick.PreguntaseguridadEntity</class>
         <class>com.ecopick.UsuarioEntity</class>
         <class>com.ecopick.TokenEntity</class>
+        <class>com.ecopick.PedidoEntity</class>
 
         <!--TODO (INFO) - AQUI VAN LAS CREDENCIALES DE LA BASE DE DATOS-->
 
