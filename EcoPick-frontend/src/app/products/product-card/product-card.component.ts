@@ -10,6 +10,13 @@ export class ProductCardComponent implements OnInit {
   @Input() productName: string;
   @Input() productQuantity: number;
   @Input() productDesc: string;
+  @Input() listType: number;
+
+  /* listType:
+        0 - explorar productos
+        1 - mis publicaciones
+        2 - mis pedidos
+  */ 
 
   constructor() { }
 

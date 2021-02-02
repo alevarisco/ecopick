@@ -7,8 +7,15 @@
         <p>{{productDesc}}</p>
         <div class="product-bottom-details">
             <div class="product-price"><small>Disponible: </small>{{productQuantity}}</div>
-            <div class="product-links">
-                <button class="reclamar-btn">¡Reclamar!</button>
+            <div *ngIf="listType == 0">
+                <div class="product-links">
+                    <button class="reclamar-btn">¡Reclamar!</button>
+                </div>
+            </div>
+            <div *ngIf="listType == 1">
+                <div class="product-links">
+                    <button class="reclamar-btn">Eliminar</button>
+                </div>
             </div>
         </div>
     </div>

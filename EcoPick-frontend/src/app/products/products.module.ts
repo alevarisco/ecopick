@@ -5,13 +5,15 @@ import { SharedModule } from '../shared/shared.module';
 import { ProductRoutingModule } from './products-routing.module';
 import { ListComponent } from './list/list.component';
 import { ProductCardComponent } from './product-card/product-card.component';
-import { ProductService } from '../core/services/product/product.service'
+import { ProductService } from '../core/services/product/product.service';
+import { PostsListComponent } from './posts-list/posts-list.component'
 
   @NgModule({
     declarations: [
       DashboardComponent,
       ListComponent,
-      ProductCardComponent
+      ProductCardComponent,
+      PostsListComponent
     ],
     imports: [
       CommonModule,

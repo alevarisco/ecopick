@@ -42,11 +42,11 @@ export class DashboardComponent implements OnInit {
   }
 
   sendMisPublicacioness(): void{
-    // this.router.navigate(['']);
+    this.router.navigate(['/my-posts']);
   }
 
   sendExplorarProd(): void{
-    this.router.navigate(['/products-published']);
+    this.router.navigate(['/explore-products']);
   }
 
   sendMisPedidos(): void{

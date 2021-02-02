@@ -4,6 +4,7 @@ import {GuestGuard} from '../core/guards/guest.guard';
 import {AuthorizedGuard} from '../core/guards/authorized.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ListComponent } from "./list/list.component";
+import { PostsListComponent } from "./posts-list/posts-list.component";
 
 const routes: Routes = [
   {
@@ -13,8 +14,13 @@ const routes: Routes = [
     // canActivate: [AuthorizedGuard]
   },
   {
-    path: 'products-published',
+    path: 'explore-products',
     component: ListComponent,
+    canActivate: [GuestGuard]
+  },
+  {
+    path: 'my-posts',
+    component: PostsListComponent,
     canActivate: [GuestGuard]
   }
 ];

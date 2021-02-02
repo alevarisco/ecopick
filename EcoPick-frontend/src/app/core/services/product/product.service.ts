@@ -14,4 +14,8 @@ export class ProductService {
   getProducts(): Observable<any>{
     return this.http.get('http://localhost:8080/servicio-1.0.0/pedido/');
   }
+
+  getProductsById(userId: number, userType: number): Observable<any>{
+    return this.http.get('http://localhost:8080/servicio-1.0.0/pedido/'+ userType +'/' + userId);
+  }
 }
