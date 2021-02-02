@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService, SelectItem} from 'primeng/api';
 import { MenuItem } from 'primeng/api';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { SessionService } from 'src/app/core/services/auth/session.service';
 
 
 @Component({
@@ -16,10 +17,20 @@ export class DashboardComponent implements OnInit {
   isEmpresarial: boolean;
 
   constructor(private router: Router,
-    private messageService: MessageService) { }
+    private Activatedroute: ActivatedRoute,
+    private sessionService: SessionService,
+    private messageService: MessageService) {
+
+      if (this.sessionService.getCurrentSession().tipo == 0){
+        this.isNatural = true;
+      }
+      else{
+        this.isNatural = false;
+      }
+
+     }
 
   ngOnInit(): void {
-    this.isNatural = false;
   }
 
   // showError() {
