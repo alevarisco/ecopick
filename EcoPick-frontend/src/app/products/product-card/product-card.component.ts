@@ -9,6 +9,7 @@ export class ProductCardComponent implements OnInit {
 
   @Input() productName: string;
   @Input() productQuantity: number;
+  @Input() productDesc: string;
 
   constructor() { }
 

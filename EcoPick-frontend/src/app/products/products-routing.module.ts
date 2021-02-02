@@ -9,8 +9,8 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    // canActivate: [GuestGuard]
-    canActivate: [AuthorizedGuard]
+    canActivate: [GuestGuard]
+    // canActivate: [AuthorizedGuard]
   },
   {
     path: 'products-published',

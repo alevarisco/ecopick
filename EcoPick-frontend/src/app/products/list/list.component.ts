@@ -16,14 +16,17 @@ export class ListComponent implements OnInit {
     this.products = [
       {
         name: "Madera",
+        desc: "Roble resistente",
         quantity: 20
       },
       {
         name: "Metal",
+        desc: "Inoxidable",
         quantity: 10
       },
       {
         name: "Plástico",
+        desc: "Necesita reutilizarse",
         quantity: 15
       }
     ]

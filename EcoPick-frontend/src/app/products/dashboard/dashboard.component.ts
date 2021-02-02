@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
   }
 
   sendExplorarProd(): void{
-    // this.router.navigate(['']);
+    this.router.navigate(['/products-published']);
   }
 
   sendMisPedidos(): void{
