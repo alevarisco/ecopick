@@ -1,0 +1,11 @@
+<div class="demo-container p-p-0 p-p-sm-4 p-p-md-6 p-p-lg-4">
+    <div id="title">
+        <h2 class="center">Explorar Produtos</h2>
+    </div>
+    <input type="text" placeholder="Buscar" class="search">
+    <div class="product-list">
+        <div *ngFor="let p of products" >
+            <app-product-card [productName]="p.name" [productQuantity]="p.quantity"></app-product-card>
+        </div>
+    </div>
+</div>
