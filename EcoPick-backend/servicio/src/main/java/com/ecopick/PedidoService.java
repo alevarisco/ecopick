@@ -359,19 +359,27 @@ public class PedidoService {
 
             if (pedidoOld != null) {
 
-                if ( pedidoOld.getFkPublica().get_id() == pedidoDto.getFkPublica() ) {
-                    pedidoDao.delete(pedidoOld);
+                if (!Objects.nonNull(pedidoOld.getFkReclama())) {
+                    if (pedidoOld.getFkPublica().get_id() == pedidoDto.getFkPublica()) {
+                        pedidoDao.delete(pedidoOld);
 
-                    respuesta.setCodigo(0);
-                    respuesta.setEstado("OK");
-                    respuesta.setMensaje("El pedido se ha eliminado exitosamente.");
-                    respuesta.setObjeto(true);
-                }
-                else {
+                        respuesta.setCodigo(0);
+                        respuesta.setEstado("OK");
+                        respuesta.setMensaje("El pedido se ha eliminado exitosamente.");
+                        respuesta.setObjeto(true);
+                    } else {
+
+                        respuesta.setCodigo(-1);
+                        respuesta.setEstado("ERROR");
+                        respuesta.setMensaje("Este pedido no corresponde a este usuario.");
+                        respuesta.setObjeto(false);
+
+                    }
+                }else {
 
                     respuesta.setCodigo(-1);
                     respuesta.setEstado("ERROR");
-                    respuesta.setMensaje("Este pedido no corresponde a este usuario.");
+                    respuesta.setMensaje("Este pedido ya se encuentra reclamado.");
                     respuesta.setObjeto(false);
 
                 }
