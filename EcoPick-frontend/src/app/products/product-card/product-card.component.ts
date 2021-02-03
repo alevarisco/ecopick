@@ -30,8 +30,8 @@ export class ProductCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  confirmation(){
-    alert("¿Esta seguro?")
+  confirmation(): boolean{
+    return confirm("¿Esta seguro?")
   }
 
   
@@ -40,21 +40,20 @@ export class ProductCardComponent implements OnInit {
  }
 
   producto: Product = {
-    _id: 0,
     fkReclama: 0,
     status: 1,
   };
 
   sendReclamar(product): void{
     console.log(product);
-    this.producto._id = product;
     this.producto.fkReclama = this.sessionService.getCurrentSession()._id; 
     console.log(this.producto);
-    this.confirmation();
-    this.productService.putEditarProducto(this.producto).subscribe((response) =>{
-      alert(response.mensaje)
-      // this.nextPage();
-    })
+    if (this.confirmation()){
+      this.productService.putEditarProducto(this.producto, product).subscribe((response) =>{
+        alert(response.mensaje)
+        // this.nextPage();    
+      });
+    }
     // this.router.navigate(['/dashboard'], { queryParams: { type: product }});
   }
 }
