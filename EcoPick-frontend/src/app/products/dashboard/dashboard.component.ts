@@ -50,6 +50,6 @@ export class DashboardComponent implements OnInit {
   }
 
   sendMisPedidos(): void{
-    // this.router.navigate(['']);
+    this.router.navigate(['/my-posts']);
   }
 }
