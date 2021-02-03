@@ -35,8 +35,6 @@ export class ModifyComponent implements OnInit {
       this.productService.getProducto(this.id).subscribe((res) => {
         // this.userService.getPerson(this.current_user).subscribe((persona) => {
             this.product = res.objeto as Product;
-            console.log(this.product)
-
             this.productos = PRODUCTS;
             this.createForm();
       })
@@ -93,7 +91,7 @@ export class ModifyComponent implements OnInit {
         ]
       ],
       productos: [
-      this.product.producto,
+        this.product.producto,
         [
           Validators.required
         ]
@@ -141,9 +139,11 @@ export class ModifyComponent implements OnInit {
         this.productService.producto.descripcion = this.publishForm.value.descripcion;
         this.productService.producto.producto = this.publishForm.value.productos;
         this.productService.producto.fkPublica = this.sessionService.getCurrentUser();
+        this.productService.producto.fkReclama = this.product.fkReclama;
+        this.productService.producto.fechaPublicacion = this.product.fechaPublicacion;
         console.log('entra');
         console.log(this.productService.producto);
-         this.productService.postRegistrarProducto(this.productService.producto).subscribe((order) =>{
+         this.productService.putEditarProducto(this.productService.producto, this.product._id).subscribe((order) =>{
            this.nextPage();
          })
       }

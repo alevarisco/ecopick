@@ -31,7 +31,6 @@ export class ProductCardComponent implements OnInit {
 
   
   sendModificar(product): void{
-    console.log("ACA: " + product);
     this.router.navigate(['/modify'], { queryParams: { type: product }});
  }
 
