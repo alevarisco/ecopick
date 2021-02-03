@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class ProductCardComponent implements OnInit {
 
+  @Input() _id: number;
   @Input() productName: string;
   @Input() productQuantity: number;
   @Input() productDesc: string;
@@ -30,7 +31,7 @@ export class ProductCardComponent implements OnInit {
 
   
   sendModificar(product): void{
-    console.log(product);
+    console.log("ACA: " + product);
     this.router.navigate(['/modify'], { queryParams: { type: product }});
  }
 

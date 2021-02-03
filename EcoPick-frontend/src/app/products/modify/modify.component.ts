@@ -5,6 +5,7 @@ import { PRODUCTS} from '../../../APP/core/constants/PRODUCTS';
 import {ProductsService} from '../../core/services/products/products.service'
 import {SessionService} from '../../core/services/auth/session.service'
 import { Router,  ActivatedRoute } from '@angular/router';
+import { Product } from 'src/app/core/classes/product/product';
 
 @Component({
   selector: 'app-modify',
@@ -14,7 +15,8 @@ import { Router,  ActivatedRoute } from '@angular/router';
 export class ModifyComponent implements OnInit {
 
   productos: SelectItem[];
-  product: Object;
+  product: Product;
+  id: number;
 
   constructor(private fb: FormBuilder,
     private productService: ProductsService,
@@ -22,14 +24,31 @@ export class ModifyComponent implements OnInit {
    // private messageService: MessageService,
     private router: Router,
     private route: ActivatedRoute) {
-  this.productos = PRODUCTS;
-  this.createForm();
+
+    if (!this.route.snapshot.queryParamMap.get('type')) {
+      this.router.navigate(['404']);
+    }
+    else{
+      this.id = parseInt(this.route.snapshot.queryParamMap.get('type'), 10);
+
+    
+      this.productService.getProducto(this.id).subscribe((res) => {
+        // this.userService.getPerson(this.current_user).subscribe((persona) => {
+            this.product = res.objeto as Product;
+            console.log(this.product)
+
+            this.productos = PRODUCTS;
+            this.createForm();
+      })
+
+    }
+
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.product = params['product'];
-    });
+    // this.route.queryParams.subscribe(params => {
+    //   this.product = params['product'];
+    // });
   }
 
   publishForm: FormGroup;
@@ -60,21 +79,21 @@ export class ModifyComponent implements OnInit {
   createForm() {
     this.publishForm = this.fb.group({
       descripcion: [
-        '',
+        this.product.descripcion,
         [
           Validators.required,
           Validators.pattern('[a-zA-Z0-9 ]+')
         ]
       ],
       cantidad: [
-       '',
+        this.product.cantidad,
         [
           Validators.required,
           Validators.pattern('^[0-9]*$')
         ]
       ],
       productos: [
-      '',
+      this.product.producto,
         [
           Validators.required
         ]

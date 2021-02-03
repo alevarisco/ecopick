@@ -1,5 +1,6 @@
 package com.ecopick;
 
+import javax.json.bind.annotation.JsonbDateFormat;
 import java.sql.Date;
 
 public class PedidoDto extends BaseDto {
@@ -7,7 +8,9 @@ public class PedidoDto extends BaseDto {
     private String producto;
     private int cantidad;
     private String descripcion;
+    @JsonbDateFormat(value = "dd/MM/yyyy")
     private Date fechaPublicacion;
+    @JsonbDateFormat(value = "dd/MM/yyyy")
     private Date fechaReclamo;
     private int status;
     private int fkPublica;

@@ -85,6 +85,7 @@ export class UsersComponent implements OnInit {
 
   showEditUser(userid){
     this.router.navigate(['/users/edit/'], { queryParams: { pid: userid } });
+    
   }
 
 }

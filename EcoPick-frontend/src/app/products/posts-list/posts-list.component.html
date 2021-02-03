@@ -10,7 +10,7 @@
         </div>
         <ng-template #cards>
             <li *ngFor="let product of products" >
-                <app-product-card [productName]="product.producto" [productQuantity]="product.cantidad" [productDesc]="product.descripcion" [listType]=1></app-product-card>
+                <app-product-card [productName]="product.producto" [productQuantity]="product.cantidad" [productDesc]="product.descripcion" [listType]=1 [_id]="product._id" ></app-product-card>
             </li>
         </ng-template>
     </div>

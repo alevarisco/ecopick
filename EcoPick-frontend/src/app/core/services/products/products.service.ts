@@ -5,6 +5,7 @@ import { ProcessHttpMessageService } from '../process-http-message.service';
 import { Observable } from 'rxjs';
 import { serverURL } from '../../constants/serverURL';
 import { catchError } from 'rxjs/operators';
+import { Respuesta } from '../../classes/respuesta';
 
 
 @Injectable({
@@ -32,6 +33,11 @@ export class ProductsService {
       };
       return this.http.post<Product>(serverURL + 'pedido/add', producto, httpOptions)
         .pipe(catchError(this.processHTTPMessageService.handleError))
+  }
+
+  getProducto(pid): Observable<Respuesta>{
+    return this.http.get<Respuesta>(serverURL + 'pedido/' + pid)
+      .pipe(catchError(this.processHTTPMessageService.handleError));
   }
 
   putEditarProducto(producto: Product): Observable<Product>{
