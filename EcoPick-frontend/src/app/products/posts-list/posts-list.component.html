@@ -1,17 +1,30 @@
 <app-navigation></app-navigation>
 <div class="demo-container p-p-0 p-p-sm-4 p-p-md-6 p-p-lg-4">
-    <div id="title">
+    <div id="title"  *ngIf="isNatural; else elseEmpresarial">
         <h2 class="center">Mis Publicaciones</h2>
     </div>
+    <ng-template #elseEmpresarial>
+        <div id="title">
+            <h2 class="center">Mis Pedidos</h2>
+        </div>
+
+    </ng-template>
     <!-- <input type="text" placeholder="Buscar" class="search"> -->
     <div class="product-list">
         <div *ngIf="empty; else cards">
             <h3>No existen publicaciones registradas</h3>
         </div>
         <ng-template #cards>
-            <li *ngFor="let product of products" >
-                <app-product-card [productName]="product.producto" [productQuantity]="product.cantidad" [productDesc]="product.descripcion" [listType]=1 [_id]="product._id" ></app-product-card>
-            </li>
+            <div *ngIf="isNatural; else elseEmpre">
+                <li *ngFor="let product of products" >
+                    <app-product-card [productName]="product.producto" [productQuantity]="product.cantidad" [productDesc]="product.descripcion" [listType]=1 [_id]="product._id" ></app-product-card>
+                </li>
+            </div>
+            <ng-template #elseEmpre>
+                <li *ngFor="let product of products" >
+                    <app-product-card [productName]="product.producto" [productQuantity]="product.cantidad" [productDesc]="product.descripcion" [listType]=3 [_id]="product._id" ></app-product-card>
+                </li>
+            </ng-template>
         </ng-template>
     </div>
 

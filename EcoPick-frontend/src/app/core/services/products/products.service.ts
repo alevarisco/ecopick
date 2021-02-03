@@ -40,13 +40,13 @@ export class ProductsService {
       .pipe(catchError(this.processHTTPMessageService.handleError));
   }
 
-  putEditarProducto(producto: Product, id:Number): Observable<Product>{
+  putEditarProducto(producto: Product, id:Number): Observable<Respuesta>{
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    return this.http.put<Product>(serverURL + 'pedido/edit/'+ id, producto, httpOptions)
+    return this.http.put<Respuesta>(serverURL + 'pedido/edit/'+ id, producto, httpOptions)
       .pipe(catchError(this.processHTTPMessageService.handleError))
 }
 

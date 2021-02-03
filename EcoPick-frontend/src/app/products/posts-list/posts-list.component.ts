@@ -13,30 +13,21 @@ export class PostsListComponent implements OnInit {
   userId: number;
   userType: number;
   empty: boolean;
+  isNatural: boolean;
 
   constructor(public productService: ProductService, public sessionService: SessionService) {
 
+
+    if (this.sessionService.getCurrentSession().tipo == 0){
+      this.isNatural = true;
+    }
+    else{
+      this.isNatural = false;
+    }
+
+
     this.userId = sessionService.getCurrentUser();
     this.userType = sessionService.getCurrentSession().tipo;
-
-    // Eliminar estos datos de prueba y descomentar el método ngOnInit() de abajo
-    // // this.products = [
-    //   {
-    //     name: "Madera",
-    //     desc: "Roble resistente",
-    //     quantity: 20
-    //   },
-    //   {
-    //     name: "Metal",
-    //     desc: "Inoxidable",
-    //     quantity: 10
-    //   },
-    //   {
-    //     name: "Plástico",
-    //     desc: "Necesita reutilizarse",
-    //     quantity: 15
-    //   }
-    // ]
   }
 
   ngOnInit(): void {

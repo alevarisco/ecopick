@@ -6,7 +6,7 @@
     <!-- <input type="text" placeholder="Buscar" class="search"> -->
     <div class="product-list">
         <li *ngFor="let p of products" >
-            <app-product-card [productName]="p.producto" [productQuantity]="p.cantidad" [productDesc]="p.descripcion" [listType]=0></app-product-card>
+            <app-product-card [productName]="p.producto" [productQuantity]="p.cantidad" [productDesc]="p.descripcion" [listType]=0 [_id]="p._id"></app-product-card>
         </li>
     </div>
 </div>
