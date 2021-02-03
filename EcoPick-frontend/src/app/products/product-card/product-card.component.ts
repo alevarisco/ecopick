@@ -34,4 +34,8 @@ export class ProductCardComponent implements OnInit {
     this.router.navigate(['/modify'], { queryParams: { type: product }});
  }
 
+ sendDelete(product): void{
+  this.router.navigate(['/delete'], { queryParams: { type: product }});
+}
+
 }

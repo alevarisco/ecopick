@@ -49,4 +49,14 @@ export class ProductsService {
     return this.http.put<Product>(serverURL + 'pedido/edit/'+ id, producto, httpOptions)
       .pipe(catchError(this.processHTTPMessageService.handleError))
 }
+
+    deleteProducto(producto: Product, id:Number): Observable<Product>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.put<Product>(serverURL + 'pedido/delete/'+ id, producto, httpOptions)
+      .pipe(catchError(this.processHTTPMessageService.handleError))
+  }
 }

@@ -9,7 +9,8 @@ import { ListComponent } from './list/list.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ProductService } from '../core/services/product/product.service';
 import { PostsListComponent } from './posts-list/posts-list.component';
-import { ModifyComponent } from './modify/modify.component'
+import { ModifyComponent } from './modify/modify.component';
+import { DeleteComponent } from './delete/delete.component'
 
   @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { ModifyComponent } from './modify/modify.component'
       ListComponent,
       ProductCardComponent,
       PostsListComponent,
-      ModifyComponent
+      ModifyComponent,
+      DeleteComponent
     ],
     imports: [
       CommonModule,

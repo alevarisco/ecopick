@@ -6,7 +6,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PublishComponent } from './publish/publish.component';
 import { ListComponent } from "./list/list.component";
 import { PostsListComponent } from "./posts-list/posts-list.component";
-import {ModifyComponent} from "./modify/modify.component"
+import {ModifyComponent} from "./modify/modify.component";
+import {DeleteComponent} from "./delete/delete.component"
 
 const routes: Routes = [
   {
@@ -32,6 +33,11 @@ const routes: Routes = [
   {
     path: 'modify',
     component: ModifyComponent,
+    //canActivate: [GuestGuard]
+  },
+  {
+    path: 'delete',
+    component: DeleteComponent,
     //canActivate: [GuestGuard]
   }
 

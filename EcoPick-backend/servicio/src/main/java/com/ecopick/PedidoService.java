@@ -346,7 +346,7 @@ public class PedidoService {
         return respuesta;
     }
 
-    @DELETE
+    @PUT
     @Path("/delete/{id}")
     public RespuestaDto<Boolean> removePedido(@PathParam("id") long id, PedidoDto pedidoDto)
     {
