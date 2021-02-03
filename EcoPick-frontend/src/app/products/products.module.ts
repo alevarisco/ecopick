@@ -8,7 +8,8 @@ import { PublishComponent } from './publish/publish.component';
 import { ListComponent } from './list/list.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ProductService } from '../core/services/product/product.service';
-import { PostsListComponent } from './posts-list/posts-list.component'
+import { PostsListComponent } from './posts-list/posts-list.component';
+import { ModifyComponent } from './modify/modify.component'
 
   @NgModule({
     declarations: [
@@ -16,7 +17,8 @@ import { PostsListComponent } from './posts-list/posts-list.component'
       PublishComponent,
       ListComponent,
       ProductCardComponent,
-      PostsListComponent
+      PostsListComponent,
+      ModifyComponent
     ],
     imports: [
       CommonModule,

@@ -4,26 +4,32 @@ import { MessageService, SelectItem } from 'primeng/api';
 import { PRODUCTS} from '../../../APP/core/constants/PRODUCTS';
 import {ProductsService} from '../../core/services/products/products.service'
 import {SessionService} from '../../core/services/auth/session.service'
-import { Router } from '@angular/router';
+import { Router,  ActivatedRoute } from '@angular/router';
+
 @Component({
-  selector: 'app-publish',
-  templateUrl: './publish.component.html',
-  styleUrls: ['./publish.component.scss']
+  selector: 'app-modify',
+  templateUrl: './modify.component.html',
+  styleUrls: ['./modify.component.scss']
 })
-export class PublishComponent implements OnInit {
+export class ModifyComponent implements OnInit {
 
   productos: SelectItem[];
+  product: Object;
 
   constructor(private fb: FormBuilder,
     private productService: ProductsService,
     private sessionService: SessionService,
    // private messageService: MessageService,
-    private router: Router) {
+    private router: Router,
+    private route: ActivatedRoute) {
   this.productos = PRODUCTS;
   this.createForm();
   }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.product = params['product'];
+    });
   }
 
   publishForm: FormGroup;
@@ -133,5 +139,6 @@ export class PublishComponent implements OnInit {
   nextPage(): void {
       this.router.navigate(['/my-posts']);
     }
+
 
 }

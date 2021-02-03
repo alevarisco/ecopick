@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-card',
@@ -18,7 +19,7 @@ export class ProductCardComponent implements OnInit {
         2 - mis pedidos
   */ 
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -26,5 +27,11 @@ export class ProductCardComponent implements OnInit {
   confirmation(){
     alert("Esta seguro?")
   }
+
+  
+  sendModificar(product): void{
+    console.log(product);
+    this.router.navigate(['/modify'], { queryParams: { type: product }});
+ }
 
 }

@@ -1,3 +1,4 @@
+<app-navigation></app-navigation>
 <div class="demo-container p-p-0 p-p-sm-4 p-p-md-6 p-p-lg-4">
     <div id="title">
         <h2 class="center">Mis Publicaciones</h2>
@@ -8,8 +9,8 @@
             <h3>No existen publicaciones registradas</h3>
         </div>
         <ng-template #cards>
-            <li *ngFor="let p of products" >
-                <app-product-card [productName]="p.producto" [productQuantity]="p.cantidad" [productDesc]="p.descripcion" [listType]=1></app-product-card>
+            <li *ngFor="let product of products" >
+                <app-product-card [productName]="product.producto" [productQuantity]="product.cantidad" [productDesc]="product.descripcion" [listType]=1></app-product-card>
             </li>
         </ng-template>
     </div>

@@ -5,5 +5,8 @@ export class Product {
     descripcion: string;
     cantidad: number;
     fkPublica: number;
-    fkLugar: number
+    fkLugar: number;
+    fkReclama: number;
+    fechaPublicacion: string;
+    status: number;
 }

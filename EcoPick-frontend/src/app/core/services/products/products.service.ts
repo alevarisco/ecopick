@@ -16,7 +16,10 @@ export class ProductsService {
     cantidad: 0,
     producto: '',
     fkPublica: 1,
-    fkLugar: 1
+    fkLugar: 1,
+    fkReclama: 1,
+    fechaPublicacion: '01/01/2021' ,
+    status:0
   }
   constructor(private http: HttpClient,
     private processHTTPMessageService: ProcessHttpMessageService) { }
@@ -30,4 +33,14 @@ export class ProductsService {
       return this.http.post<Product>(serverURL + 'pedido/add', producto, httpOptions)
         .pipe(catchError(this.processHTTPMessageService.handleError))
   }
+
+  putEditarProducto(producto: Product): Observable<Product>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.put<Product>(serverURL + 'pedido/edit', producto, httpOptions)
+      .pipe(catchError(this.processHTTPMessageService.handleError))
+}
 }
